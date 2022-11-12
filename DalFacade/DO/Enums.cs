@@ -1,3 +1,3 @@
 ﻿
 namespace DO;
-public enum Category { }
+public enum Category { Earrings,Braclet,Ring, Neckless,Watch };
