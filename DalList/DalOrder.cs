@@ -41,7 +41,7 @@ namespace Dal;
     {
         List<Order?> list = new List<Order?>();
         for(int i = 0; i < DataSource.OrdersList.Count; i++)
-        {
+{
             Order? newOrder  = new Order();
             newOrder = DataSource.OrdersList[i];
             list.Add(newOrder);

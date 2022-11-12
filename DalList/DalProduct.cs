@@ -33,15 +33,15 @@ public class DalProduct
 
     }
     public IEnumerable<Product?> GetAll()
-    {
+{
         List<Product?> listP = new List<Product?>();
         for (int i = 0; i < DataSource.ProducstList.Count; i++)
-        {
+    {
             Product? newProduct = new Product();
             newProduct = DataSource.ProducstList[i];
             listP.Add(newProduct);
 
-        }
+    }
         return listP;
     }
 }

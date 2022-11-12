@@ -37,10 +37,10 @@ namespace Dal
 
         }
         public IEnumerable<OrderItem?> GetAll()
-        {
+{
             List<OrderItem?> listO = new List<OrderItem?>();
             for (int i = 0; i < DataSource.OrderItemsList.Count; i++)
-            {
+    {
                OrderItem? newOrderItem = new OrderItem();
                newOrderItem = DataSource.OrderItemsList[i];
                 listO.Add(newOrderItem);
