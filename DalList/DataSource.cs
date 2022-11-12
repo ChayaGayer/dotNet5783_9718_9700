@@ -54,7 +54,7 @@ internal static class DataSource
         }
               int y = s_rand.Next(5);
                 ProducstList.Add(
-                   new Product
+                   new Product 
                    {
                        ID = s_rand.Next(100000 + 9, 999999),
                        Price = s_rand.Next(300, 1500),
