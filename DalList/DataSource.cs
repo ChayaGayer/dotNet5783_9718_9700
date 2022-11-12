@@ -1,6 +1,7 @@
 ﻿
 
 using DO;
+using System.Runtime.InteropServices;
 
 namespace Dal;
 
@@ -67,12 +68,24 @@ internal static class DataSource
         }
 
    
+    }
     private static void CreateAndInitOrders()
     {
         string[] CustomersNameArray = { "Shira Choen", "Sigal Levi", "Inbal Peri", "Sarit Shimon", "Chana Gross", " Chen David", "Yoval Leon", " Sari Waiss", "Ella Fridman", "Rcheli Gayer", "Shani Polski", "Reut Hominer", "Nurit Hact", "Sapir Grinboim", "Dasi Shain", "Tzipi Shwartz", "Noa Block", "Roni Berko", "Chaya Gal", "Bar Sason" };
         string[] CustomersAdressArray = { "Tel Aviv", "Petach Tikva", "Hod Hasharon", "Herzeliya", "Ramat Gan", "Azor", "Bney Brak", "Jerushlem", "Natania", "Zfat", "Ashdod", "Rechovot", "Kfar Saba", "Rosh Hayin", "Givat Shmouel", "Ranana", "Hadera", "Be'er Sheva", "Nariya", "Eilat" };
         for (int i = 0; i <= 20; i++)
         {
+            OrdersList.Add(
+            new Order
+            {
+                ID = Config.NextOrderNumber,
+                CustomerName = CustomersName[i],
+                CustomerEmail = CustomersName[i] + "@gmail.com",
+                CustomerAddress = CustomersAdress[i],
+                OrderDate = DateTime.Now,
+                ShipDate = ,
+                DeliveryDate = null
+            }) ;
 
             Order x = new Order();
             x.ID = Config.NextOrderNumber;
