@@ -1,8 +1,7 @@
 ﻿
 
-namespace Dal
+namespace Dal;
+
+internal class DalOrder
 {
-    internal class DalOrder
-    {
-    }
 }
