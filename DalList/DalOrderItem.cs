@@ -1,8 +1,9 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 
 namespace Dal
 {
-    public class DalOrderItem
+    internal class DalOrderItem:IOrderItem
     {
         
         //create
@@ -49,7 +50,7 @@ namespace Dal
             }
             return listO;
         }
-        public List<OrderItem?> GetOrderItems(int id)//get the id and return akk the items of this order
+        public IEnumerable<OrderItem?> GetOrderItems(int id)//get the id and return akk the items of this order
         {
             List<OrderItem?> allTheOrder = new List<OrderItem?>();
             for (int i = 0; i < DataSource.OrderItemsList.Count; i++)//go over the new list
