@@ -10,5 +10,6 @@ namespace BlApi;
 public interface IProduct
 {
     IEnumerable<ProductItem?> GetProducts();
-    IEnumerable<ProductItem?> GetListedProducts();
+    IEnumerable<ProductForList?> GetListedProducts();
+    BO.Product RequestProductDetalisForM(int productID);
 }
