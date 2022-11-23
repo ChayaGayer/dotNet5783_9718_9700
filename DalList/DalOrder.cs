@@ -1,9 +1,10 @@
 ﻿
+using DalApi;
 using DO;
 
 namespace Dal;
 
- public class DalOrder
+ internal class DalOrder : IOrder
 {
     //create
     public int Add(Order order)

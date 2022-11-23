@@ -1,8 +1,9 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 
 namespace Dal
 {
-    public class DalOrderItem
+    internal class DalOrderItem:IOrderItem
     {
         
         //create

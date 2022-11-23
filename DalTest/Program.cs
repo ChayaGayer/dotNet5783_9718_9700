@@ -1,16 +1,17 @@
 ﻿
-using Dal;
+
+using DalApi;
 using DO;
 
-namespace DalTest
+
+namespace Dal
 {
     class Program
     {
        
-        static void ForProduct (DalProduct product)
+        static void ForProduct (IDal dal)//?
         {
 
-            
             Console.WriteLine("Choose one of the following:enter f for stop");
             Console.WriteLine("a :for add");
             Console.WriteLine("b: for show product");
@@ -48,18 +49,18 @@ namespace DalTest
                             product2.ProductName = name;
                             product2.Price = price;
                             product2.InStock = inStock;
-                            int d = product.Add(product2);
+                            int d = dal.Product.Add(product2);
                             Console.WriteLine(d);
                         } break;
                     case 'b':
                         {
                             Console.WriteLine("Enter the product id");
                             int.TryParse(Console.ReadLine(), out id);
-                            Product newProduct= product.GetById(id);
+                            Product newProduct= dal.Product.GetById(id);
                            Console.WriteLine(newProduct); } break;
                     case 'c':
                         {
-                            foreach (var item in product.GetAll())
+                            foreach (var item in dal.Product.GetAll())
                             {
                                 Console.WriteLine(item);//
                             }
@@ -86,12 +87,12 @@ namespace DalTest
                             product2.ProductName = name;
                             product2.Price = price;
                             product2.InStock = inStock;
-                            product.Update(product2); } break;
+                            dal.Product.Update(product2); } break;
                     case 'e':
                         {
                             Console.WriteLine("Enter the product id");
                             int.TryParse(Console.ReadLine(), out id);
-                            product.Delete(id); } break;
+                            dal.Product.Delete(id); } break;
                     default: Console.WriteLine("finish"); break;
 
                 }
@@ -99,7 +100,7 @@ namespace DalTest
             while (x != 'f');
         }
 
-         static void ForOrder(DalOrder order)
+         static void ForOrder(IDal dal)
         {
 
             //DalOrder Order = new DalOrder();
@@ -141,21 +142,21 @@ namespace DalTest
                             order1.CustomerName = name;
                             order1.CustomerEmail = email;
                             order1.CustomerAddress = address;
-                            order.Add(order1);
+                            dal.Order.Add(order1);
                             Console.WriteLine(order1);
                         }; break;
                     case 'b':
                         {
                             Console.WriteLine("Enter the order id");
                             int.TryParse(Console.ReadLine(), out id);
-                            Order newOrder = order.GetById(id);
+                            Order newOrder = dal.Order.GetById(id);
                             Console.WriteLine(newOrder);
                         }
                         break;
                     case 'c':
                         {
 
-                            foreach (var item in order.GetAll())
+                            foreach (var item in dal.Order.GetAll())
                             {
                                 Console.WriteLine(item);//
                             }
@@ -183,13 +184,13 @@ namespace DalTest
                             order1.CustomerName = name;
                             order1.CustomerEmail = email;
                             order1.CustomerAddress = address;
-                            order.Update(order1);
+                            dal.Order.Update(order1);
                         } ; break;
                     case 'e':
                         {
                             Console.WriteLine("Enter the order id");
                             int.TryParse(Console.ReadLine(), out id);
-                            order.Delete(id);
+                            dal.Order.Delete(id);
                         } break;
                     default: Console.WriteLine("finish"); break;
 
@@ -199,7 +200,7 @@ namespace DalTest
         }
 
 
-        static void ForOrderItem(DalOrderItem orderItem)
+        static void ForOrderItem(IDal dal)
         {
             
            int id;
@@ -243,7 +244,7 @@ namespace DalTest
                             orderItem1.ItemId = itemId;
                             orderItem1.Price = price;
                             orderItem1.Amount = amount;
-                            orderItem.Add(orderItem1);
+                            dal.OrderItem.Add(orderItem1);
                             Console.WriteLine(orderItem1.ID);
                            
                         }; break;
@@ -251,13 +252,13 @@ namespace DalTest
                         {
                             Console.WriteLine("Enter the orderItem id");
                             int.TryParse(Console.ReadLine(), out id);
-                            OrderItem newOrderItem = orderItem.GetById(id);
+                            OrderItem newOrderItem = dal.OrderItem.GetById(id);
                             Console.WriteLine(newOrderItem);
                         }
                         break;
                     case 'c':
                         {
-                           foreach(var item in orderItem.GetAll())
+                           foreach(var item in dal.OrderItem.GetAll())
                             {
                                 Console.WriteLine(item);//
                             }
@@ -284,18 +285,18 @@ namespace DalTest
                             orderItem1.ItemId = itemId;
                             orderItem1.Price = price;
                             orderItem1.Amount = amount;
-                            orderItem.Update(orderItem1); break;
+                            dal.OrderItem.Update(orderItem1); break;
                         }
                     case 'e':
                         {
                             Console.WriteLine("Enter the orderItem id");
                             int.TryParse(Console.ReadLine(), out id);
-                            orderItem.Delete(id); break;
+                            dal.OrderItem.Delete(id); break;
                         } 
                     case 'g': {
                             Console.WriteLine("Enter the orderItem id");
                             int.TryParse(Console.ReadLine(), out id);
-                            foreach (var item in orderItem.GetOrderItems(id))
+                            foreach (var item in dal.OrderItem.GetOrderItems(id))
                             {
                                 Console.WriteLine(item);//
                             }
@@ -309,7 +310,7 @@ namespace DalTest
                             Console.WriteLine("Enter the orderId, and itemId");
                             int.TryParse(Console.ReadLine(), out orderId);
                             int.TryParse(Console.ReadLine(), out itemId);
-                            Console.WriteLine(orderItem.GetTheItem(orderId, itemId));
+                            Console.WriteLine(dal.OrderItem.GetTheItem(orderId, itemId));
 
                         } break;
                     default: Console.WriteLine("finish"); break;
@@ -323,9 +324,8 @@ namespace DalTest
         static void Main(string[] args)
         {
             
-            DalOrder order = new DalOrder();
-            DalOrderItem orderItem = new DalOrderItem();
-            DalProduct product = new DalProduct();
+           IDal dal = new DalList();
+
 
         Console.WriteLine("Choose one of the following:");
             Console.WriteLine("0 :for exist");
@@ -342,9 +342,9 @@ namespace DalTest
                     switch (ch)
                     {
 
-                        case '1': ForProduct(product); break;
-                        case '2': ForOrder(order); break;
-                        case '3': ForOrderItem(orderItem); break;
+                        case '1': ForProduct(dal); break;
+                        case '2': ForOrder(dal); break;
+                        case '3': ForOrderItem(dal); break;
 
                         default:
                             Console.WriteLine("finish"); break;
