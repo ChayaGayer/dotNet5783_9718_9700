@@ -11,5 +11,9 @@ public interface IProduct
 {
     IEnumerable<ProductItem?> GetProducts();
     IEnumerable<ProductForList?> GetListedProducts();
-    BO.Product RequestProductDetalisForM(int productID);
+    BO.Product RequestProductDetalistForM(int productID);
+    BO.Product RequestProductDetalistForC(int productID, BO.Cart cart);
+    void AddProduct(BO.Product product);
+    void DeleteProduct(BO.Product product); 
+    void UpdateProductData(BO.Product product);
 }
