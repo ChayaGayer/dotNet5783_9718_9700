@@ -1,10 +1,11 @@
 ﻿using BlApi;
-using BO;
+
 namespace BlImplementation;
 
-internal class Cart:ICart
+internal class Cart: ICart
 {
-   public BO.Cart AddProductForCart(BO.Cart cart, int productId)
+    DalApi.IDal dal = new Dal.DalList();
+    public BO.Cart AddProductForCart(BO.Cart cart, int productId)
     {
         throw new NotImplementedException();
     }

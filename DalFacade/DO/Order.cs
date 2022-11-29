@@ -15,8 +15,4 @@ public struct Order
         return this.ToStringProperty();
     }
 
-
-
-
-
 }

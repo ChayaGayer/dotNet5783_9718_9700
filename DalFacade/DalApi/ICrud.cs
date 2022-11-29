@@ -1,6 +1,7 @@
 ﻿
 using DO;
 namespace DalApi;
+//System.Linq.Enumerable
 
 public interface ICrud <T> where T : struct
 {
@@ -9,6 +10,6 @@ public interface ICrud <T> where T : struct
     void Update(T item);    
     void Delete(int id);
 
-    IEnumerable<T?> GetAll();
+    IEnumerable<T?> GetAll(Fanc<T?,bool>? filtar=null);
 
 }

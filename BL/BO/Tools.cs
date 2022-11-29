@@ -1,6 +1,10 @@
-﻿
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-
+using System.Text;
+using System.Threading.Tasks;
 namespace BO;
 
 static class Tools
@@ -9,7 +13,18 @@ static class Tools
     {
         string str = " ";
         foreach (PropertyInfo item in t.GetType().GetProperties())
-            str += "\n" + item.Name + ": " + item.GetValue(t, null);
+            if(item.PropertyType == typeof(IEnumerable))
+            {
+                foreach(var i in (IEnumerable)item)
+                {
+                    str += (i + " ");
+                }
+            }
+            else
+            {
+                str += "\n" + item.Name + ": " + item.GetValue(t, null);
+            }
+            
         return str;
     }
 }

@@ -9,11 +9,13 @@ namespace BlApi;
 
 public interface IProduct
 {
-    IEnumerable<ProductItem?> GetProducts();
+   
     IEnumerable<ProductForList?> GetListedProducts();
-    BO.Product RequestProductDetalistForM(int productID);
-    BO.Product RequestProductDetalistForC(int productID, BO.Cart cart);
+    IEnumerable<ProductItem?> GetListedProductsForC();
+    
+    BO.Product RequestProductDetaForM(int productID);
+    BO.ProductItem RequestProductDetaForC(int productID);
     void AddProduct(BO.Product product);
-    void DeleteProduct(BO.Product product); 
+    void DeleteProduct(int  productID); 
     void UpdateProductData(BO.Product product);
 }
