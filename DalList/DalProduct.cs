@@ -2,7 +2,7 @@
 using DO;
 namespace Dal;
 
-internal class DalProduct:IProduct
+internal class DalProduct: IProduct
 {
     public int Add(Product product)
     {

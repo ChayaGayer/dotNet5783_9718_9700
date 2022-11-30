@@ -86,7 +86,7 @@ internal static class DataSource
         Order x = new Order();
         x.ID = Config.NextOrderNumber;
         x.CustomerName = CustomersNameArray[i];
-        x.CustomerEmail = CustomersNameArray[i] + "@gmail.com";
+        x.CustomerEmail = (CustomersNameArray[i] + "@gmail.com").Replace(' ', '_');
         x.CustomerAddress = CustomersAdressArray[i];
         x.OrderDate = DateTime.Now;
         if (i < 0.8 * 20)//80% from the orders
