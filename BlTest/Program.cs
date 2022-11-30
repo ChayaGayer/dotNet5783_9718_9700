@@ -60,7 +60,7 @@ namespace BITest
                         double price;
                         int category;
                         int stock;
-
+                         
                        
                         Console.WriteLine("enter id of product:");
                         if (!int.TryParse(Console.ReadLine(), out id)) throw new Exception("wrong input type");
