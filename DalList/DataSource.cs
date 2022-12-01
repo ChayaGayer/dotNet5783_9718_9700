@@ -88,7 +88,8 @@ internal static class DataSource
         x.CustomerName = CustomersNameArray[i];
         x.CustomerEmail = (CustomersNameArray[i] + "@gmail.com").Replace(' ', '_');
         x.CustomerAddress = CustomersAdressArray[i];
-        x.OrderDate = DateTime.Now;
+        int month = -s_rand.Next(1, 3);
+            x.OrderDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month + month, s_rand.Next(1, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month + month)));
         if (i < 0.8 * 20)//80% from the orders
         {
             x.ShipDate = x.OrderDate + TimeSpan.FromDays((double)s_rand.Next(4));

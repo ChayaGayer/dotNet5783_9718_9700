@@ -17,12 +17,13 @@ internal class Order : IOrder
         IEnumerable<DO.Order?> orders = dal.Order.GetAll();
         IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem.GetAll();
         return from DO.Order item in orders
+               let items=orderItem.Where(orderItem=>orderItem.Value.OrderId==item.ID)
                select new BO.OrderForList()
                {
                    ID = item.ID,
                    CustomerName = item.CustomerName,
                    Status = Status(item),
-                   Amount = orderItem.Select(orderItem => orderItem.Value.ID == item.ID).Count(),
+                   Amount = orderItem.Count(),
                    TotelPrice = orderItem.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount)
                };
 

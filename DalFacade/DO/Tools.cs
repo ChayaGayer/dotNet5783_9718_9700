@@ -8,25 +8,37 @@ using System.Threading.Tasks;
 
 namespace DO;
 
- static class Tools
+public static class Tools
 {
-    public static string ToStringProperty<T>(this T t)
+    public static string ToStringProperty<T>(this T t, string str = "")
     {
-        string str = " ";
         foreach (PropertyInfo item in t.GetType().GetProperties())
-            if (item.PropertyType == typeof(IEnumerable))
+        {
+            if (item.GetValue(t, null) is IEnumerable<object>)
             {
-                foreach (var i in (IEnumerable)item)
-                {
-                    str += (i + " ");
-                }
+                IEnumerable<object> list = (IEnumerable<object>)item.GetValue(obj: t, null);
+                string s = String.Join(" ", list);
+                str += "\n" + item.Name + ": " + s;
             }
             else
-            {
                 str += "\n" + item.Name + ": " + item.GetValue(t, null);
-            }
+        }
+        //    string str = " ";
+        //    foreach (PropertyInfo item in t.GetType().GetProperties())
+        //        if(item.PropertyType == typeof(IEnumerable))
+        //        {
+        //            foreach(var i in (IEnumerable)item)
+        //            {
+        //                str += (i + " ");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            str += "\n" + item.Name + ": " + item.GetValue(t, null);
+        //        }
 
         return str;
-    
+        //}
+    }
 }
-}
+
