@@ -112,16 +112,22 @@ internal class Product:IProduct
             if (product.ID < 100000 || product.ID > 999999||product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)
             
                 throw new BO.BlNullPropertyException("Missing detail in property");
-        
-        dal.Product.Add(new DO.Product()
+        try
         {
-        ID=product.ID,
-       ProductName=product.ProductName,
-       Price=product.Price,
-       InStock=product.InStock,
-       Category=(DO.Category)product.Category,
+            dal.Product.Add(new DO.Product()
+            {
+                ID = product.ID,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                InStock = product.InStock,
+                Category = (DO.Category)product.Category,
 
-        });
+            });
+        }
+        catch(DO.DalAlreadyExistIdException ex)
+        {
+            throw new BO.BlAlreadyExistEntityException("this product exist", ex);
+        }
     }
     public void DeleteProduct(int productID)
 

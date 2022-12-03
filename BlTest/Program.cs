@@ -63,7 +63,7 @@ namespace BITest
                             addProduct.Price = price;
                             Console.WriteLine("enter category of product:");
                             if (!int.TryParse(Console.ReadLine(), out category)) throw new Exception("wrong input type");
-                            addProduct.Category = (Category)(category);
+                            addProduct.Category = (Category)category;
                             Console.WriteLine("enter amount in stock of product:");
                             if (!int.TryParse(Console.ReadLine(), out stock)) throw new Exception("wrong input type");
                             addProduct.InStock = stock;
@@ -262,10 +262,10 @@ namespace BITest
         public static void CartOptions()
         {
             CartActions choice;
-            Console.WriteLine(@"insert your choice 1:
-add product to cart,2:
-update amount of product in cart,3:
-create a new order:4:");
+            Console.WriteLine(@"insert your choice 
+1:add product to cart,
+2:update amount of product in cart,
+3:create a new order:");
             if (!CartActions.TryParse(Console.ReadLine(), out choice)) throw new Exception("wrong input type");
             while (choice != CartActions.Exit)
             {
