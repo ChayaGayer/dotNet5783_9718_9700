@@ -39,7 +39,7 @@ namespace DO
     public class DalMissingIdException : Exception
     {
         public int EntityID;
-        public string EntityName;
+        public string EntityName; 
         public DalMissingIdException(int id, string name) : base()
         {
             EntityID = id;

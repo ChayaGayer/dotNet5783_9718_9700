@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO;
 /// <summary>
-/// order for list
+/// order for list 
 /// </summary>
 public class OrderForList
 {

@@ -9,7 +9,7 @@ public struct OrderItem
     public int ItemId { get; set; }//the item id
     public double Price { get; set; }
     public int Amount { get; set; }//the amount of the items
-
+     
     public override string ToString()
     {
         return this.ToStringProperty();

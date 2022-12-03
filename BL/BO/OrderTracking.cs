@@ -4,7 +4,7 @@ namespace BO;
 /// <summary>
 /// the Order Tracking
 /// </summary>
-public class OrderTracking
+public class OrderTracking 
 {
     public int ID { get; set; }
     /// <summary>

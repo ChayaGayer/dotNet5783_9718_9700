@@ -9,7 +9,7 @@ namespace Dal;
 internal static class DataSource
 {
     static DataSource()//the constructor
-    {
+    { 
         s_Initialize();
     }
     private static readonly Random s_rand = new();//the rand func

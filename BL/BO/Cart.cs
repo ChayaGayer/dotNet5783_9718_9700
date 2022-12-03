@@ -1,6 +1,6 @@
 ﻿
 namespace BO;
-/// <summary>
+/// <summary> 
 /// a cart of shopping
 /// </summary>
 public class Cart

@@ -13,7 +13,7 @@ namespace Dal;
         order.ID = DataSource.Config.NextOrderNumber;
        
        DataSource.OrdersList.Add(order);//add to the list
-       
+        
         return order.ID;
    }
     //Request

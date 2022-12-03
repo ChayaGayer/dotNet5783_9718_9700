@@ -6,7 +6,7 @@ namespace BO;
 /// </summary>
 public class ProductForList
 {
-    public int ID { get; set; }
+    public int ID { get; set; } 
     public string ProductName { get; set; }
     public double Price { get; set; }
     public Category Category { get; set; }

@@ -15,7 +15,7 @@ public class ProductItem
     /// <summary>
     /// the price
     /// </summary>
-     public double Price { get; set; }
+     public double Price { get; set; } 
     /// <summary>
     /// the catefory
     /// </summary>
