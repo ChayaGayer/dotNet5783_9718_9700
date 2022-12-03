@@ -7,45 +7,52 @@ using System.Threading.Tasks;
 namespace DO
 {
     [Serializable]
-    public class NagtiveNumberException : Exception
+    public class DalAlreadyExistIdException : Exception
     {
-        public NagtiveNumberException(string message) : base(message)
+        public int EntityID;
+        public string EntityName;
+        public DalAlreadyExistIdException(int id, string name) : base()
         {
-
+            EntityID = id;
+            EntityName = name;
         }
+        public DalAlreadyExistIdException(int id, string name, string message) : base(message)
+        {
+            EntityID = id;
+            EntityName = name;
+        }
+        public DalAlreadyExistIdException(int id, string name, string message, Exception innerException) : base(message, innerException)
+        {
+            EntityID = id;
+            EntityName = name;
+        }
+        public override string ToString() => $"Id:{EntityID}ofType {EntityName},is already exist.";
+
 
     }
     [Serializable]
-    public class EmptyString : Exception
+    public class DalMissingIdException : Exception
     {
-        public EmptyString(string? message) : base(message)
+        public int EntityID;
+        public string EntityName;
+        public DalMissingIdException(int id, string name) : base()
         {
-
+            EntityID = id;
+            EntityName = name;
         }
-    }
-    [Serializable]
-    public class NotExist : Exception
-    {
-        public NotExist(string? message) : base(message)
+        public DalMissingIdException(int id, string name, string message) : base(message)
         {
-
+            EntityID = id;
+            EntityName = name;
         }
-        public NotExist(Exception innerException, string? message = " ") : base(message, innerException)
+        public DalMissingIdException(int id, string name, string message, Exception innerException) : base(message, innerException)
         {
-
+            EntityID = id;
+            EntityName = name;
         }
-    }
-    [Serializable]
-    public class AlredyExist : Exception
-    {
-        public AlredyExist(string? message) : base(message)
-        {
+        public override string ToString() => $"Id:{EntityID}ofType {EntityName},is missing.";
 
-        }
-        public AlredyExist(Exception innerException, string? message = " ") : base(message, innerException)
-        {
-
-        }
 
     }
+  
 }

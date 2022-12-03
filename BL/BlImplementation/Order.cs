@@ -14,6 +14,7 @@ internal class Order : IOrder
     }
     public IEnumerable<BO.OrderForList?> GetListedOrders()
     {
+
         IEnumerable<DO.Order?> orders = dal.Order.GetAll();
         IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem.GetAll();
         return from DO.Order item in orders
@@ -44,9 +45,9 @@ internal class Order : IOrder
     }
     public BO.Order RequestOrderDeta(int orderID)
     {
-        if (orderID < 0)
+        if (orderID < 100000||orderID>999999)
         {
-            throw new ArgumentOutOfRangeException();
+            throw new BO.BlInCorrectException("Worng ID");
         }
         DO.Order order = dal.Order.GetById(orderID);
         return new BO.Order()
@@ -76,13 +77,13 @@ internal class Order : IOrder
         {
             order = dal.Order.GetById(orderID);
         }
-        catch
+        catch(DO.DalMissingIdException ex)
         {
-            new Exception();
+            throw new BO.BlMissingEntityException("Missing order", ex);
         }
 
         if (order.ShipDate != null)
-            throw new Exception();
+            throw new BO.BlIncorrectDatesException("The order already shipped");
 
         order.ShipDate = DateTime.Now;
         dal.Order.Update(order);
@@ -99,16 +100,24 @@ internal class Order : IOrder
         {
             order = dal.Order.GetById(orderID);
         }
-        catch
+        catch(DO.DalMissingIdException ex)
         {
-            new Exception();
+            throw new BO.BlMissingEntityException("Missing order", ex);
         }
 
         if (order.DeliveryDate != null)
-            throw new Exception();
+            throw new BO.BlIncorrectDatesException("The order already deliverd");
 
         order.DeliveryDate = DateTime.Now;
-        dal.Order.Update(order);
+
+        try
+        {
+            dal.Order.Update(order);
+        }
+        catch (DO.DalMissingIdException ex)
+        {
+            throw new BO.BlMissingEntityException("Cant update order", ex);
+        }
 
         return RequestOrderDeta(orderID);
 
@@ -120,16 +129,16 @@ internal class Order : IOrder
         
         
             DO.Order order = new DO.Order();
-            try
-            {
-                order = dal.Order.GetById(orderID);
+        try
+        {
+            order = dal.Order.GetById(orderID);
+        }
+        catch (DO.DalMissingIdException ex)
+        {
+            throw new BO.BlMissingEntityException("Missing order", ex);
+        }
 
-            }
-            catch
-            {
-                throw new Exception();
-            }
-            return new BO.OrderTracking()
+        return new BO.OrderTracking()
             {
                 ID = order.ID,
                 Status = Status(order),

@@ -1,6 +1,8 @@
 ﻿
 using BlApi;
+using BO;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
 namespace BlImplementation;
 
@@ -14,30 +16,36 @@ internal class Cart : ICart
         {
             product = dal.Product.GetById(productId);
         }
-        catch (DO.NotExist ex)
+        catch (DO.DalMissingIdException ex)
         {
-            throw new BO.NotExist(ex);
+            throw new BO.BlMissingEntityException("Missing product", ex);
         }
 
-        var orderItem = cart.Items.FirstOrDefault(x => x.ItemId == productId);
+
+        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ItemId == productId);
 
         if (orderItem != null)
         {
             if (product.InStock > orderItem.Amount)
             {
                 orderItem.Amount += 1;
-                orderItem.TotalPrice = product.Price;
+                orderItem.TotalPrice += product.Price;
                 cart.TotalPrice += product.Price;
                 return cart;
             }
           else
-            { throw new BO.NagtiveNumberException(""); }
+            {
+                throw new BO.BlMissingEntityException("The amount of the product is lower then the amount in stock");
+            }
         }
 
         else///if the item is not exist in the cart
         {
-
-            if (product.InStock > orderItem.Amount)
+            if(cart.Items==null)
+            {
+                cart.Items = new List<BO.OrderItem>();
+            }
+            if (product.InStock > 0)
             {
                 BO.OrderItem? newOrderItem = new BO.OrderItem()
                 {
@@ -49,9 +57,14 @@ internal class Cart : ICart
                 };
 
                 cart.Items = cart.Items.Append(newOrderItem);
+                cart.TotalPrice += newOrderItem.TotalPrice;
                 return cart;
             }
-            return cart;
+            else 
+            {
+                throw new BO.BlMissingEntityException("THE PRODUCT IS NOT IN THE CART");
+            }
+            
         }
 
 
@@ -67,7 +80,7 @@ internal class Cart : ICart
         var orderItem = cart.Items.FirstOrDefault(x => x.ItemId == productId);
         if (orderItem != null)
         {
-            if (product.InStock > amount)
+            if (product.InStock <amount)
             {
                 orderItem.Amount += amount;
                 orderItem.TotalPrice = product.Price;
@@ -75,7 +88,7 @@ internal class Cart : ICart
                 return cart;
             }
 
-            if (product.InStock < amount)
+            if (product.InStock > amount)
             {
                 orderItem.Amount = amount;
                 orderItem.TotalPrice -= (amount - product.InStock) * product.Price;
@@ -84,6 +97,7 @@ internal class Cart : ICart
             }
             if (amount == 0)
             {
+               
                 cart.Items = cart.Items.Where(x => x.ItemId != product.ID);
                 return cart;
                
@@ -92,40 +106,54 @@ internal class Cart : ICart
         }
         else
         {
-            throw new BO.NotExist("THE PRODUCT IS NOT IN THE CART");
+            throw new BO.BlMissingEntityException("THE PRODUCT IS NOT IN THE CART");
         }
         
     }
 
-    public void OrderConfirmation(BO.Cart cart/*, string name, string email, string address*/)
+    public void OrderConfirmation(BO.Cart cart)
     {
-        if (cart.Items.Any())
+        //check if items are exist
+        IEnumerable<DO.Product> productIsExist;
+        try
         {
-            foreach (BO.OrderItem item in cart.Items)
-            {
-                if (item.Amount < 1)
-                {
-                    throw new BO.NagtiveNumberException("negative amount in order items");
-                }
-                DO.Product produc1;
-                try
-                {
-                    produc1 = dal.Product.GetById(item.ID);
-                }
-                catch (DO.NotExist ex)
-                {
-                    throw new BO.NotExist(ex);
-                }
-                if (produc1.InStock < item.Amount)
-                {
-                    throw new BO.NagtiveNumberException("there is not enogh amount in stock");
-                }
-                if (cart.CustomerName == "")
-                    throw new BO.EmptyString("empty customer name");
-                if (GetEmail(cart.CustomerEmail))
-                    throw new BO.EmptyString("empty customer email");
+            productIsExist = from item in cart.Items
+                             select dal.Product.GetById(item.ID);
+        }
+        catch(DO.DalMissingIdException ex)
+        {
+            throw new BO.BlMissingEntityException("Product not exist", ex);
+        }
 
-            };
+
+        //check if items are not negetive
+        var isNegetive = cart.Items.Where(x => x.Amount < 1);
+        if(isNegetive.Any())
+        {
+           throw new BO.BlNagtiveNumberException("negative amount in order items");
+        }
+
+        //check if items are in stock
+        var isInStock = from item in cart.Items
+                        select dal.Product.GetById(item.ID).InStock < item.Amount;
+        if (isInStock.Any())
+        {
+            throw new BO.BlNagtiveNumberException("negative amount in order items");
+        }
+
+       
+        var isEmptyNamed = cart.CustomerName;
+        if (isEmptyNamed.Any())
+        {
+            throw new BO.BlNagtiveNumberException("negative amount in order items");
+        }
+
+        if (cart.CustomerName == "")
+            throw new BO.BlEmptyStringException("empty customer name");
+        if (GetEmail(cart.CustomerEmail))
+            throw new BO.BlEmptyStringException("empty customer email");
+
+      
             DO.Order order = new DO.Order();
 
             order.CustomerName = cart.CustomerName;
@@ -134,24 +162,48 @@ internal class Cart : ICart
             order.OrderDate = DateTime.Now;
             order.ShipDate = null;
             order.DeliveryDate = null;
-            int orderId = dal.Order.Add(order);
-            foreach (BO.OrderItem item in cart.Items)
-            {
-                dal.OrderItem.Add(new DO.OrderItem()
+
+     int orderId = dal.Order.Add(order);
+       
+        var addOrderItem = from item in cart.Items
+                select dal.OrderItem.Add(new DO.OrderItem()
                 {
                     ID = item.ID,
                     OrderId = orderId,
                     Price = item.Price,
                     Amount = item.Amount,
                 });
-                DO.Product product = dal.Product.GetById(item.ID);
-                product.InStock -= item.Amount;
-                dal.Product.Update(product);
-            }
+        foreach (BO.OrderItem item in cart.Items)
+        {
+            DO.Product product = dal.Product.GetById(item.ID);
+            product.InStock -= item.Amount;
+            dal.Product.Update(product);
+        }
+        //var updateProduct = from item in cart.Items
+        //select dal.Product.GetById(item.ID)
+        //    product.InStock -= item.Amount;
+        //    dal.Product.Update(product);
+        //cart.Items.Where()
+
+
+
+        //foreach (BO.OrderItem item in cart.Items)
+        //    {
+        //        dal.OrderItem.Add(new DO.OrderItem()
+        //        {
+        //            ID = item.ID,
+        //            OrderId = orderId,
+        //            Price = item.Price,
+        //            Amount = item.Amount,
+        //        });
+        //        DO.Product product = dal.Product.GetById(item.ID);
+        //        product.InStock -= item.Amount;
+        //        dal.Product.Update(product);
+        //    }
 
         }
        
-    }
+    
     bool GetEmail(string email)
     {
         return new EmailAddressAttribute().IsValid(email);
