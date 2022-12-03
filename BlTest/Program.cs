@@ -20,7 +20,7 @@ namespace BITest
 
         public static void ProductOptions()
         {
-
+            string x;
             ProductActions choice;
             Console.WriteLine(@"insert your choice:
 1:list of products,
@@ -62,6 +62,7 @@ namespace BITest
                             if (!double.TryParse(Console.ReadLine(), out price)) throw new Exception("wrong input type");
                             addProduct.Price = price;
                             Console.WriteLine("enter category of product:");
+                            
                             if (!int.TryParse(Console.ReadLine(), out category)) throw new Exception("wrong input type");
                             addProduct.Category = (Category)(category);
                             Console.WriteLine("enter amount in stock of product:");

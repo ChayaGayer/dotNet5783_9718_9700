@@ -1,7 +1,9 @@
 ﻿
 
 namespace BO;
-
+/// <summary>
+///  product for list
+/// </summary>
 public class ProductForList
 {
     public int ID { get; set; }

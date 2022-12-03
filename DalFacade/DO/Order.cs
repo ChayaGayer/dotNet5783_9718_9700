@@ -2,14 +2,34 @@
 namespace DO;
 
 public struct Order
-{
-    public int ID { get; set; }//the order id
-    public string? CustomerName { get; set; }//the customer name
-    public string? CustomerEmail { get; set; }//the customer email
-    public string? CustomerAddress { get; set; }//the cusomer adress
-    public DateTime? OrderDate { get; set; }//the date of the order
-    public DateTime? ShipDate { get; set; }//the ship date
-    public DateTime? DeliveryDate { get; set; }//the delivery date
+{/// <summary>
+/// the order id
+/// </summary>
+    public int ID { get; set; }
+    /// <summary>
+    /// the customer name
+    /// </summary>
+    public string? CustomerName { get; set; }
+    /// <summary>
+    /// the customer email
+    /// </summary>
+    public string? CustomerEmail { get; set; }
+    /// <summary>
+    /// //the cusomer adress
+    /// </summary>
+    public string? CustomerAddress { get; set; }
+    /// <summary>
+    /// /the date of the order
+    /// </summary>
+    public DateTime? OrderDate { get; set; }
+    /// <summary>
+    /// the ship date
+    /// </summary>
+    public DateTime? ShipDate { get; set; }
+    /// <summary>
+    /// /the delivery date
+    /// </summary>
+    public DateTime? DeliveryDate { get; set; }
   public override string ToString()
     {
         return this.ToStringProperty();

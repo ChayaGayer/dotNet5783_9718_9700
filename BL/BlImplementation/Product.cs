@@ -1,8 +1,12 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
 using DO;
+using System.Buffers.Text;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
 
 namespace BlImplementation;
@@ -10,7 +14,17 @@ namespace BlImplementation;
 internal class Product:IProduct
 {
     DalApi.IDal dal=new Dal.DalList();
-    
+    /// <summary>
+    /// Product list request
+    ///Request a list of products from the data layer
+   /// Build a list of products of the ProductForList type(logical entity) based on the data
+////Return the list that was built
+
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlEmptyStringException"></exception>
+    /// <exception cref="BO.BlWorngCategoryException"></exception>
     public IEnumerable<BO.ProductForList?> GetListedProducts()
     {
         return from DO.Product? doProduct in dal.Product.GetAll()
@@ -24,6 +38,13 @@ internal class Product:IProduct
         
 
     }
+    /// <summary>
+    /// return the list of product for the customer
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlEmptyStringException"></exception>
+    /// <exception cref="BO.BlWorngCategoryException"></exception>
     public IEnumerable<BO.ProductItem?> GetListedProductsForC()
     {
         return from DO.Product? doProduct in dal.Product.GetAll()
@@ -38,10 +59,16 @@ internal class Product:IProduct
 
 
     }
-
+    /// <summary>
+    /// get the product id and return this product for maneger
+    /// </summary>
+    /// <param name="productID"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
     public BO.Product RequestProductDetaForM(int productID)
     {
-         if (productID < 100000 || productID > 999999)
+         if (productID < 100000 || productID > 999999)//if the id correct
         {
             throw new BO.BlInCorrectException("Worng ID");
         }
@@ -49,7 +76,7 @@ internal class Product:IProduct
         DO.Product doProduct = dal.Product.GetById(productID);
         try
         {
-            doProduct = dal.Product.GetById(productID);
+            doProduct = dal.Product.GetById(productID);//if exist
 
         }
         catch (DO.DalMissingIdException ex)
@@ -57,7 +84,7 @@ internal class Product:IProduct
             throw new BO.BlMissingEntityException("Missing product", ex);
         }
 
-        return new BO.Product()
+        return new BO.Product()//build and return the product
     {
         ID = doProduct.ID,
         Category = (BO.Category) doProduct.Category,
@@ -67,17 +94,24 @@ internal class Product:IProduct
     };
 
 }
+    /// <summary>
+    /// get the product id and return this product for costumer
+    /// </summary>
+    /// <param name="productID"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
     public BO.ProductItem RequestProductDetaForC(int productID, BO.Cart cart)
     {
         
-            if (productID < 100000 || productID > 999999)
-                throw new BO.BlInCorrectException("Worng ID");
+            if (productID < 100000 || productID > 999999)//if the id correct
+            throw new BO.BlInCorrectException("Worng ID");
         
         DO.Product product;
 
             try
             {
-                product = dal.Product.GetById(productID);
+                product = dal.Product.GetById(productID);//if exist
             }
             catch (DO.DalMissingIdException ex)
              {
@@ -104,16 +138,20 @@ internal class Product:IProduct
 
             //    };
         }
-    
+    /// <summary>
+    /// add a product gets a product and add it to the dal
+    /// </summary>
+    /// <param name="product"></param>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
     public void AddProduct(BO.Product product)
     {
         
              
-            if (product.ID < 100000 || product.ID > 999999||product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)
-            
-                throw new BO.BlNullPropertyException("Missing detail in property");
+            if (product.ID < 100000 || product.ID > 999999||product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)//check if the details in property
+
+            throw new BO.BlNullPropertyException("Missing detail in property");
         
-        dal.Product.Add(new DO.Product()
+        dal.Product.Add(new DO.Product()//adding to the dal
         {
         ID=product.ID,
        ProductName=product.ProductName,
@@ -123,13 +161,18 @@ internal class Product:IProduct
 
         });
     }
+    /// <summary>
+    /// getting product id and delete this product
+    /// </summary>
+    /// <param name="productID"></param>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
     public void DeleteProduct(int productID)
 
     {
         try
         {
             DO.OrderItem? Items = dal.OrderItem.GetAll().FirstOrDefault(item => item.Value.ID == productID);
-            if (Items == null)
+            if (Items == null)//not exist 
                 throw new DO.DalMissingIdException(productID, "product");
             dal.Product.Delete(productID);
         }
@@ -141,14 +184,19 @@ internal class Product:IProduct
 
 
     }
+    /// <summary>
+    /// get a product to update 
+    /// </summary>
+    /// <param name="product"></param>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
     public void UpdateProductData(BO.Product product)
     {
         
-            if (product.ID < 100000 || product.ID > 999999 || product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)
+            if (product.ID < 100000 || product.ID > 999999 || product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)//check if the details in property
 
-                throw new BO.BlNullPropertyException("Missing detail in property");
+            throw new BO.BlNullPropertyException("Missing detail in property");
       
-        dal.Product.Update(new DO.Product()
+        dal.Product.Update(new DO.Product()//update
         {
             ID = product.ID,
             ProductName = product.ProductName,
