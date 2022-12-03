@@ -37,8 +37,9 @@ internal static class DataSource
     }
     private static void CreateAndInitProducts()//The function that initializes the list of products
     {
-        string[] ProductsArray = { "stud earrings",  "Watch ", "Neckless",   "Tennis bracelets", "Halo rings", "Bands rings" };
+        string[] ProductsArray = { " stud earrings",  " Watch ", " Neckless",   " Tennis bracelets", " Halo rings", " Bands rings" };
         string[] ProductsColorArray = { "Gold", "Silver", "RoseGold" };
+        int m = 0;
         for (int i = 0; i < 5; i++)
         {
             
@@ -49,13 +50,14 @@ internal static class DataSource
                 ProducstList.Add(
                    new Product
                    {
-                       ID = 100000 + i+j,
+                       ID = 100000 +m ,
                        Price = s_rand.Next(300, 1500),
                        ProductName = ProductsColorArray[j] + ProductsArray[i],
                        Category = (Category)x,
                        InStock = s_rand.Next(10),
 
                    });
+                m++;
             }
         }
              
@@ -86,9 +88,10 @@ internal static class DataSource
         Order x = new Order();
         x.ID = Config.NextOrderNumber;
         x.CustomerName = CustomersNameArray[i];
-        x.CustomerEmail = CustomersNameArray[i] + "@gmail.com";
+        x.CustomerEmail = (CustomersNameArray[i] + "@gmail.com").Replace(' ', '_');
         x.CustomerAddress = CustomersAdressArray[i];
-        x.OrderDate = DateTime.Now;
+        int month = -s_rand.Next(1, 3);
+            x.OrderDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month + month, s_rand.Next(1, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month + month)));
         if (i < 0.8 * 20)//80% from the orders
         {
             x.ShipDate = x.OrderDate + TimeSpan.FromDays((double)s_rand.Next(4));
@@ -103,8 +106,8 @@ internal static class DataSource
         }
         else
         {
-            x.ShipDate = DateTime.MinValue;//or null?
-            x.DeliveryDate = DateTime.MinValue;//or null?
+            x.ShipDate = null;//or null?
+            x.DeliveryDate = null;//or null?
         }
 
         OrdersList.Add(x);//add the object for the order list

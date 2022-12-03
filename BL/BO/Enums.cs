@@ -1,6 +1,8 @@
 ﻿
 namespace BO;
-
+/// <summary>
+/// the status of the order
+/// </summary>
 public enum OrderStatus
 {
     Initiated,
@@ -9,6 +11,9 @@ public enum OrderStatus
     Shipped,
     Delivered
 }
+/// <summary>
+/// the categories
+/// </summary>
  public enum Category
 {
     Earrings,
