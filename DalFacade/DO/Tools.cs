@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DO;
-
+/// <summary>
+/// overide of the ToString
+/// </summary>
 public static class Tools
 {
     public static string ToStringProperty<T>(this T t, string str = "")

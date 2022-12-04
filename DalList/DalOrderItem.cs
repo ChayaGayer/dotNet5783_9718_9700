@@ -42,7 +42,7 @@ namespace Dal
             orderItemToDell = DataSource.OrderItemsList.Find(x => x?.ID == id) ?? throw new DO.DalMissingIdException(id, "orderItem");///if found the orderItem with the same id if not throw exception
             DataSource.OrderItemsList.Remove(orderItemToDell);
 
-        }
+        } 
         public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filtar = null)
         {
             if (filtar != null)

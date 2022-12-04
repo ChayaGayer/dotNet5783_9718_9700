@@ -5,7 +5,7 @@ namespace BO
     /// if the entity allready exist throw an exception
     /// </summary>
     [Serializable]
-    public class BlAlreadyExistEntityException : Exception
+    public class BlAlreadyExistEntityException : Exception 
     {
         public BlAlreadyExistEntityException(string message,Exception innerException):base(message, innerException)
         {

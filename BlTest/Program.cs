@@ -14,13 +14,13 @@ namespace BITest
     {
         static IBl bl = new Bl();
 
-        static Cart newCart = new Cart() { CustomerAdress = "", CustomerEmail = "", CustomerName = "", Items = null, TotalPrice = 0 };
+        static Cart newCart = new Cart() { CustomerAdress = "", CustomerEmail = "", CustomerName = "", Items = new List<OrderItem>(), TotalPrice = 0 };
 
 
 
         public static void ProductOptions()
         {
-
+            string x;
             ProductActions choice;
             Console.WriteLine(@"insert your choice:
 1:list of products,
@@ -29,7 +29,8 @@ namespace BITest
 4:delete product,
 5:update product,
 6:show catalog
-7:delails of product from catalog");
+7:delails of product from catalog
+8:for back");
 
             if (!ProductActions.TryParse(Console.ReadLine(), out choice)) throw new Exception("This option not exist!");
             while (choice != ProductActions.Exit)
@@ -62,6 +63,7 @@ namespace BITest
                             if (!double.TryParse(Console.ReadLine(), out price)) throw new Exception("wrong input type");
                             addProduct.Price = price;
                             Console.WriteLine("enter category of product:");
+                            
                             if (!int.TryParse(Console.ReadLine(), out category)) throw new Exception("wrong input type");
                             addProduct.Category = (Category)category;
                             Console.WriteLine("enter amount in stock of product:");
@@ -113,47 +115,47 @@ namespace BITest
                 catch(BO.BlMissingEntityException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlEmptyStringException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlIncorrectDatesException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlAlreadyExistEntityException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlInCorrectException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlNagtiveNumberException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlNullPropertyException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(BO.BlWorngCategoryException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    
+                    break;
                 }
                 }
             
@@ -169,7 +171,8 @@ namespace BITest
 3:update ship date,
 4:update delivery date,
 5:order tracking,
-6:update order");
+6:update order
+7:for back");
             OrderActions ch = OrderActions.Exit;
 
             do
@@ -213,47 +216,47 @@ namespace BITest
                 catch (BO.BlMissingEntityException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlEmptyStringException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlIncorrectDatesException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlAlreadyExistEntityException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlInCorrectException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlNagtiveNumberException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlNullPropertyException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlWorngCategoryException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-
+                    break;
                 }
                 
             } while (ch != OrderActions.Exit);
@@ -265,7 +268,8 @@ namespace BITest
             Console.WriteLine(@"insert your choice 
 1:add product to cart,
 2:update amount of product in cart,
-3:create a new order:");
+3:create a new order-OrderConfirmation:
+4:for back");
             if (!CartActions.TryParse(Console.ReadLine(), out choice)) throw new Exception("wrong input type");
             while (choice != CartActions.Exit)
             {
@@ -300,6 +304,7 @@ namespace BITest
                             break;
                         case CartActions.Create:
                             bl.Cart.OrderConfirmation(newCart);
+                            //newCart = new Cart();
                             break;
                         case CartActions.Exit:
                             break;
@@ -313,46 +318,47 @@ namespace BITest
                 catch (BO.BlMissingEntityException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlEmptyStringException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlIncorrectDatesException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlAlreadyExistEntityException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlInCorrectException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlNagtiveNumberException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlNullPropertyException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (BO.BlWorngCategoryException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    break;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    break;
 
                 }
             }

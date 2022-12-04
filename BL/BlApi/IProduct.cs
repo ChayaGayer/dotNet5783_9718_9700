@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlApi;
-
+/// <summary>
+/// the product interface
+/// </summary>
 public interface IProduct
 {
    

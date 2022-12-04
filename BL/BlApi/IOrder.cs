@@ -1,7 +1,9 @@
 ﻿using BO;
 
 namespace BlApi;
-
+/// <summary>
+/// the order interface
+/// </summary>
 public interface IOrder
 {
    

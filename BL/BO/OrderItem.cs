@@ -8,7 +8,7 @@ namespace BO;
 
 public class OrderItem
 {
-    public int ID { get; set; }//the id of the order item
+    public int ID { get; set; }//the id of the order item 
     public int OrderId { get; set; }//the order id
     public int ItemId { get; set; }//the item id
     public string ItemName { get; set; }

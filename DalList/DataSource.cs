@@ -62,7 +62,7 @@ internal static class DataSource
         ProducstList.Add(
            new Product
            {
-               ID = 100000 + 6 + 3 + m,
+               ID = 100000 + 15,
                Price = s_rand.Next(300, 1500),
                ProductName = ProductsColorArray[2] + ProductsArray[5],
                Category = (Category)y,
@@ -103,8 +103,8 @@ internal static class DataSource
             }
             else
             {
-                x.ShipDate = null;//or null?
-                x.DeliveryDate = null;//or null?
+                x.ShipDate = null;
+                x.DeliveryDate = null;
             }
 
             OrdersList.Add(x);//add the object for the order list
@@ -116,75 +116,40 @@ internal static class DataSource
 
 
     private static void CreateAndInitOrderItems()//The function that initializes the list of the order items
-   {
-        ////    for(int i = 0; i < 40; i++)
-        ////    {
-        //        //Product? product=new Product();
-        //        //OrderItem item=new OrderItem();
-        //        //product = ProducstList[s_rand.Next(0, ProducstList.Count())];
-        //        //item.ID = Config.NextOrderItemNumber;
-        //        //item.ItemId = product.Value.ID;
-        //        //item.Amount = s_rand.Next(1, 3);
-        //        //item.OrderId = OrdersList[s_rand.Next(0, OrdersList.Count())].Value.ID;
-        //        //item.Price = product.Value.Price ;
+    {
 
-        //    for (int i = 0; i < 40;)
-        //    {
-        //        OrderItem item = new OrderItem();
-        //        Product product = new Product();
-        //        if (i < 20)
-        //            item.OrderId = OrdersList[i].Value.ID;
-        //        else
-        //            item.OrderId = OrdersList[s_rand.Next(0, OrdersList.Count())].Value.ID;
-        //        int x = s_rand.Next(1, 4);
-        //        for (int j = 0; j < x; j++)
-        //        {
-        //            item.ID = Config.NextOrderItemNumber;
-        //            product = ProducstList[s_rand.Next(0, ProducstList.Count())].Value;
-        //            item.OrderId = 10000 + i;
-        //            item.ItemId = product.ID;
-        //            item.Amount = s_rand.Next(0, 2);
-        //            item.Price = product.Price * item.Amount;
-        //            OrderItemsList.Add(item);
-        //        }
-        //    }
+        int x1 = s_rand.Next(15);
+        int y = 100000;
+
         for (int i = 0; i < 20; i++)//for each order
         {
-
-
-            for (int j = 0; j <= s_rand.Next(1, 4); j++)//every order need 1-4 product
-                                                        //    {
-                OrderItemsList.Add(
+            OrderItemsList.Add(
                 new OrderItem
                 {
                     ID = Config.NextOrderItemNumber,
                     OrderId = 10000 + i,
-                    ItemId = 100000 + s_rand.Next(0, 10),
-                    Price = s_rand.Next(300, 1500),
-                    Amount = s_rand.Next(1, 4)
+                    ItemId = 100000 + x1,
+                    Price = ProducstList.Find(x => (x?.ID == x1 + y)).Value.Price,
+                    Amount = s_rand.Next(1, 3),
                 });
+            int x2 = s_rand.Next(15);
+            while (x2 == x1)
+            {
+                x2 = s_rand.Next(15);
+            }
+            OrderItemsList.Add(
+               new OrderItem
+               {
+                   ID = Config.NextOrderItemNumber,
+                   OrderId = 10000 + i,
+                   ItemId = 100000 + x2,
+                   Price = ProducstList.Find(x => (x?.ID == y + x2)).Value.Price,
+                   Amount = s_rand.Next(1, 3),
 
-        }
-        //for (int i = 0; i < 20; i++)//for each order
-        //{
-
-
-        //    for (int j = 0; j <= s_rand.Next(1, 4); j++)//every order need 1-4 product
-        //                                                //    {
-        //        OrderItemsList.Add(
-        //        new OrderItem
-        //        {
-        //            ID = Config.NextOrderItemNumber,
-
-        //             OrderId = 10000 + i,
-        //            ItemId = 100000 + s_rand.Next(0, 10),
-        //            Price = s_rand.Next(300, 1500),
-        //            Amount = s_rand.Next(0, 2)
-        //        });
-
-        //}
+               });
     }
     }
+}
 
     
    

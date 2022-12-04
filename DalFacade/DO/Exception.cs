@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DO
-{
+{/// <summary>
+/// exception that thrown when the Entity already exist
+/// </summary>
     [Serializable]
     public class DalAlreadyExistIdException : Exception
     {
@@ -30,11 +32,14 @@ namespace DO
 
 
     }
+    /// <summary>
+    /// exception that thrown when the Entity is missing 
+    /// </summary>
     [Serializable]
     public class DalMissingIdException : Exception
     {
         public int EntityID;
-        public string EntityName;
+        public string EntityName; 
         public DalMissingIdException(int id, string name) : base()
         {
             EntityID = id;

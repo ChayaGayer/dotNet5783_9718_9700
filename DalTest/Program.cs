@@ -110,16 +110,16 @@ namespace Dal
             catch (DO.DalMissingIdException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw;
+                
             }
             catch (DO.DalAlreadyExistIdException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw;
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
             }
         }
         static void ForOrder(IDal dal)
@@ -226,16 +226,16 @@ namespace Dal
             catch (DO.DalMissingIdException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw;
+                
             }
             catch (DO.DalAlreadyExistIdException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw;
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
             }
         }
    static void ForOrderItem(IDal dal)
@@ -365,17 +365,17 @@ namespace Dal
                 catch (DO.DalMissingIdException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    
                 }
                 catch (DO.DalAlreadyExistIdException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    throw;
+                    
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
-                }
+                Console.WriteLine(ex.Message);
+            }
             }
 
                 
