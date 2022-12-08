@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{3580F7D4-8E07-4F69-AF8E-04DC5CD99072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlTest", "BlTest\BlTest.csproj", "{5C34EDA4-E96E-4455-B470-B23ED45A982D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{5C34EDA4-E96E-4455-B470-B23ED45A982D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{690B183D-5076-4249-990C-B8639327A991}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,12 +52,17 @@ Global
 		{5C34EDA4-E96E-4455-B470-B23ED45A982D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C34EDA4-E96E-4455-B470-B23ED45A982D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C34EDA4-E96E-4455-B470-B23ED45A982D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690B183D-5076-4249-990C-B8639327A991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690B183D-5076-4249-990C-B8639327A991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690B183D-5076-4249-990C-B8639327A991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690B183D-5076-4249-990C-B8639327A991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C34EDA4-E96E-4455-B470-B23ED45A982D} = {7082352E-E513-4DE0-ABA8-D7DBE276456C}
+		{690B183D-5076-4249-990C-B8639327A991} = {7082352E-E513-4DE0-ABA8-D7DBE276456C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B15B2D1-AC30-4FDE-BEA6-DC5F8F7E6AAE}

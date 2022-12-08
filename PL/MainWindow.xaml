@@ -1,0 +1,28 @@
+﻿<Window x:Class="PL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\user1\Pictures\לוגו סברובסקי.png"/>
+        </Grid.Background>
+        <Button Content="Maneger" Click="ProductList" HorizontalAlignment="Left" Margin="599,264,0,0" VerticalAlignment="Top" FontFamily="Rockwell Extra Bold" Height="54" Width="114">
+            <Button.Background>
+                <ImageBrush TileMode="None"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Customer" HorizontalAlignment="Left"  Margin="140,267,0,0" VerticalAlignment="Top" Height="51" Width="124" FontFamily="Rockwell Extra Bold">
+            <Button.Background>
+                <ImageBrush Stretch="None"/>
+            </Button.Background>
+        </Button>
+
+
+
+
+    </Grid>
+</Window>

@@ -20,5 +20,6 @@ public enum OrderStatus
     Braclet,
     Ring,
     Neckless,
-    Watch
+    Watch,
+    None//צריך לבדוק האם זה לא דופק את שלב שתיים
 }

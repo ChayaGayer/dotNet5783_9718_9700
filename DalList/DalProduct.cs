@@ -11,7 +11,7 @@ internal class DalProduct: IProduct
         if (DataSource.ProducstList.Exists(x => x?.ID == product.ID))//checking if the product already here
             throw new DO.DalAlreadyExistIdException(product.ID,"product");
         else
-            DataSource.ProducstList.Add(product);//if not add to the list
+            DataSource.ProducstList.Add(product);//if not, add to the list
         return product.ID;
     } 
 

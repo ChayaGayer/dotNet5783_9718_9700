@@ -1,5 +1,6 @@
 ﻿using BO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,9 @@ namespace BlApi;
 /// </summary>
 public interface IProduct
 {
-   
-    IEnumerable<ProductForList?> GetListedProducts();
+
+    IEnumerable<BO.ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? filter = null);
+   // IEnumerable<BO.ProductForList?> GetListedProductsByNoneCategory();
     IEnumerable<ProductItem?> GetListedProductsForC();
     
     BO.Product RequestProductDetaForM(int productID);
@@ -20,4 +22,5 @@ public interface IProduct
     void AddProduct(BO.Product product);
     void DeleteProduct(int  productID); 
     void UpdateProductData(BO.Product product);
+    
 }

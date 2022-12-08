@@ -1,0 +1,56 @@
+﻿<Window x:Class="PL.Product.ProductListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Product"
+        mc:Ignorable="d"
+        Title="ProductListWindow" Height="640" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="638*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="MainGrid" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="500*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="16*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="Category" SelectionChanged="Category_SelectionChanged" Grid.Column="2" Margin="0,5,10,574" RenderTransformOrigin="0.5,0.5">
+                <ComboBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-360.116"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ComboBox.RenderTransform>
+            </ComboBox>
+            <Label Content="Product:" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,312">
+
+            </Label>
+            <Button Content="Add new Product" HorizontalAlignment="Left" Margin="200,464,0,60" Padding="5" Grid.Column="2" Click="AddNewProduct" Width="200" FontSize="16" FontFamily="Rockwell Extra Bold" Background="#FFDDDDDD">
+                <Button.BorderBrush>
+                    <ImageBrush ImageSource="C:\Users\user1\Pictures\לוגו סברובסקי.png"/>
+                </Button.BorderBrush>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF030311" Offset="0.01"/>
+                        <GradientStop Offset="1" Color="#FF030311"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+
+        </Grid>
+        <ListView x:Name="ProductListView" Margin="0,57,454,0" Grid.ColumnSpan="3" SelectionChanged="ProductListView_SelectionChanged" MouseDoubleClick="Update_Click"/>
+    </Grid>
+</Window>
