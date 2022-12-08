@@ -25,6 +25,10 @@ namespace PL.Product
     public partial class ProductListWindow : Window
     {
         IBl bl = new Bl();
+        /// <summary>
+        /// constructor for the product list window 
+        /// </summary>
+        /// <param name="bl"></param>
         public ProductListWindow(IBl bl)
         {
             InitializeComponent();
