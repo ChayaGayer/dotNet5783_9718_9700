@@ -8,7 +8,8 @@ namespace BlImplementation;
 
 internal class Cart : ICart
 {
-    DalApi.IDal dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
+
     /// <summary>
     /// adding a product to the cart
     /// </summary>
@@ -22,7 +23,7 @@ internal class Cart : ICart
         DO.Product product = new DO.Product();
         try
         {
-            product = dal.Product.GetById(productId);//check if exist
+            product = dal!.Product.GetById(productId);//check if exist
         }
         catch (DO.DalMissingIdException ex)
         {
@@ -30,7 +31,7 @@ internal class Cart : ICart
         }
 
 
-        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x.ItemId == productId);
+        BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
 
         if (orderItem != null)//if the product already in the cart
         {
@@ -93,9 +94,9 @@ internal class Cart : ICart
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int amount)
     {
         DO.Product product = new DO.Product();
-        product = dal.Product.GetById(productId);//get the product
+        product = dal!.Product.GetById(productId);//get the product
 
-        var orderItem = cart.Items.FirstOrDefault(x => x.ItemId == productId);
+        var orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
         if (orderItem != null)//there is such product
         {
             if (product.InStock < amount)//if the amount in stock smaller then the new amount->update
@@ -116,7 +117,7 @@ internal class Cart : ICart
             if (amount == 0)
             {
 
-                cart.Items = cart.Items.Where(x => x.ItemId != product.ID);//delete
+                cart.Items = cart.Items.Where(x => x?.ItemId != product.ID);//delete
                 return cart;
 
             }
@@ -141,7 +142,7 @@ internal class Cart : ICart
         IEnumerable<DO.Product> productIsExist;
         try { 
             productIsExist = from item in cart.Items
-                             select dal.Product.GetById(item.ID);
+                             select dal!.Product.GetById(item.ID);
         }
         catch (DO.DalMissingIdException ex)//if not exist-throw
         {
@@ -150,7 +151,7 @@ internal class Cart : ICart
 
 
         //check if the amount is not negetive
-        var isNegetive = cart.Items.Where(x => x.Amount < 1);
+        var isNegetive = cart.Items.Where(x => x?.Amount < 1);
         if (isNegetive.Any())
         {
             throw new BO.BlNagtiveNumberException("negative amount in order items");
@@ -158,7 +159,7 @@ internal class Cart : ICart
         int index;
         try
         {
-             index = cart.Items.ToList().FindIndex(x => x.Amount > productIsExist.First(y => y.ID == x.ItemId).InStock);
+             index = cart.Items.ToList().FindIndex(x => x?.Amount > productIsExist.First(y => y.ID == x.ItemId).InStock);
         }
         catch(DO.DalMissingIdException ex)
         {
@@ -185,7 +186,7 @@ internal class Cart : ICart
         order.ShipDate = null;
         order.DeliveryDate = null;
 
-        int orderId = dal.Order.Add(order);//try to add
+        int orderId = dal!.Order.Add(order);//try to add
 
         var addOrderItem = from BO.OrderItem item in cart.Items//build order items
                            select new DO.OrderItem()

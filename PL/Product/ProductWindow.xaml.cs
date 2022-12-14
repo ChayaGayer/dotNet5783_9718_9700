@@ -1,4 +1,4 @@
-﻿using BlApi;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,8 @@ namespace PL.Product
     /// 
     public partial class ProductWindow : Window
     {
-        IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         /// <summary>
         /// constructor for the add
         /// </summary>
@@ -49,14 +50,14 @@ namespace PL.Product
         {
             InitializeComponent();
             selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            BO.Product product = bl.Product.RequestProductDetaForM(id);
-            IDtextBox.Text = product.ID.ToString();
+            BO.Product product = bl!.Product.RequestProductDetaForM(id);
+            IDtextBox.Text = product?.ID.ToString();
             IDtextBox.IsReadOnly = true;
             IDtextBox.Foreground = Brushes.Red;
-            selection.Text = product.Category.ToString();
-            Name.Text = product.ProductName;
-            Price.Text = product.Price.ToString();
-            Amount.Text = product.InStock.ToString();
+            selection.Text = product?.Category.ToString();
+            Name.Text = product?.ProductName;
+            Price.Text = product?.Price.ToString();
+            Amount.Text = product?.InStock.ToString();
             UpdateProduct.Visibility = Visibility.Visible;
             Add.Visibility = Visibility.Collapsed;//close the add button
             UpdateProduct.Content = "Update";
@@ -159,7 +160,7 @@ namespace PL.Product
                 product.InStock = int.Parse(Amount.Text);
                 product.Price = int.Parse(Price.Text);
                 product.Category = (BO.Category)selection.SelectedItem;
-                bl.Product.UpdateProductData(product);
+                bl?.Product.UpdateProductData(product);
                 messageBoxResult = MessageBox.Show("Product update succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.BlNullPropertyException ex)

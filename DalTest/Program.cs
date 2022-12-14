@@ -382,10 +382,8 @@ namespace Dal
        static void Main(string[] args)
                 {
 
-                    IDal dal = new DalList();
-
-
-                    Console.WriteLine("Choose one of the following:");
+            DalApi.IDal? dal = DalApi.Factory.Get();
+            Console.WriteLine("Choose one of the following:");
                     Console.WriteLine("0 :for exist");
                     Console.WriteLine("1: for product");
                     Console.WriteLine("2: for order");
