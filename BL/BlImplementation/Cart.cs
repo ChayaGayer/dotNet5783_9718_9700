@@ -8,7 +8,7 @@ namespace BlImplementation;
 
 internal class Cart : ICart
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    DalApi.IDal dal = DalApi.Factory.Get();
 
     /// <summary>
     /// adding a product to the cart
@@ -23,7 +23,7 @@ internal class Cart : ICart
         DO.Product product = new DO.Product();
         try
         {
-            product = dal!.Product.GetById(productId);//check if exist
+            product = dal.Product.GetById(productId);//check if exist
         }
         catch (DO.DalMissingIdException ex)
         {
@@ -159,7 +159,7 @@ internal class Cart : ICart
         int index;
         try
         {
-             index = cart.Items.ToList().FindIndex(x => x?.Amount > productIsExist.First(y => y.ID == x.ItemId).InStock);
+             index = cart.Items.ToList().FindIndex(x => x?.Amount > productIsExist.First(y => y.ID == x?.ItemId).InStock);
         }
         catch(DO.DalMissingIdException ex)
         {

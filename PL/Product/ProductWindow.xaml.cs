@@ -13,10 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
-using DO;
-using Dal;
-using DalApi;
-using BlImplementation;
 using System.Diagnostics;
 using System.ComponentModel;
 
@@ -28,7 +24,7 @@ namespace PL.Product
     /// 
     public partial class ProductWindow : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
+         static readonly BlApi.IBl bl = BlApi.Factory.Get();
 
         /// <summary>
         /// constructor for the add

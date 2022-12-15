@@ -14,12 +14,12 @@ internal class Product : BlApi.IProduct
     /// <exception cref="BO.BlMissingEntityException"></exception>
     /// <exception cref="BO.BlEmptyStringException"></exception>
     /// <exception cref="BO.BlWorngCategoryException"></exception>
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    DalApi.IDal dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? filter = null)
     {
         IEnumerable<BO.ProductForList?> list;
-        list = from DO.Product doProduct in dal!.Product.GetAll()
+        list = from DO.Product doProduct in dal.Product.GetAll()
                select new BO.ProductForList
                {
                    ID = doProduct.ID, //?? throw new BO.BlMissingEntityException("Missing ID"),
@@ -41,7 +41,7 @@ internal class Product : BlApi.IProduct
     /// <exception cref="BO.BlWorngCategoryException"></exception>
     public IEnumerable<BO.ProductItem?> GetListedProductsForC()
     {
-        return from DO.Product? doProduct in dal!.Product.GetAll()
+        return from DO.Product? doProduct in dal.Product.GetAll()
                select new BO.ProductItem
                {
                    ID = doProduct?.ID ?? throw new BO.BlMissingEntityException("Missing ID"),
@@ -67,7 +67,7 @@ internal class Product : BlApi.IProduct
             throw new BO.BlInCorrectException("Worng ID");
         }
 
-        DO.Product doProduct = dal!.Product.GetById(productID);
+        DO.Product doProduct = dal.Product.GetById(productID);
         try
         {
             doProduct = dal.Product.GetById(productID);//if exist
@@ -105,7 +105,7 @@ internal class Product : BlApi.IProduct
 
         try
         {
-            product = dal!.Product.GetById(productID);//if exist
+            product = dal.Product.GetById(productID);//if exist
         }
         catch (DO.DalMissingIdException ex)
         {
@@ -164,10 +164,10 @@ internal class Product : BlApi.IProduct
         {
             try
             {
-                DO.OrderItem? Items = dal?.OrderItem.GetAll().FirstOrDefault(item => item?.ID == productID);
+                DO.OrderItem? Items = dal.OrderItem.GetAll().FirstOrDefault(item => item?.ID == productID);
                 if (Items == null)//not exist 
                     throw new DO.DalMissingIdException(productID, "product");
-                dal?.Product.Delete(productID);
+                dal.Product.Delete(productID);
             }
             catch (DO.DalMissingIdException ex)
             {

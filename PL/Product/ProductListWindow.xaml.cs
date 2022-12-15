@@ -25,25 +25,19 @@ namespace PL.Product
   
     public partial class ProductListWindow : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
+        BlApi.IBl bl = BlApi.Factory.Get();
 
         /// <summary>
         /// constructor for the product list window 
         /// </summary>
         /// <param name="bl"></param>
-        public ProductListWindow(IBl? bl)
+        public ProductListWindow(IBl bl)
         {
             InitializeComponent();
             BO.Category category = new BO.Category();   
             Category.ItemsSource=Enum.GetValues(typeof(BO.Category));
-            ProductListView.ItemsSource = bl?.Product.GetListedProducts();
-            //Category.Items.Add(BO.Category.Braclet);
-            //Category.Items.Add(BO.Category.Earrings);
-            //Category.Items.Add(BO.Category.Neckless);
-            //Category.Items.Add(BO.Category.Ring);
-            //Category.Items.Add(BO.Category.Watch);
-            //Category.Items.Add("None");
-
+            ProductListView.ItemsSource = bl.Product.GetListedProducts();
+            
         }
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,10 +46,10 @@ namespace PL.Product
             BO.Category category = (BO.Category)Category.SelectedItem;
             if (category == BO.Category.None)
             {
-                ProductListView.ItemsSource = bl?.Product.GetListedProducts();
+                ProductListView.ItemsSource = bl.Product.GetListedProducts();
             }
             else {
-                ProductListView.ItemsSource = bl?.Product.GetListedProducts(x => x?.Category == category);
+                ProductListView.ItemsSource = bl.Product.GetListedProducts(x => x?.Category == category);
             }
         }
         
@@ -75,14 +69,14 @@ namespace PL.Product
         private void AddNewProduct(object sender, RoutedEventArgs e)
         {
             new ProductWindow().ShowDialog();//open the product window
-            ProductListView.ItemsSource = bl?.Product.GetListedProducts();//show the update list
+            ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             int id = ((ProductForList)ProductListView.SelectedItem).ID;//get the id
             new ProductWindow(id).ShowDialog();//open the product window with the update button
-            ProductListView.ItemsSource = bl?.Product.GetListedProducts();//show the update list
+            ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list
         }
     }
 }

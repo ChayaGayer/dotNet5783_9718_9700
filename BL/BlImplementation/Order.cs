@@ -6,7 +6,7 @@ namespace BlImplementation;
 
 internal class Order : IOrder
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    DalApi.IDal dal = DalApi.Factory.Get();
 
     /// <summary>
     /// return the status of the order
@@ -26,17 +26,17 @@ internal class Order : IOrder
     public IEnumerable<BO.OrderForList?> GetListedOrders()
     {
 
-        IEnumerable<DO.Order?> orders = dal!.Order.GetAll();
-        IEnumerable<DO.OrderItem?> orderItem = dal!.OrderItem.GetAll();
+        IEnumerable<DO.Order?> orders = dal.Order.GetAll();
+        IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem.GetAll();
         return from DO.Order item in orders
-               let items=orderItem.Where(x=>x!.Value.OrderId==item.ID)
+               let items=orderItem.Where(x=>x?.OrderId==item.ID)
                select new BO.OrderForList()
                {
                    ID = item.ID,
                    CustomerName = item.CustomerName,
                    Status = Status(item),
                    Amount= items.Count(),
-                   TotelPrice = items.Sum(orderItem => orderItem!.Value.Price * orderItem.Value.Amount)
+                   TotelPrice = items.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount)
                };
 
 
@@ -65,7 +65,7 @@ internal class Order : IOrder
         {
             throw new BO.BlInCorrectException("Worng ID");
         }
-        DO.Order order = dal!.Order.GetById(orderID);//from the do to the bo build the order
+        DO.Order order = dal.Order.GetById(orderID);//from the do to the bo build the order
         return new BO.Order()
         {
             ID = order.ID,
@@ -97,7 +97,7 @@ internal class Order : IOrder
 
         try
         {
-            order = dal!.Order.GetById(orderID);//if exist
+            order = dal.Order.GetById(orderID);//if exist
         }
         catch(DO.DalMissingIdException ex)//missing
         {
@@ -126,7 +126,7 @@ internal class Order : IOrder
 
         try
         {
-            order = dal!.Order.GetById(orderID);//if exist
+            order = dal.Order.GetById(orderID);//if exist
         }
         catch(DO.DalMissingIdException ex)//missing
         {
@@ -166,7 +166,7 @@ internal class Order : IOrder
             DO.Order order = new DO.Order();
         try
         {
-            order = dal!.Order.GetById(orderID);//if exist
+            order = dal.Order.GetById(orderID);//if exist
         }
         catch (DO.DalMissingIdException ex)
         {
