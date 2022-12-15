@@ -8,7 +8,7 @@ public class Cart
     public string CustomerName { get; set; }
     /// <summary>
     /// the coustomer name
-    /// </summary>
+    /// </summary> 
     public string CustomerEmail { get; set; }
     /// <summary>
     /// the customer email
