@@ -12,7 +12,7 @@ namespace BITest
     public enum OrderActions { Get_Order = 1, Order_List, Update_Ship, Update_Delivery, Order_Tracking, Update_Order, Exit }
     internal class Program
     {
-        static IBl bl = new Bl();
+        static IBl bl = Factory.Get();
 
         static Cart newCart = new Cart() { CustomerAdress = "", CustomerEmail = "", CustomerName = "", Items = new List<OrderItem>(), TotalPrice = 0 };
 
