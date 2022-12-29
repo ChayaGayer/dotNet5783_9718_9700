@@ -34,7 +34,7 @@ internal static class DataSource
     }
     private static void CreateAndInitProducts()//The function that initializes the list of products
     {
-        string[] ProductsArray = { " stud earrings", " Watch ", " Neckless", " Tennis bracelets", " Halo rings", " Bands rings" };
+        string[] ProductsArray = { " stud earrings", " Tennis bracelets", " Halo rings",  " Neckless", " Watch "," Bands rings" };
         string[] ProductsColorArray = { "Gold", "Silver", "RoseGold" };
         int m = 0;
         for (int i = 0; i < 5; i++)
@@ -42,7 +42,7 @@ internal static class DataSource
 
             for (int j = 0; j < 3; j++)
             {
-                int x = s_rand.Next(5);
+               
 
                 ProducstList.Add(
                    new Product
@@ -50,7 +50,7 @@ internal static class DataSource
                        ID = 100000 + m,
                        Price = s_rand.Next(300, 1500),
                        ProductName = ProductsColorArray[j] + ProductsArray[i],
-                       Category = (Category)x,
+                       Category = (Category)i,
                        InStock = s_rand.Next(10),
 
                    });
@@ -58,14 +58,14 @@ internal static class DataSource
             }
         }
 
-        int y = s_rand.Next(5);
+        
         ProducstList.Add(
            new Product
            {
                ID = 100000 + 15,
                Price = s_rand.Next(300, 1500),
                ProductName = ProductsColorArray[2] + ProductsArray[5],
-               Category = (Category)y,
+               Category = (Category)2,
                InStock = 0,
 
            });
@@ -127,10 +127,10 @@ internal static class DataSource
                 new OrderItem
                 {
                     ID = Config.NextOrderItemNumber,
-                    OrderId = 10000 + i,
+                    OrderId = 100000 + i,
                     ItemId = 100000 + x1,
                     Price = ProducstList.Find(x => (x?.ID == x1 + y)).Value.Price,
-                    Amount = s_rand.Next(1, 3),
+                    Amount = s_rand.Next(1, 10),
                 });
             int x2 = s_rand.Next(15);
             while (x2 == x1)
@@ -144,7 +144,7 @@ internal static class DataSource
                    OrderId = 10000 + i,
                    ItemId = 100000 + x2,
                    Price = ProducstList.Find(x => (x?.ID == y + x2)).Value.Price,
-                   Amount = s_rand.Next(1, 3),
+                   Amount = s_rand.Next(1, 10),
 
                });
     }

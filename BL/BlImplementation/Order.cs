@@ -76,8 +76,8 @@ internal class Order : IOrder
             DeliveryDate = order.DeliveryDate,
             OrderDate = order.OrderDate,
             ShipDate = order.ShipDate,
-            Items = GetList(dal.OrderItem.GetAll().Where(x => x!.Value.OrderId == order.ID)),
-            TotalPrice = GetList(dal.OrderItem.GetAll().Where(x => x!.Value.OrderId == order.ID)).Sum(x => x!.TotalPrice)//לבדוק את הסכום פה
+            Items = GetList(dal.OrderItem.GetAll().Where(x => x?.OrderId == order.ID)),
+            TotalPrice = GetList(dal.OrderItem.GetAll().Where(x => x?.OrderId == order.ID)).Sum(x => x!.TotalPrice)//לבדוק את הסכום פה
 
 
         };

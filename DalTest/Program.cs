@@ -388,7 +388,8 @@ namespace Dal
                     Console.WriteLine("1: for product");
                     Console.WriteLine("2: for order");
                     Console.WriteLine("3: for order item");
-                    char ch;
+                    Console.WriteLine("4: for back");
+            char ch;
                     try
                     {
                         do
@@ -401,12 +402,13 @@ namespace Dal
                                 case '1': ForProduct(dal); break;
                                 case '2': ForOrder(dal); break;
                                 case '3': ForOrderItem(dal); break;
-
-                                default:
+                                case '4': return;
+                               default:
                                     Console.WriteLine("finish"); break;
 
                             }
                         } while (ch != '0');
+                          char.TryParse(Console.ReadLine(), out ch);
                     }
 
                     catch (Exception e) { Console.WriteLine(e.Message); }

@@ -40,7 +40,7 @@
             </Label>
             <Button Content="Add new Product" HorizontalAlignment="Left" Margin="200,464,0,60" Padding="5" Grid.Column="2" Click="AddNewProduct" Width="200" FontSize="16" FontFamily="Rockwell Extra Bold" Background="#FFDDDDDD">
                 <Button.BorderBrush>
-                    <ImageBrush ImageSource="C:\Users\user1\Pictures\לוגו סברובסקי.png"/>
+                    <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
                 </Button.BorderBrush>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

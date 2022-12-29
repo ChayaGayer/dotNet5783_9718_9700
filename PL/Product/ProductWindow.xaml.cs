@@ -38,6 +38,19 @@ namespace PL.Product
             Add.Content = "Add";
 
         }
+
+
+        public BO.Product? productPl
+        {
+            get { return (BO.Product?)GetValue(productProperty); }
+            set { SetValue(productProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for product.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty productProperty =
+            DependencyProperty.Register("productPl", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
+
+
         /// <summary>
         /// constructor for the update
         /// </summary>
@@ -45,6 +58,7 @@ namespace PL.Product
         public ProductWindow(int id)
         {
             InitializeComponent();
+            //product=
             selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
             BO.Product product = bl!.Product.RequestProductDetaForM(id);
             IDtextBox.Text = product?.ID.ToString();
@@ -204,6 +218,106 @@ namespace PL.Product
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+        }
+
+      
+       
+
+        
+
+        
+
+        
+       
+
+        
+
+      
+
+     
+
+        private void Price_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text == null) return;
+
+            if (e == null) return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+
+            if (Char.IsDigit(c))
+
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+
+                    return;
+
+
+            e.Handled = true;
+
+            return;
+        }
+
+        private void IDtextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text == null) return;
+
+            if (e == null) return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+
+            if (Char.IsDigit(c))
+
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+
+                    return;
+
+
+            e.Handled = true;
+
+            return;
+        }
+
+        private void Amount_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text == null) return;
+
+            if (e == null) return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+
+            if (Char.IsDigit(c))
+
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+
+                    return;
+
+
+            e.Handled = true;
+
+            return;
         }
     }
 }

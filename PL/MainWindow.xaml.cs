@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PL.Product;
+using PL.Orders;
 
 namespace PL
 {
@@ -28,9 +29,41 @@ namespace PL
         {
             InitializeComponent();
         }
-        private void ProductList(object sender, RoutedEventArgs e) => new ProductListWindow(bl).Show();
-        
+        private void ProductList(object sender, RoutedEventArgs e) => new Window1().Show();
 
-        
+      
+
+        private void Track_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderTrack().ShowDialog();
+        }
+
+        private void NewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            new ProductItemWindow().Show();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //new ProductListWindow(bl).Show();
+
+
+
     }
 }

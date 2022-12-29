@@ -5,24 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
+       DataContext="{Binding productPl,RelativeSource={RelativeSource Self}}"
         Title="ProductWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\user1\Pictures\לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox Name="IDtextBox" HorizontalAlignment="Left" Margin="205,32,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100" Height="33"/>
-        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="205,70,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100" Height="34"/>
-        <TextBox Name="Amount"  HorizontalAlignment="Left" Margin="205,161,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100" Height="26"/>
-        <TextBox x:Name="Price"  HorizontalAlignment="Left" Margin="205,200,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100" Height="30"/>
+        <TextBox Name="IDtextBox" HorizontalAlignment="Left" Margin="205,32,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="33" MaxLength="6" PreviewKeyDown="IDtextBox_PreviewKeyDown" />
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="205,70,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="34"/>
+        <TextBox Name="Amount"  HorizontalAlignment="Left" Margin="205,161,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="26"  PreviewKeyDown="Amount_PreviewKeyDown"/>
+        <TextBox x:Name="Price"  HorizontalAlignment="Left" Margin="205,200,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="30" PreviewKeyDown="Price_PreviewKeyDown"/>
         <Button x:Name="Add"  Content="Add" MouseDoubleClick="Add_Click" HorizontalAlignment="Left" Margin="100,266,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Add_Click" Height="37" Width="100"/>
         <Label x:Name="Category" Content ="Category" HorizontalAlignment="Left" Margin="86,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" FontFamily="Rockwell Extra Bold"/>
         <Button x:Name="UpdateProduct" Content="Update" HorizontalAlignment="Left" Margin="100,363,0,0" Grid.Row="1" VerticalAlignment="Top" IsDefault="True"  Visibility="Hidden" Height="49" Width="100" Click="UpdateProduct_Click_1"  />
-        <Label x:Name="id" Content="Product id" HorizontalAlignment="Left" Margin="86,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" FontFamily="Rockwell Extra Bold" Height="33"/>
+        <Label x:Name="id" Content="Product id" HorizontalAlignment="Left" Margin="86,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" FontFamily="Rockwell Extra Bold" Height="33" />
         <Label x:Name="ProductName"  Content="Name of Product" HorizontalAlignment="Left" Margin="59,74,0,0" Grid.Row="1" VerticalAlignment="Top" Width="138" RenderTransformOrigin="0.5,0.5" Height="22" FontFamily="Rockwell Extra Bold">
             <Label.RenderTransform>
                 <TransformGroup>
@@ -34,9 +35,11 @@
             </Label.RenderTransform>
         </Label>
         <ComboBox x:Name="selection" SelectionChanged="SelectCategory"  HorizontalAlignment="Left" Margin="205,115,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25"/>
-        <Label x:Name="AmountInStock" Content="Amount" HorizontalAlignment="Left" Margin="86,161,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="27" FontFamily="Rockwell Extra Bold"/>
-        <Label x:Name="PriceOfProduct" Content="Price" HorizontalAlignment="Left" Margin="86,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="87" Height="30" FontFamily="Rockwell Extra Bold"/>
+        <Label x:Name="AmountInStock" Content="Amount" HorizontalAlignment="Left" Margin="86,161,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="27" FontFamily="Rockwell Extra Bold" />
+        <Label x:Name="PriceOfProduct" Content="Price" HorizontalAlignment="Left" Margin="86,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="87" Height="30" FontFamily="Rockwell Extra Bold" />
 
+
+  
 
     </Grid>
 

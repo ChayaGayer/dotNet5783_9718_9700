@@ -8,18 +8,19 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\user1\Pictures\לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
         </Grid.Background>
         <Button Content="Maneger" Click="ProductList" HorizontalAlignment="Left" Margin="599,264,0,0" VerticalAlignment="Top" FontFamily="Rockwell Extra Bold" Height="54" Width="114">
             <Button.Background>
                 <ImageBrush TileMode="None"/>
             </Button.Background>
         </Button>
-        <Button Content="Customer" HorizontalAlignment="Left"  Margin="140,267,0,0" VerticalAlignment="Top" Height="51" Width="124" FontFamily="Rockwell Extra Bold">
+        <Button Content="New Order" HorizontalAlignment="Left"  Margin="140,267,0,0" VerticalAlignment="Top" Height="51" Width="124" FontFamily="Rockwell Extra Bold" Click="NewOrder_Click">
             <Button.Background>
                 <ImageBrush Stretch="None"/>
             </Button.Background>
         </Button>
+        <Button Content="Track" HorizontalAlignment="Left"  Margin="343,267,0,0" VerticalAlignment="Top" Height="51" Width="143" FontFamily="Rockwell Extra Bold" Click="Track_Click"/>
 
 
 
