@@ -24,51 +24,35 @@ namespace PL.Orders
         {
             InitializeComponent();
         }
-
-        public BO.Order? OrderPl
+        public OrderTrack(int id)
         {
-            get { return (BO.Order?)GetValue(OrderPlProperty); }
+            InitializeComponent();
+            try
+            {
+                OrderPl = bl.Order.OrderTracking(id);
+               
+            }
+            catch (BO.BlInCorrectException ex)
+            {
+                OrderPl = null;
+                MessageBox.Show(ex.Message, " Invalied id", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        
+        public BO.OrderTracking? OrderPl
+        {
+            get { return (BO.OrderTracking?)GetValue(OrderPlProperty); }
             set { SetValue(OrderPlProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for OrderPl.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrderPlProperty =
-            DependencyProperty.Register("OrderPl", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
+            DependencyProperty.Register("OrderPl", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
 
 
-        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-            if (text == null) return;
-            if (e == null) return;
-            //allow get out of the text box
-            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
-                return;
-            //allow list of system keys (add other key here if you want to allow)
-            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
-            e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-            || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
-                return;
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-            //allow control system keys
-            if (Char.IsControl(c)) return;
-            //allow digits (without Shift or Alt)
-            if (Char.IsDigit(c))
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-                    return; //let this key be written inside the textbox
-                            //forbid letters and signs (#,$, %, ...)
-            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other
-           
-          return;
-        }
+      
 
-        private void Check_Click(object sender, RoutedEventArgs e)
-        {
-            int id = int.Parse(TextBoxId.Text);
-            OrderPl = bl.Order.RequestOrderDeta(id);
-            new OrderWindow(OrderPl.ID).Show();   
-        }
-
+   
        
     }
     }
