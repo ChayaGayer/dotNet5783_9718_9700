@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,22 @@ namespace PL.Product
     /// </summary>
     public partial class ProductItemWindow : Window
     {
+        BlApi.IBl bl = BlApi.Factory.Get();
+        public ObservableCollection<BO.ProductItem?> ListProductItems
+        {
+            get { return (ObservableCollection<BO.ProductItem?>)GetValue(ListProductItemsProperty); }
+            set { SetValue(ListProductItemsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ListProductItems.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListProductItemsProperty =
+            DependencyProperty.Register("ListProductItems", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window), new PropertyMetadata(null));
+
+
         public ProductItemWindow()
         {
             InitializeComponent();
+            productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
         }
 
         private void Cart_Click(object sender, RoutedEventArgs e)

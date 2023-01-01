@@ -53,7 +53,8 @@ internal class Order : IOrder
                    TotalPrice = item.Price * item.Amount,
 
                };
-    }/// <summary>
+    }
+    /// <summary>
      /// Order details request
      /// </summary>
      /// <param name="orderID"></param>

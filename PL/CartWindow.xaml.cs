@@ -19,15 +19,10 @@ namespace PL
     /// </summary>
     public partial class CartWindow : Window
     {
-        public CartWindow()
+        BlApi.IBl bl = BlApi.Factory.Get();
+        public BO.Cart? CartPl
         {
-            InitializeComponent();
-        }
-
-
-        public BO.Cart CartPl
-        {
-            get { return (BO.Cart)GetValue(CartPlProperty); }
+            get { return (BO.Cart?)GetValue(CartPlProperty); }
             set { SetValue(CartPlProperty, value); }
         }
 
@@ -36,5 +31,32 @@ namespace PL
             DependencyProperty.Register("CartPl", typeof(BO.Cart), typeof(Window), new PropertyMetadata(null));
 
 
+
+        
+        public CartWindow()
+        {
+            InitializeComponent();
+            Cart.Visibility = Visibility.Hidden;
+            btnConfirm.Visibility = Visibility.Hidden;
+        }
+
+
+        
+        private void FinishOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Cart.Visibility = Visibility.Visible;
+            productItemListView.Visibility = Visibility.Hidden;
+            btnFinishOrder.Visibility = Visibility.Visible;
+            btnConfirm.Visibility = Visibility.Visible;
+            btnFinishOrder.Visibility = Visibility.Hidden;
+        }
+
+        private void Confirm_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //btnFinishOrder.Visibility = Visibility.Visible;
+            MessageBox.Show("Are you sure you want to complite the order?");
+        }
+
+        
     }
 }

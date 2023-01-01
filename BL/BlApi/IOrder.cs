@@ -8,6 +8,7 @@ public interface IOrder
 {
    
     IEnumerable<OrderForList?> GetListedOrders();
+    //IEnumerable<BO.OrderItem?> GetList(IEnumerable<DO.OrderItem?> listOrderItem);
     BO.Order  RequestOrderDeta(int orderID);
     BO.Order UpdateSendOrder(int orderID);
     BO.Order UpdateSupplyOrder(int orderID);

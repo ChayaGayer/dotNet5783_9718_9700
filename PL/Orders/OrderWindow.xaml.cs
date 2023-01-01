@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,10 @@ namespace PL.Orders
         BlApi.IBl bl = BlApi.Factory.Get();
 
 
+
+
+        
+
         public BO.Order? OrderPl
         {
             get { return (BO.Order?)GetValue(OrderPlProperty); }
@@ -32,14 +37,17 @@ namespace PL.Orders
         public static readonly DependencyProperty OrderPlProperty =
             DependencyProperty.Register("OrderPl", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
 
-
+       
         public OrderWindow()
         {
+            //orderItemListView.ItemsSource = bl.Order.GetListedOrders();
             InitializeComponent();
         }
         public OrderWindow(int id)
         {
+            
             InitializeComponent();
+            //orderItemListView.ItemsSource = bl.Order.
             try
             {
                 OrderPl = bl.Order.RequestOrderDeta(id);
