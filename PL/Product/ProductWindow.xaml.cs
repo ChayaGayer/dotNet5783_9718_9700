@@ -31,12 +31,20 @@ namespace PL.Product
         /// </summary>
         public ProductWindow()
         {
-            InitializeComponent();
-            selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            UpdateProduct.Visibility = Visibility.Collapsed;
-            Add.Visibility = Visibility.Visible;
-            Add.Content = "Add";
-
+             InitializeComponent();
+             categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
+             UpdateProduct.Visibility = Visibility.Collapsed;
+             AddProduct.Visibility = Visibility.Visible;
+            AddProduct.Content = "Add";
+            try
+            {
+                productPl = new BO.Product();
+            }
+            catch(BO.BlMissingEntityException ex)
+            { productPl = null;
+                MessageBox.Show(ex.Message," Operation Fail",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                this.Close();
+            }
         }
 
 
@@ -59,8 +67,11 @@ namespace PL.Product
         {
             InitializeComponent();
             //product=
-            selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            BO.Product product = bl!.Product.RequestProductDetaForM(id);
+            categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            UpdateProduct.Visibility = Visibility.Visible;
+            AddProduct.Visibility = Visibility.Collapsed;
+            productPl=bl.Product.RequestProductDetaForM(id);
+            /*BO.Product product = bl!.Product.RequestProductDetaForM(id);
             IDtextBox.Text = product?.ID.ToString();
             IDtextBox.IsReadOnly = true;
             IDtextBox.Foreground = Brushes.Red;
@@ -68,8 +79,7 @@ namespace PL.Product
             Name.Text = product?.ProductName;
             Price.Text = product?.Price.ToString();
             Amount.Text = product?.InStock.ToString();
-            UpdateProduct.Visibility = Visibility.Visible;
-            Add.Visibility = Visibility.Collapsed;//close the add button
+            */
             UpdateProduct.Content = "Update";
 
 
@@ -86,139 +96,247 @@ namespace PL.Product
         /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult;
+           // MessageBoxResult messageBoxResult;
 
             try
             {
-                BO.Product product = new BO.Product()
-                 {
+                // BO.Product product = new BO.Product()
+                bl?.Product.AddProduct(productPl!);
+                MessageBox.Show($"Product successfully added!", "success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            catch(BlAlreadyExistEntityException ex) {MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation); }
+                
 
-                ID = int.Parse(IDtextBox.Text),
+               /* ID = int.Parse(IDtextBox.Text),
                 Price = int.Parse(Price.Text),
                 ProductName = Name.Text,
                 InStock = int.Parse(Amount.Text),
                 Category = (BO.Category)selection.SelectedItem
                 };
                 bl.Product.AddProduct(product);
-                messageBoxResult = MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-            } 
+               */ //messageBoxResult = MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+             
    
-           catch (BO.BlNullPropertyException ex)
-            {
-                MessageBox.Show(ex.Message);
+          // catch (BO.BlNullPropertyException ex)
+            //{
+                //MessageBox.Show(ex.Message);
 
 
             }
-            catch (BO.BlAlreadyExistEntityException ex)
-            {
-                MessageBox.Show(ex.Message,"ERROR", MessageBoxButton.OK,MessageBoxImage.Error);
 
-
-            }
-            catch (BO.BlEmptyStringException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-            }
-            catch (BO.BlInCorrectException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-            }
-            catch (BO.BlMissingEntityException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-            catch (BO.BlNagtiveNumberException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-            catch (BO.BlWorngCategoryException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-            catch (BO.BlIncorrectDatesException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-        }
-
-        private void SelectCategory(object sender, SelectionChangedEventArgs e)
+        private void UpdateProduct_Click(object sender, RoutedEventArgs e)
         {
-            selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            try
+            {
+                bl?.Product.UpdateProductData(productPl!);
+                MessageBox.Show($"Product successfully updated!", "success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            catch(BlMissingEntityException ex)
+            {
+                {
+                    MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
 
         }
+        /* catch (BO.BlAlreadyExistEntityException ex)
+{
+    MessageBox.Show(ex.Message,"ERROR", MessageBoxButton.OK,MessageBoxImage.Error);
+
+
+}
+catch (BO.BlEmptyStringException ex)
+{
+    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+}
+catch (BO.BlInCorrectException ex)
+{
+    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+}
+catch (BO.BlMissingEntityException ex)
+{
+    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+}
+catch (BO.BlNagtiveNumberException ex)
+{
+    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+}
+catch (BO.BlWorngCategoryException ex)
+{
+    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+}
+catch (BO.BlIncorrectDatesException ex)
+{
+    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+}
+*/
+    }
+
+        private void iDTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text == null) return;
+
+            if (e == null) return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+
+            if (Char.IsDigit(c))
+
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+
+                    return;
+
+
+            e.Handled = true;
+
+            return;
+        }
+
+        private void priceTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text == null) return;
+
+            if (e == null) return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+
+            if (Char.IsDigit(c))
+
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+
+                    return;
+
+
+            e.Handled = true;
+
+            return;
+        }
+
+        private void inStockTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+
+            if (text == null) return;
+
+            if (e == null) return;
+
+            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            //allow control system keys
+
+            if (Char.IsControl(c)) return;
+
+            //allow digits (without Shift or Alt)
+
+            if (Char.IsDigit(c))
+
+                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
+
+                    return;
+
+
+            e.Handled = true;
+
+            return;
+        }
+
+
+
+        //  private void SelectCategory(object sender, SelectionChangedEventArgs e)
+        // {
+        //  selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
+
+        // }
 
         /// <summary>
         /// update the product 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UpdateProduct_Click_1(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult messageBoxResult;
-            try
-            {
-                BO.Product product = new BO.Product();
-                product.ID = int.Parse(IDtextBox.Text);
-                product.ProductName = Name.Text;
-                product.InStock = int.Parse(Amount.Text);
-                product.Price = int.Parse(Price.Text);
-                product.Category = (BO.Category)selection.SelectedItem;
-                bl?.Product.UpdateProductData(product);
-                messageBoxResult = MessageBox.Show("Product update succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (BO.BlNullPropertyException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        /* private void UpdateProduct_Click_1(object sender, RoutedEventArgs e)
+         {
+             MessageBoxResult messageBoxResult;
+             try
+             {
+                 BO.Product product = new BO.Product();
+                 product.ID = int.Parse(IDtextBox.Text);
+                 product.ProductName = Name.Text;
+                 product.InStock = int.Parse(Amount.Text);
+                 product.Price = int.Parse(Price.Text);
+                 product.Category = (BO.Category)selection.SelectedItem;
+                 bl?.Product.UpdateProductData(product);
+                 messageBoxResult = MessageBox.Show("Product update succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+             }
+             catch (BO.BlNullPropertyException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
 
-            }
-            catch (BO.BlAlreadyExistEntityException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlAlreadyExistEntityException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
 
-            }
-            catch (BO.BlEmptyStringException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlEmptyStringException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
 
-            }
-            catch (BO.BlInCorrectException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlInCorrectException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
 
-            }
-            catch (BO.BlMissingEntityException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlMissingEntityException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
-            catch (BO.BlNagtiveNumberException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlNagtiveNumberException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
-            catch (BO.BlWorngCategoryException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlWorngCategoryException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
-            catch (BO.BlIncorrectDatesException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             }
+             catch (BO.BlIncorrectDatesException ex)
+             {
+                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
-        }
+             *///}
+    }
 
       
        
@@ -236,88 +354,5 @@ namespace PL.Product
 
      
 
-        private void Price_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-
-            if (text == null) return;
-
-            if (e == null) return;
-
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
-            //allow control system keys
-
-            if (Char.IsControl(c)) return;
-
-            //allow digits (without Shift or Alt)
-
-            if (Char.IsDigit(c))
-
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-
-                    return;
-
-
-            e.Handled = true;
-
-            return;
-        }
-
-        private void IDtextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-
-            if (text == null) return;
-
-            if (e == null) return;
-
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
-            //allow control system keys
-
-            if (Char.IsControl(c)) return;
-
-            //allow digits (without Shift or Alt)
-
-            if (Char.IsDigit(c))
-
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-
-                    return;
-
-
-            e.Handled = true;
-
-            return;
-        }
-
-        private void Amount_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-
-            if (text == null) return;
-
-            if (e == null) return;
-
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
-            //allow control system keys
-
-            if (Char.IsControl(c)) return;
-
-            //allow digits (without Shift or Alt)
-
-            if (Char.IsDigit(c))
-
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-
-                    return;
-
-
-            e.Handled = true;
-
-            return;
-        }
-    }
+  
 }

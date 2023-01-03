@@ -26,8 +26,9 @@ namespace PL.Orders
             InitializeComponent();
             orderForListDataGrid.ItemsSource = bl.Order.GetListedOrders();
         }
+        
 
-  
+
         private void orderForListDataGrid_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             BO.OrderForList? OrderL = orderForListDataGrid.SelectedItem as BO.OrderForList;

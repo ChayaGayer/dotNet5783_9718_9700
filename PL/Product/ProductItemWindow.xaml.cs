@@ -35,7 +35,7 @@ namespace PL.Product
         public ProductItemWindow()
         {
             InitializeComponent();
-            productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
         }
 
         private void Cart_Click(object sender, RoutedEventArgs e)
