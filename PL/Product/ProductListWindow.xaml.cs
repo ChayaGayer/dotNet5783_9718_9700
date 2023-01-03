@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,25 +30,40 @@ namespace PL.Product
         /// constructor for the product list window 
         /// </summary>
         /// <param name="bl"></param>
-        public ProductListWindow(IBl bl)
+        public ProductListWindow(BlApi.IBl bl)
         {
             InitializeComponent();
+            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();
             BO.Category category = new BO.Category();   
             Category.ItemsSource=Enum.GetValues(typeof(BO.Category));
-            ProductListView.ItemsSource = bl.Product.GetListedProducts();
-            
+           productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();
+           
+
+       }
+
+
+        public List<BO.ProductForList?>  prodList
+        {
+            get { return (List<BO.ProductForList?>) GetValue(prodListProperty); }
+            set { SetValue(prodListProperty, value); }
         }
+       
+
+        // Using a DependencyProperty as the backing store for prodList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty prodListProperty =
+            DependencyProperty.Register("prodList", typeof(List<BO.ProductForList?>), typeof(Window), new PropertyMetadata(null));
+
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-            BO.Category category = (BO.Category)Category.SelectedItem;
+
+            BO.Category? category = Category.SelectedItem as BO.Category?;
             if (category == BO.Category.None)
             {
-                ProductListView.ItemsSource = bl.Product.GetListedProducts();
+                productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();
             }
             else {
-                ProductListView.ItemsSource = bl.Product.GetListedProducts(x => x?.Category == category);
+                productForListDataGrid.ItemsSource = bl.Product.GetListedProducts(x => x?.Category == category);
             }
         }
         
@@ -67,14 +83,15 @@ namespace PL.Product
         private void AddNewProduct(object sender, RoutedEventArgs e)
         {
             new ProductWindow().ShowDialog();//open the product window
-            ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list
+           // ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((ProductForList)ProductListView.SelectedItem).ID;//get the id
-            new ProductWindow(id).ShowDialog();//open the product window with the update button
-            ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list
+            BO.ProductForList? prodList = productForListDataGrid.SelectedItems as BO.ProductForList;
+            int id = ((ProductForList)productForListDataGrid.SelectedItem).ID;//get the id-אפשר למחוק
+             new ProductWindow(id).ShowDialog();//open the product window with the update button
+            //ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list-איך רואין ריענון
         }
     }
 }

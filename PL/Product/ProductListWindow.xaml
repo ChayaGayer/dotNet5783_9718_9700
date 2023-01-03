@@ -5,52 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
+         DataContext="{Binding prodList,RelativeSource={RelativeSource Self}}"
         Title="ProductListWindow" Height="640" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="99*"/>
-            <ColumnDefinition Width="63*"/>
-            <ColumnDefinition Width="638*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Name="MainGrid" Grid.ColumnSpan="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="500*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-        </Grid>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="13*"/>
-                <ColumnDefinition Width="16*"/>
-            </Grid.ColumnDefinitions >
-            <ComboBox Name="Category" SelectionChanged="Category_SelectionChanged" Grid.Column="2" Margin="0,5,10,574" RenderTransformOrigin="0.5,0.5">
-                <ComboBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-360.116"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ComboBox.RenderTransform>
-            </ComboBox>
-            <Label Content="Product:" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,312">
-
-            </Label>
-            <Button Content="Add new Product" HorizontalAlignment="Left" Margin="200,464,0,60" Padding="5" Grid.Column="2" Click="AddNewProduct" Width="200" FontSize="16" FontFamily="Rockwell Extra Bold" Background="#FFDDDDDD">
-                <Button.BorderBrush>
-                    <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
-                </Button.BorderBrush>
-                <Button.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF030311" Offset="0.01"/>
-                        <GradientStop Offset="1" Color="#FF030311"/>
-                    </LinearGradientBrush>
-                </Button.Foreground>
-            </Button>
-
-        </Grid>
-        <ListView x:Name="ProductListView" Margin="0,57,454,0" Grid.ColumnSpan="3" SelectionChanged="ProductListView_SelectionChanged" MouseDoubleClick="Update_Click"/>
+        <DataGrid x:Name="productForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="268,113,132,121" MouseDoubleClick="Update_Click " SelectionChanged="ProductListView_SelectionChanged">
+        <DataGrid.Columns>
+            <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
+            <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Header="Product Name" Width="SizeToHeader"/>
+        </DataGrid.Columns>
+    </DataGrid>
+        <Button Content="Add New Product" HorizontalAlignment="Left" Margin="635,586,0,0" VerticalAlignment="Top" Click="AddNewProduct"/>
+        <ComboBox Name="Category" SelectionChanged="Category_SelectionChanged" HorizontalAlignment="Left" Margin="80,166,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

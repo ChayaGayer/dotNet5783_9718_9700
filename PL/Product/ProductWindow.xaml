@@ -7,42 +7,45 @@
         mc:Ignorable="d"
        DataContext="{Binding productPl,RelativeSource={RelativeSource Self}}"
         Title="ProductWindow" Height="640" Width="800">
-    <Grid Name="MainGrid">
-        <Grid.Background>
-            <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBox Name="IDtextBox" HorizontalAlignment="Left" Margin="205,32,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="33" MaxLength="6" PreviewKeyDown="IDtextBox_PreviewKeyDown" />
-        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="205,70,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="34"/>
-        <TextBox Name="Amount"  HorizontalAlignment="Left" Margin="205,161,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="26"  PreviewKeyDown="Amount_PreviewKeyDown"/>
-        <TextBox x:Name="Price"  HorizontalAlignment="Left" Margin="205,200,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="30" PreviewKeyDown="Price_PreviewKeyDown"/>
-        <Button x:Name="Add"  Content="Add" MouseDoubleClick="Add_Click" HorizontalAlignment="Left" Margin="100,266,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Add_Click" Height="37" Width="100"/>
-        <Label x:Name="Category" Content ="Category" HorizontalAlignment="Left" Margin="86,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" FontFamily="Rockwell Extra Bold"/>
-        <Button x:Name="UpdateProduct" Content="Update" HorizontalAlignment="Left" Margin="100,363,0,0" Grid.Row="1" VerticalAlignment="Top" IsDefault="True"  Visibility="Hidden" Height="49" Width="100" Click="UpdateProduct_Click_1"  />
-        <Label x:Name="id" Content="Product id" HorizontalAlignment="Left" Margin="86,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" FontFamily="Rockwell Extra Bold" Height="33" />
-        <Label x:Name="ProductName"  Content="Name of Product" HorizontalAlignment="Left" Margin="59,74,0,0" Grid.Row="1" VerticalAlignment="Top" Width="138" RenderTransformOrigin="0.5,0.5" Height="22" FontFamily="Rockwell Extra Bold">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.126"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <ComboBox x:Name="selection" SelectionChanged="SelectCategory"  HorizontalAlignment="Left" Margin="205,115,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25"/>
-        <Label x:Name="AmountInStock" Content="Amount" HorizontalAlignment="Left" Margin="86,161,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="27" FontFamily="Rockwell Extra Bold" />
-        <Label x:Name="PriceOfProduct" Content="Price" HorizontalAlignment="Left" Margin="86,200,0,0" Grid.Row="1" VerticalAlignment="Top" Width="87" Height="30" FontFamily="Rockwell Extra Bold" />
+    <Grid>
+        <Grid x:Name="grid1Product"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,71,0,0" Height="439" Width="568">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"  PreviewKeyDown="iDTextBox_PreviewKeyDown" />
 
 
-  
+            <Label Grid.Column="0" Content="Product Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="productNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding ProductName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+            <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <ComboBox x:Name="categoryComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN"  Margin="3" Grid.Row="2" VerticalAlignment="Center" Width="120">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+            <Label Grid.Column="0" Content="In Stock:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="inStockTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding InStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="inStockTextBox_PreviewKeyDown"/>
+            <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="priceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="priceTextBox_PreviewKeyDown"/>
+
+        </Grid>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="692,469,0,0" VerticalAlignment="Top" Click="Add_Click" Visibility="Visible" Name="AddProduct" />
+        <Button Content="Update" HorizontalAlignment="Left" Margin="620,474,0,0" VerticalAlignment="Top" Click="UpdateProduct_Click" Visibility="Visible" Name="UpdateProduct"/>
 
     </Grid>
-
 
 
 </Window>

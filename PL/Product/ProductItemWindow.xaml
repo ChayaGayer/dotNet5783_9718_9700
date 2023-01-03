@@ -8,83 +8,40 @@
         DataContext="{Binding ListProductItems,RelativeSource={RelativeSource Self}}"
         Title="ProductItemWindow" Height="450" Width="800">
     <Grid>
-        <ScrollViewer>
-            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <Rectangle Margin="5" Width="100" Height="100" Fill="Beige" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="PowderBlue" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF9ACD32" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFF6347" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF6495ED" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFFA500" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFFD700" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFF4500" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF316915" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF8E32A7" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFECBADC" />
-                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFE6D84F" />
-            </ListView>
-        </ScrollViewer>
-        <ListView x:Name="productItemListView" ItemsSource="{Binding}" SelectionMode="Single" Margin="86,52,108,95" MouseDoubleClick="ChooseItem_MouseDoubleClick">
-            <ListView.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn x:Name="amountInCartColumn" Header="Amount In Cart" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="6,-1,-6,-1" Text="{Binding AmountInCart, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#ffff" >
+            <StackPanel>
+                <TextBlock Text="Items"/>
+                <StackPanel Margin="20 0">
+                    <ItemsControl x:Name="ListViewProductItems" ItemsSource="{Binding}">
+                        <ItemsControl.ItemTemplate>
+                                      <DataTemplate>
+                <StackPanel>
+                <Border Width="100" Height="100" CornerRadius="5" Margin="5">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="1"/>
+                                    </Border.Effect>
+                                </Border>
+                                <TextBlock Margin="5" Text="{Binding ProductName}" FontSize="15"/>
+                                <TextBlock Margin="5" Text="{Binding Price}" FontSize="15"/>
+                                <TextBlock Margin="5" Text="{Binding Category}" FontSize="15"/>
+                                    <Button Name="ShowProduct" Content="Show Product" HorizontalAlignment="Left" Margin="500,140,0,0" VerticalAlignment="Top"> </Button>
+                     </StackPanel>
                             </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="categoryColumn" Header="Category" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1,-6,-1" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="iDColumn" Header="ID" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1,-6,-1" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="isStockColumn" Header="Is Stock" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="-6,-1,-6,-1"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="priceColumn" Header="Price" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1,-6,-1" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn x:Name="productNameColumn" Header="Product Name" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="-6,-1,-6,-1" Text="{Binding ProductName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                  </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>        
+                 </ItemsControl>
+                </StackPanel>
+                <Button Content="Cart" HorizontalAlignment="Left" Margin="500,100,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="63" Width="167"/>
 
-        <Button Content="Cart" HorizontalAlignment="Left" Margin="555,344,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="63" Width="167"/>
+            </StackPanel>
+            
+        </ScrollViewer>
+
+
 
     </Grid>
 </Window>
