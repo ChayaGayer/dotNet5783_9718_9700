@@ -1,0 +1,36 @@
+﻿<Window x:Class="PL.Product.CatalogProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Product"
+        mc:Ignorable="d"
+        DataContext="{Binding CatalogProductPL,RelativeSource={RelativeSource Self}}"
+        Title="CatalogProduct" Height="450" Width="800">
+    <Grid>
+        <Grid x:Name="ProductForCatalog"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="296,130,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock x:Name="categoryTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Category}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ID}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="In Stock:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock x:Name="inStockTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" Text="{Binding InStock}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding Price}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Product Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBlock x:Name="productNameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding ProductName}" VerticalAlignment="Center"/>
+        </Grid>
+        <Button Content="Add To Cart" HorizontalAlignment="Left" Margin="553,324,0,0" VerticalAlignment="Top" Height="40" Width="117" Click="AddToCart_Click"/>
+    </Grid>
+</Window>

@@ -61,19 +61,19 @@ internal class Cart : ICart
                     ID = product.ID,
                     ItemName = product.ProductName,
                     //orderid
-                    ItemId= product.ID,
+                    ItemId = product.ID,
                     Price = product.Price,
                     Amount = 1,
                     TotalPrice = product.Price,
                 };
 
-                cart.Items= cart.Items.Append(newOrderItem);
+                cart.Items = cart.Items.Append(newOrderItem);
                 cart.TotalPrice += newOrderItem.TotalPrice;//update
                 return cart;
             }
             else
             {
-                throw new BO.BlMissingEntityException("THE PRODUCT IS NOT IN THE CART");
+                throw new BO.BlMissingEntityException("The product is out of stock");
             }
 
         }
@@ -125,7 +125,7 @@ internal class Cart : ICart
         }
         else
         {
-            throw new BO.BlMissingEntityException("THE PRODUCT IS NOT IN THE CART");
+            throw new BO.BlMissingEntityException("The amount of the product is lower then the amount in stock");
         }
 
     }
@@ -140,9 +140,10 @@ internal class Cart : ICart
     {
         //check if items are exist
         IEnumerable<DO.Product> productIsExist;
-        try { 
+        try
+        {
             productIsExist = from item in cart.Items
-                             select dal!.Product.GetById(item.ID);
+                             select dal!.Product.GetById(item.ItemId);
         }
         catch (DO.DalMissingIdException ex)//if not exist-throw
         {
@@ -159,17 +160,17 @@ internal class Cart : ICart
         int index;
         try
         {
-             index = cart.Items.ToList().FindIndex(x => x?.Amount > productIsExist.First(y => y.ID == x?.ItemId).InStock);
+            index = cart.Items.ToList().FindIndex(x => x?.Amount > productIsExist.First(y => y.ID == x?.ItemId).InStock);
         }
-        catch(DO.DalMissingIdException ex)
+        catch (DO.DalMissingIdException ex)
         {
-            throw new BO.BlMissingEntityException("the product doesnt exist",ex);
+            throw new BO.BlMissingEntityException("the product doesnt exist", ex);
         }
-        if(index!=-1)
+        if (index != -1)
         {
             throw new BO.BlMissingEntityException("there is not enough from the product");
         }
-       
+
         //check if the name is empty
         if (cart.CustomerName == "")
             throw new BO.BlEmptyStringException("empty customer name");
@@ -197,7 +198,21 @@ internal class Cart : ICart
                                Amount = item.Amount,
                            };
         addOrderItem.ToList().ForEach(x => dal.OrderItem.Add(x));//add
-        addOrderItem.ToList().ForEach(x => { DO.Product p = dal.Product.GetById(x.ItemId); p.InStock -= x.Amount; dal.Product.Update(p); });//update
+        IEnumerable<DO.Product> productUpdate = from item in cart.Items
+                                                select new DO.Product
+                                                {
+                                                    ID = item.ID,
+                                                    ProductName = item.ItemName,
+                                                    Price = item.Price,
+                                                    Category = dal.Product.GetById(item.ItemId).Category,
+                                                    InStock = dal.Product.GetById(item.ItemId).InStock - item.Amount
+                                                };
+    
+
+
+        productUpdate.ToList().ForEach(x => dal.Product.Update(x));
+        //addOrderItem.ToList().ForEach(x => { DO.Product p = dal.Product.GetById(x.ItemId); p.InStock -= x.Amount; dal.Product.Update(p); });//update
+        ////addOrderItem.ToList().ForEach(x => dal.Product.Update(x));
 
 
     }

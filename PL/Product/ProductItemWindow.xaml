@@ -8,7 +8,28 @@
         DataContext="{Binding ListProductItems,RelativeSource={RelativeSource Self}}"
         Title="ProductItemWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="productItemListView" ItemsSource="{Binding}" SelectionMode="Single" Margin="86,52,108,95">
+        <ScrollViewer>
+            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <Rectangle Margin="5" Width="100" Height="100" Fill="Beige" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="PowderBlue" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF9ACD32" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFF6347" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF6495ED" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFFA500" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFFD700" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFFF4500" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF316915" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FF8E32A7" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFECBADC" />
+                <Rectangle Margin="5" Width="100" Height="100" Fill="#FFE6D84F" />
+            </ListView>
+        </ScrollViewer>
+        <ListView x:Name="productItemListView" ItemsSource="{Binding}" SelectionMode="Single" Margin="86,52,108,95" MouseDoubleClick="ChooseItem_MouseDoubleClick">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -67,3 +88,4 @@
 
     </Grid>
 </Window>
+

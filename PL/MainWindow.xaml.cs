@@ -41,9 +41,21 @@ namespace PL
            // new OrderTrack().ShowDialog();
         }
 
-        private void NewOrder_Click(object sender, RoutedEventArgs e)
+        public void NewOrder_Click(object sender, RoutedEventArgs e)//private
         {
-            new ProductItemWindow().Show();
+            
+            //BO.Cart MyCart = new BO.Cart();
+            BO.Cart MyCart = new BO.Cart
+            {
+                CustomerName = " ",
+                CustomerAdress = " ",
+                CustomerEmail = " ",
+                Items = new List<BO.OrderItem?>(),
+                TotalPrice = 0
+            };
+
+
+            new ProductItemWindow(MyCart).Show();
         }
 
         private void Check_Click(object sender, RoutedEventArgs e)

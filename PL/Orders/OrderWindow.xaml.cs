@@ -21,12 +21,6 @@ namespace PL.Orders
     public partial class OrderWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
-
-
-
-
-        
-
         public BO.Order? OrderPl
         {
             get { return (BO.Order?)GetValue(OrderPlProperty); }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,15 +33,36 @@ namespace PL.Product
             DependencyProperty.Register("ListProductItems", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window), new PropertyMetadata(null));
 
 
+        BO.Cart cart1;
+        
+
         public ProductItemWindow()
         {
             InitializeComponent();
             productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
         }
+        public ProductItemWindow(BO.Cart cart)
+        {
+            InitializeComponent();
+            productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
+            cart1 = cart;
+        }
 
         private void Cart_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow().Show();
+            new CartWindow(cart1).ShowDialog();
         }
+
+        private void ChooseItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.ProductItem? productItem= productItemListView.SelectedItem as BO.ProductItem;
+            if(productItem!=null)
+            {
+                CatalogProduct catalogProduct=new CatalogProduct(cart1 ,productItem.ID);
+                catalogProduct.ShowDialog();
+            }
+        }
+
+      
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace PL
     public partial class CartWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
+        BO.Cart cart2;
         public BO.Cart? CartPl
         {
             get { return (BO.Cart?)GetValue(CartPlProperty); }
@@ -33,11 +35,16 @@ namespace PL
 
 
         
-        public CartWindow()
+        public CartWindow(BO.Cart MyCart)
         {
+            CartPl = MyCart;
             InitializeComponent();
+            orderItemListView.ItemsSource = CartPl.Items;
+            //productItemListView.Items.Refresh();
             Cart.Visibility = Visibility.Hidden;
             btnConfirm.Visibility = Visibility.Hidden;
+
+
         }
 
 
@@ -45,7 +52,7 @@ namespace PL
         private void FinishOrder_Click(object sender, RoutedEventArgs e)
         {
             Cart.Visibility = Visibility.Visible;
-            productItemListView.Visibility = Visibility.Hidden;
+            orderItemListView.Visibility = Visibility.Hidden;
             btnFinishOrder.Visibility = Visibility.Visible;
             btnConfirm.Visibility = Visibility.Visible;
             btnFinishOrder.Visibility = Visibility.Hidden;
@@ -55,8 +62,38 @@ namespace PL
         {
             //btnFinishOrder.Visibility = Visibility.Visible;
             MessageBox.Show("Are you sure you want to complite the order?");
+            
+            //cart2 = CartPl;
+            CartPl.CustomerAdress = customerAdressTextBox.Text;
+            CartPl.CustomerName = customerNameTextBox1.Text;
+            CartPl.CustomerEmail = customerEmailTextBox1.Text;
+
+
+            try
+            {
+                bl.Cart.OrderConfirmation(CartPl);
+                MessageBox.Show("Your Order ");
+            }
+            catch (BO.BlMissingEntityException ex)
+            {
+                MessageBox.Show(ex.Message, " ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BlNagtiveNumberException ex)
+            {
+                MessageBox.Show(ex.Message, " ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+                catch (BO.BlEmptyStringException ex)
+            {
+                MessageBox.Show(ex.Message, " ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton==MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
     }
 }
