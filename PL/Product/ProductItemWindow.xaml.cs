@@ -39,7 +39,7 @@ namespace PL.Product
         public ProductItemWindow()
         {
             InitializeComponent();
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
+            productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
         }
         public ProductItemWindow(BO.Cart cart)
         {
@@ -55,14 +55,14 @@ namespace PL.Product
 
         private void ChooseItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductItem? productItem= productItemListView.SelectedItem as BO.ProductItem;
-            if(productItem!=null)
+            BO.ProductItem? productItem = productItemListView.SelectedItem as BO.ProductItem;
+            if (productItem != null)
             {
-                CatalogProduct catalogProduct=new CatalogProduct(cart1 ,productItem.ID);
+                CatalogProduct catalogProduct = new CatalogProduct(cart1, productItem.ID);
                 catalogProduct.ShowDialog();
             }
         }
 
-      
+
     }
 }

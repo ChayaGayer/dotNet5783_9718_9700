@@ -1,4 +1,6 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
+using PL.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,44 +37,44 @@ namespace PL
 
 
         
-        public CartWindow(BO.Cart MyCart)
+        public CartWindow(BO.Cart? MyCart)
         {
             CartPl = MyCart;
             InitializeComponent();
             orderItemListView.ItemsSource = CartPl.Items;
-            //productItemListView.Items.Refresh();
-            Cart.Visibility = Visibility.Hidden;
-            btnConfirm.Visibility = Visibility.Hidden;
+            orderItemListView.Items.Refresh();
+           //Cart.Visibility = Visibility.Hidden;
+            //4btnConfirm.Visibility = Visibility.Hidden;
 
 
         }
 
 
-        
+
         private void FinishOrder_Click(object sender, RoutedEventArgs e)
         {
-            Cart.Visibility = Visibility.Visible;
+            // Cart.Visibility = Visibility.Visible;
             orderItemListView.Visibility = Visibility.Hidden;
-            btnFinishOrder.Visibility = Visibility.Visible;
-            btnConfirm.Visibility = Visibility.Visible;
-            btnFinishOrder.Visibility = Visibility.Hidden;
+            orderItemListView.Visibility = Visibility.Visible;
+            orderItemListView.Visibility = Visibility.Visible;
+            orderItemListView.Visibility = Visibility.Hidden;
         }
 
         private void Confirm_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //btnFinishOrder.Visibility = Visibility.Visible;
             MessageBox.Show("Are you sure you want to complite the order?");
-            
+
             //cart2 = CartPl;
-            CartPl.CustomerAdress = customerAdressTextBox.Text;
-            CartPl.CustomerName = customerNameTextBox1.Text;
-            CartPl.CustomerEmail = customerEmailTextBox1.Text;
+            //CartPl.CustomerAdress = customerAdressTextBox.Text;
+            //CartPl.CustomerName = customerNameTextBox1.Text;
+            //CartPl.CustomerEmail = customerEmailTextBox1.Text;
 
 
             try
             {
                 bl.Cart.OrderConfirmation(CartPl);
-                MessageBox.Show("Your Order ");
+                MessageBox.Show("Your order has been accepted ");
             }
             catch (BO.BlMissingEntityException ex)
             {
@@ -88,12 +90,34 @@ namespace PL
             }
         }
 
-        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void AddOne_Click(object sender, RoutedEventArgs  e)
         {
-            if(e.ChangedButton==MouseButton.Left)
-            {
-                this.DragMove();
-            }
+            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
+            CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, 1);
+            orderItemListView.Items.Refresh();
+            orderItemListView.ItemsSource = CartPl.Items;
+
         }
+
+        private void Minus_Click(object sender, RoutedEventArgs  e)
+        {
+            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
+            CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, -1);
+            orderItemListView.Items.Refresh();
+            orderItemListView.ItemsSource = CartPl.Items;
+
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
+            CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, 0);
+            orderItemListView.Items.Refresh();
+            orderItemListView.ItemsSource = CartPl.Items;
+        }
+
+        
     }
 }

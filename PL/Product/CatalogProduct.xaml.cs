@@ -26,17 +26,7 @@ namespace PL.Product
         BO.Cart cart;
 
 
-        //public BO.Cart? MyCartPl
-        //{
-        //    get { return (BO.Cart?)GetValue(MyCartPlProperty); }
-        //    set { SetValue(MyCartPlProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for MyCartPl.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty MyCartPlProperty =
-        //    DependencyProperty.Register("MyCartPl", typeof(BO.Cart), typeof(Window), new PropertyMetadata(null));
-
-
+       
         public BO.Product? CatalogProductPL
         {
             get { return (BO.Product?)GetValue(CatalogProductPLProperty); }

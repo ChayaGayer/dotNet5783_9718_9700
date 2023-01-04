@@ -211,9 +211,7 @@ internal class Cart : ICart
 
 
         productUpdate.ToList().ForEach(x => dal.Product.Update(x));
-        //addOrderItem.ToList().ForEach(x => { DO.Product p = dal.Product.GetById(x.ItemId); p.InStock -= x.Amount; dal.Product.Update(p); });//update
-        ////addOrderItem.ToList().ForEach(x => dal.Product.Update(x));
-
+        
 
     }
     bool GetEmail(string email)//help func to check the email
