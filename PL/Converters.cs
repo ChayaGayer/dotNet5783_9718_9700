@@ -15,34 +15,34 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            string imageRelativeName = (string)value;
-            string currentDir = Environment.CurrentDirectory;
-            string ImagePath = @"\Pics\" + imageRelativeName + ".png";
-            string imageFullName = currentDir +
-            (File.Exists(currentDir + ImagePath) ? ImagePath : @"\Pics\IMG_FAILURE.png");
+            //string imageRelativeName = (string)value;
+            //string currentDir = Environment.CurrentDirectory;
+            //string ImagePath = @"\Pics\" + imageRelativeName + ".png";
+            //string imageFullName = currentDir +
+            //(File.Exists(currentDir + ImagePath) ? ImagePath : @"\Pics\IMG_FAILURE.png");
 
-            return new BitmapImage(new Uri(imageFullName));
+            //return new BitmapImage(new Uri(imageFullName));
+
+            try
+            {
+                string imageRelativeName = (string)value;
+                string currentDir = Environment.CurrentDirectory[..^4];
+                string imageFullName = currentDir + imageRelativeName;
+                BitmapImage bitmapImage = new BitmapImage(new Uri(imageFullName));
+                return bitmapImage;
+            }
+            catch (Exception ex)
+            {
+                string imageRelativeName = @"\Pics\IMG_FAILURE.png";
+                string currentDir = Environment.CurrentDirectory[..^4];
+                string imageFullName = currentDir + imageRelativeName;
+                BitmapImage bitmapImage = new BitmapImage(new Uri(imageFullName));
+                return bitmapImage;
+
+            }
         }
-            //    try
-            //    {
-            //        string imageRelativeName=(string)value;
-            //        string currentDir = Environment.CurrentDirectory[..^4];
-            //        string imageFullName = currentDir + imageRelativeName;
-            //        BitmapImage bitmapImage = new BitmapImage( new Uri(imageFullName));
-            //        return bitmapImage;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        string imageRelativeName = @"\Pics\IMG_FAILURE.png";
-            //        string currentDir = Environment.CurrentDirectory[..^4];
-            //        string imageFullName = currentDir + imageRelativeName;
-            //        BitmapImage bitmapImage = new BitmapImage(new Uri(imageFullName));
-            //        return bitmapImage;
 
-            //    }
-            //}
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
                 throw new NotImplementedException();
             }
