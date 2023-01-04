@@ -26,7 +26,7 @@ internal class Product : BlApi.IProduct
                    ProductName = doProduct.ProductName!,// ?? throw new BO.BlEmptyStringException("missing name"),
                    Category = (BO.Category)doProduct.Category,// ?? throw new BO.BlWorngCategoryException("missing category"),
                    Price = doProduct.Price, //?? 0
-                   ImageRelativeName=doProduct.ID.ToString()
+                   ImageRelativeName= @"\Pics\"+doProduct.ID+".png"
                };
         return filter is null ? list : list.Where(filter);
         
@@ -50,7 +50,7 @@ internal class Product : BlApi.IProduct
                    Category = (BO.Category?)doProduct?.Category ?? throw new BO.BlWorngCategoryException("missing category"),
                    Price = doProduct?.Price ?? 0,
                    IsStock = doProduct?.InStock > 0 ? true : false,
-                   ImageRelativeName = doProduct?.ID.ToString()
+                   ImageRelativeName = @"\Pics\" + doProduct?.ID + ".png"
 
                };
 
@@ -88,7 +88,7 @@ internal class Product : BlApi.IProduct
             Price = doProduct.Price,
             ProductName = doProduct.ProductName,
             InStock = doProduct.InStock,
-            ImageRelativeName = doProduct.ID.ToString()
+            ImageRelativeName = @"\Pics\" + doProduct.ID + ".png"
         };
 
     }
@@ -124,7 +124,7 @@ internal class Product : BlApi.IProduct
             Category = (BO.Category)product.Category,
             Price = product.Price,
             AmountInCart = cart.Items is null ? 0 : cart.Items.Where(x => x.ItemId == productID).Sum(x => x.Amount),
-            ImageRelativeName = product.ID.ToString()
+            ImageRelativeName = @"\Pics\" + product.ID + ".png"
 
         };
 

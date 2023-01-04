@@ -15,7 +15,7 @@
                         <DropShadowEffect ShadowDepth="1"/>
                     </Border.Effect>
                 </Border>
-                <Image x:Name="prodImage" Source="{Binding ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
+                <Image x:Name="prodImage" Source="{Binding  Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
                 <TextBlock Margin="5" Text="{Binding ProductName}" FontSize="15"/>
                 <TextBlock Margin="5" Text="{Binding Price}" FontSize="15"/>
                 <TextBlock Margin="5" Text="{Binding Category}" FontSize="15">
