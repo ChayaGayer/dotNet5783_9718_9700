@@ -31,6 +31,7 @@
             <Label Grid.Column="0" Content="Product Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBlock x:Name="productNameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding ProductName}" VerticalAlignment="Center"/>
         </Grid>
+        <Image x:Name="prodImage" Source="{Binding ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
         <Button Content="Add To Cart" HorizontalAlignment="Left" Margin="553,324,0,0" VerticalAlignment="Top" Height="40" Width="117" Click="AddToCart_Click"/>
     </Grid>
 </Window>

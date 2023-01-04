@@ -44,7 +44,7 @@ namespace PL.Product
         public ProductItemWindow(BO.Cart cart)
         {
             InitializeComponent();
-            productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
             cart1 = cart;
         }
 
@@ -55,8 +55,8 @@ namespace PL.Product
 
         private void ChooseItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductItem? productItem = productItemListView.SelectedItem as BO.ProductItem;
-            if (productItem != null)
+            BO.ProductItem? productItem= ListViewProductItems.SelectedItem as BO.ProductItem;
+           if(productItem!=null)
             {
                 CatalogProduct catalogProduct = new CatalogProduct(cart1, productItem.ID);
                 catalogProduct.ShowDialog();
