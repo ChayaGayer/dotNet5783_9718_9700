@@ -28,6 +28,7 @@ public class ProductItem
 /// return the amount of this product in cart
 /// </summary>
      public int AmountInCart { get; set; }
+    public string? ImageRelativeName { get; set; }
     public override string ToString()
     {
         return this.ToStringProperty();

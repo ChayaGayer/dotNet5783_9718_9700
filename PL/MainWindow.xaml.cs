@@ -55,7 +55,7 @@ namespace PL
             };
 
 
-            new ProductItemWindow(MyCart).Show();
+            new ProductItemWindow(MyCart).ShowDialog();
         }
 
         private void Check_Click(object sender, RoutedEventArgs e)
