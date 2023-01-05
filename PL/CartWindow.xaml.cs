@@ -43,8 +43,8 @@ namespace PL
             InitializeComponent();
             orderItemListView.ItemsSource = CartPl.Items;
             orderItemListView.Items.Refresh();
-           //Cart.Visibility = Visibility.Hidden;
-            //4btnConfirm.Visibility = Visibility.Hidden;
+            CartGrid.Visibility = Visibility.Hidden;
+            btnConfirmOrder.Visibility = Visibility.Hidden;
 
 
         }
@@ -53,28 +53,101 @@ namespace PL
 
         private void FinishOrder_Click(object sender, RoutedEventArgs e)
         {
-            // Cart.Visibility = Visibility.Visible;
+            CartGrid.Visibility = Visibility.Visible;
             orderItemListView.Visibility = Visibility.Hidden;
             orderItemListView.Visibility = Visibility.Visible;
             orderItemListView.Visibility = Visibility.Visible;
             orderItemListView.Visibility = Visibility.Hidden;
         }
 
-        private void Confirm_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+
+        private void AddOne_Click(object sender, RoutedEventArgs  e)
         {
-            //btnFinishOrder.Visibility = Visibility.Visible;
+            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
+            try
+            {
+                CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, orderItem.Amount + 1);
+            }
+            catch (BO.BlInCorrectException ex)
+            {
+                MessageBox.Show(ex.Message, "Try again", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch (BO.BlNagtiveNumberException ex)
+            {
+                MessageBox.Show(ex.Message, "Try again", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch (BO.BlMissingEntityException ex)
+            {
+                MessageBox.Show(ex.Message, "Try again", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            orderItemListView.ItemsSource = CartPl.Items;
+            orderItemListView.Items.Refresh();
+
+        }
+
+        private void Minus_Click(object sender, RoutedEventArgs  e)
+        {
+            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
+            try
+            {
+                CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, orderItem.Amount - 1);
+            }
+            catch(BO.BlInCorrectException ex)
+            {
+                 MessageBox.Show(ex.Message,"Try again",MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch (BO.BlNagtiveNumberException ex)
+            {
+                MessageBox.Show(ex.Message, "Try again", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch (BO.BlMissingEntityException ex)
+            {
+                MessageBox.Show(ex.Message, "Try again", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+           
+            //orderItemListView.Items.Refresh();
+            orderItemListView.ItemsSource = CartPl.Items;
+            orderItemListView.Items.Refresh();
+
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
+            try
+            {
+                CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, 0);
+            }
+            catch (BO.BlInCorrectException ex)
+            {
+                MessageBox.Show(ex.Message, "Try again", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch (BO.BlNagtiveNumberException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BlMissingEntityException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            //orderItemListView.Items.Refresh();
+            orderItemListView.ItemsSource = CartPl.Items;
+            orderItemListView.Items.Refresh();
+
+
+        }
+
+        private void btnConfirmOrder_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            btnFinishOrder.Visibility = Visibility.Hidden;
             MessageBox.Show("Are you sure you want to complite the order?");
-
-            //cart2 = CartPl;
-            //CartPl.CustomerAdress = customerAdressTextBox.Text;
-            //CartPl.CustomerName = customerNameTextBox1.Text;
-            //CartPl.CustomerEmail = customerEmailTextBox1.Text;
-
 
             try
             {
                 bl.Cart.OrderConfirmation(CartPl);
-                MessageBox.Show("Your order has been accepted ");
+                MessageBox.Show("Your order has been accepted,Thank you buing at swarovski" +
+                    "🛍 ");
             }
             catch (BO.BlMissingEntityException ex)
             {
@@ -84,40 +157,23 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, " ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-                catch (BO.BlEmptyStringException ex)
+            catch (BO.BlEmptyStringException ex)
             {
                 MessageBox.Show(ex.Message, " ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-
-        private void AddOne_Click(object sender, RoutedEventArgs  e)
+        private void btnFinishOrder_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
-            CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, 1);
-            orderItemListView.Items.Refresh();
-            orderItemListView.ItemsSource = CartPl.Items;
-
-        }
-
-        private void Minus_Click(object sender, RoutedEventArgs  e)
-        {
-            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
-            CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, -1);
-            orderItemListView.Items.Refresh();
-            orderItemListView.ItemsSource = CartPl.Items;
+            CartGrid.Visibility = Visibility.Visible;
+            orderItemListView.Visibility = Visibility.Hidden;
+            orderItemListView.Visibility = Visibility.Visible;
+            orderItemListView.Visibility = Visibility.Visible;
+            orderItemListView.Visibility = Visibility.Hidden;
+            btnFinishOrder.Visibility = Visibility.Hidden;
+            btnConfirmOrder.Visibility = Visibility.Visible;
 
 
         }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
-            CartPl = bl.Cart.UpdateAmountOfProduct(CartPl, orderItem.ItemId, 0);
-            orderItemListView.Items.Refresh();
-            orderItemListView.ItemsSource = CartPl.Items;
-        }
-
-        
     }
 }

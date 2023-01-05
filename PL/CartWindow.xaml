@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="126*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="OrderId: " Margin="0,0,10,0" />
-                <TextBlock Text="{Binding Path=OrderId}" Margin="0,22,0,-23" />
+                <TextBlock Text="{Binding Path=OrderId}" Margin="0,22,0,-105" />
                 <TextBlock Grid.Column="1" Text="ItemId " RenderTransformOrigin="0.5,0.5" Margin="2,0,5,12" >
                     <TextBlock.RenderTransform>
                         <TransformGroup>
@@ -33,11 +33,11 @@
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-                <TextBlock Grid.Column="1" Text="{Binding Path=ItemId}" Margin="0,22,0,-23" />
+                <TextBlock Grid.Column="1" Text="{Binding Path=ItemId}" Margin="0,22,0,-105" />
                 <TextBlock Grid.Column="2" Text="ItemName: " Margin="0,0,0,23" />
-                <TextBlock Grid.Column="2" Text="{Binding Path=ItemName}" Margin="0,27,0,-23" />
+                <TextBlock Grid.Column="2" Text="{Binding Path=ItemName}" Margin="0,27,0,-105" />
                 <TextBlock Grid.Column="3" Text="Price: " Margin="5,0,11,5" />
-                <TextBlock Grid.Column="3" Text="{Binding Path=Price}" Margin="0,27,0,-23" />
+                <TextBlock Grid.Column="3" Text="{Binding Path=Price}" Margin="0,27,0,-105" />
 
                 <TextBlock Grid.Column="5" Text="{Binding Path=Amount}" Margin="102,50,96,-40" />
                 <Grid Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="52" RenderTransformOrigin="0.5,0.5">
@@ -49,8 +49,8 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Grid.RenderTransform>
-                    <Button Content="btnPlus" Name="btnPlus"  Click="AddOne_Click" Margin="103,0,-100,0"/>
-                    <Button Content="btnMinus" Name="btnMinus"  Click="Minus_Click" Margin="103,90,-100,-93">
+                    <Button Content="➕"  Name="btnPlus"  Click="AddOne_Click" Margin="103,0,-100,0" Background="#FFF9F4F4"/>
+                    <Button Content="➖" Name="btnMinus"  Click="Minus_Click" Margin="103,90,-100,-93" BorderBrush="#FF0F0F10" Background="#FFFCF8F8">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1"/>
@@ -61,7 +61,7 @@
                         </Button.RenderTransform>
                     </Button>
                 </Grid>
-                <Button  Grid.Column="5"  Content="btnDelete" Name="btnDelete" Click="btnDelete_Click" Margin="177,2,3,-43" >
+                <Button  Grid.Column="5"  Content="❌" Name="btnDelete" Click="btnDelete_Click" Margin="177,2,3,-43" Background="#FFF9F4F4" >
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleX="1"/>
@@ -76,9 +76,9 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyOrderItemTemplate}" Margin="348,10,0,125">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyOrderItemTemplate}" Margin="288,10,0,125">
         </ListView>
-        <Grid x:Name="CartGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,93,0,0">
+        <Grid x:Name="CartGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,56,0,0" Height="143" Width="232">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -89,16 +89,18 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Customer Adress:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Customer Adress:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
             <TextBox x:Name="customerAdressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding CustomerAdress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Customer Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
             <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Customer Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
             <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
             <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice}" VerticalAlignment="Center"/>
         </Grid>
+        <Button Content="Confirm" Name="btnConfirmOrder" HorizontalAlignment="Left" Margin="136,270,0,0" VerticalAlignment="Top" MouseDoubleClick="btnConfirmOrder_MouseDoubleClick" Height="22" Width="78" Background="#FFF6F3F3" FontFamily="Tempus Sans ITC"/>
+        <Button x:Name="btnFinishOrder" Content="Finish Order" HorizontalAlignment="Left" Margin="136,313,0,0" VerticalAlignment="Top" MouseDoubleClick="btnFinishOrder_MouseDoubleClick" Width="78" Background="#FFF6F0F0" FontFamily="Tempus Sans ITC"/>
 
     </Grid>
-    
+
 </Window>

@@ -35,7 +35,8 @@ internal class Order : IOrder
                    ID = item.ID,
                    CustomerName = item.CustomerName,
                    Status = Status(item),
-                   Amount= items.Count(),
+                   //Amount= items.Count(),
+                   Amount=dal.OrderItem.GetAll(x=>x.Value.OrderId==item.ID).Sum(x=>x.Value.Amount),
                    TotelPrice = items.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount)
                };
 

@@ -1,6 +1,7 @@
 ﻿
 using BlApi;
 using BO;
+using DO;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
@@ -93,42 +94,94 @@ internal class Cart : ICart
 
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int amount)
     {
-        DO.Product product = new DO.Product();
-        product = dal!.Product.GetById(productId);//get the product
-
-        var orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
-        if (orderItem != null)//there is such product
         {
-            if (product.InStock < amount)//if the amount in stock smaller then the new amount->update
+            try
             {
-                orderItem.Amount += amount;
-                orderItem.TotalPrice = product.Price;
-                cart.TotalPrice += product.Price;
+                if (productId < 0)// if id is inavalid
+                {
+                    throw new BO.BlInCorrectException("id is inavalid");
+                }
+                if (amount < 0)// if amount is inavalid
+                {
+                    throw new BO.BlNagtiveNumberException("Incorrect amount");
+                }
+
+                DO.Product? p = dal?.Product.GetById(productId);// getting the product
+                BO.OrderItem? oi = (from item in cart.Items  // finding orsderItem
+                                    where item.ItemId == productId
+                                    select item).First();
+                if (amount == 0)
+                {
+                    cart.Items = cart.Items.Where(x => x?.ItemId != oi.ID);//delete
+                    return cart;    //        return cart;
+
+                   
+                }
+               
+                else if (amount > oi.Amount)// increasing the amount
+                {
+                    if (p?.InStock >= amount)
+                    {
+                        cart.TotalPrice += oi.Price * (amount - oi.Amount);// updating the prices and the amount
+                        oi.TotalPrice += oi.Price * (amount - oi.Amount);
+                        oi.Amount = amount;
+                    }
+                    else// if wanting to increase the amount and there aren't enough products in stock
+                    {
+                        throw new BO.BlNagtiveNumberException("Out of Stock");
+                    }
+                }
+                else if (amount < oi.Amount)// decreasing the amount
+                {
+                    cart.TotalPrice -= oi.Price * (oi.Amount - amount);// updating the prices and the amount
+                    oi.TotalPrice -= oi.Price * (oi.Amount - amount);
+                    oi.Amount = amount;
+                }
                 return cart;
             }
-
-            if (product.InStock > amount) //if the amount in stock bigger then the new amount->update
+            catch (DO.DalMissingIdException exception)//if product doesn't exist
             {
-                orderItem.Amount = amount;
-                orderItem.TotalPrice -= (amount - product.InStock) * product.Price;
-                cart.TotalPrice -= (amount - product.InStock) * product.Price;
-                return cart;
+                throw new BO.BlMissingEntityException("Product doesn't exist in cart", exception);
             }
-            if (amount == 0)
-            {
 
-                cart.Items = cart.Items.Where(x => x?.ItemId != product.ID);//delete
-                return cart;
-
-            }
-            return cart;
         }
-        else
-        {
-            throw new BO.BlMissingEntityException("The amount of the product is lower then the amount in stock");
-        }
+    
+    //DO.Product product = new DO.Product();
+    //product = dal!.Product.GetById(productId);//get the product
 
-    }
+    //var orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
+    //if (orderItem != null)//there is such product
+    //{
+    //    if (product.InStock < amount)//if the amount in stock smaller then the new amount->update
+    //    {
+    //        orderItem.Amount += amount;
+    //        orderItem.TotalPrice = product.Price;
+    //        cart.TotalPrice += product.Price;
+    //        return cart;
+    //    }
+
+    //    if (product.InStock > amount) //if the amount in stock bigger then the new amount->update
+    //    {
+    //        orderItem.Amount = amount;
+    //        orderItem.TotalPrice -= (amount - product.InStock) * product.Price;
+    //        cart.TotalPrice -= (amount - product.InStock) * product.Price;
+    //        return cart;
+    //    }
+    //    if (amount == 0)
+    //    {
+
+    //        cart.Items = cart.Items.Where(x => x?.ItemId != product.ID);//delete
+    //        return cart;
+
+    //    }
+    //    return cart;
+    //}
+    //else
+    //{
+    //    throw new BO.BlMissingEntityException("The amount of the product is lower then the amount in stock");
+    //}
+
+}
     /// <summary>
     /// confirmation of  order getting a cart and check propriety
     /// </summary>

@@ -39,7 +39,7 @@ namespace PL.Product
         public ProductItemWindow()
         {
             InitializeComponent();
-            productItemListView.ItemsSource = bl.Product.GetListedProductsForC();
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
         }
         public ProductItemWindow(BO.Cart cart)
         {
