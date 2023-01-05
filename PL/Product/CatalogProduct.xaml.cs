@@ -27,15 +27,15 @@ namespace PL.Product
 
 
        
-        public BO.Product? CatalogProductPL
+        public BO.ProductItem? CatalogProductPL
         {
-            get { return (BO.Product?)GetValue(CatalogProductPLProperty); }
+            get { return (BO.ProductItem?)GetValue(CatalogProductPLProperty); }
             set { SetValue(CatalogProductPLProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CatalogProductPL.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CatalogProductPLProperty =
-            DependencyProperty.Register("CatalogProductPL", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
+            DependencyProperty.Register("CatalogProductPL", typeof(BO.ProductItem), typeof(Window), new PropertyMetadata(null));
 
 
         public CatalogProduct()
@@ -48,7 +48,7 @@ namespace PL.Product
             InitializeComponent();
             try
             {
-                CatalogProductPL = bl.Product.RequestProductDetaForM(id);
+                CatalogProductPL =bl.Product.RequestProductDetaForC(id,cart);
             }
             catch( BO.BlInCorrectException ex)
             {
@@ -75,6 +75,7 @@ namespace PL.Product
             {
                 MessageBox.Show(ex.Message, " ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            this.Close();
         }
     }
 }

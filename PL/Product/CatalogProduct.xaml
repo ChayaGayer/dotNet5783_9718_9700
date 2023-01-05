@@ -11,7 +11,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
         </Grid.Background>
-        <Grid x:Name="ProductForCatalog"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="39,46,0,0" Height="234" Width="294">
+        <Grid x:Name="ProductForCatalog"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,34,0,0" Height="203" Width="186">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -22,19 +22,22 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Category:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBlock x:Name="categoryTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding Category}" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="ID:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ID}" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="In Stock:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBlock x:Name="inStockTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" Text="{Binding InStock}" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="Price:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding Price}" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="Product Name:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBlock x:Name="productNameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding ProductName}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Amount In Cart:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
+            <TextBlock x:Name="amountInCartTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding AmountInCart}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="categoryTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding Category}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" Text="{Binding ID}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Is Stock:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <CheckBox x:Name="isStockCheckBox" Grid.Column="1" Content="" HorizontalAlignment="Left" IsChecked="{Binding IsStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBlock x:Name="priceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding Price ,StringFormat={}{0:c}}" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Product Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBlock x:Name="productNameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding ProductName}" VerticalAlignment="Center"/>
         </Grid>
-        <Image x:Name="prodImage" Source="{Binding ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
-        <Button Content="Add To Cart"  HorizontalAlignment="Left" Margin="553,324,0,0" VerticalAlignment="Top" Height="40" Width="117" Click="AddToCart_Click"/>
+        <Image x:Name="prodImage" Source="{Binding ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="171" Margin="30,237,0,0" VerticalAlignment="Top" Width="257"/>
+        <Button Content="Add To Cart"  HorizontalAlignment="Left" Margin="553,324,0,0" VerticalAlignment="Top" Height="40" Width="117" Click="AddToCart_Click" Background="#FFFCF7F7" FontFamily="Tempus Sans ITC"/>
     </Grid>
 </Window>

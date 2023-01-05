@@ -10,14 +10,14 @@
     <Window.Resources>
         <DataTemplate x:Key="prod">
             <StackPanel>
-                <Border Width="100" Height="100" CornerRadius="5" Margin="5"  >
+                <Border Width="10" Height="10" CornerRadius="5" Margin="0"  >
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="1"/>
                     </Border.Effect>
                 </Border>
-                <Image x:Name="prodImage" Source="{Binding  Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
+                <Image x:Name="prodImage" Source="{Binding  Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="60" Margin="10,20,0,0" VerticalAlignment="Top" Width="191"/>
                 <TextBlock Margin="5" Text="{Binding ProductName}" FontSize="15"/>
-                <TextBlock Margin="5" Text="{Binding Price}" FontSize="15"/>
+                <TextBlock Margin="5" Text="{Binding Price,StringFormat={}{0:c}}" FontSize="15"/>
                 <TextBlock Margin="5" Text="{Binding Category}" FontSize="15">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
@@ -62,8 +62,8 @@
 
 
         <Grid>
-            <Button Content="🛒" HorizontalAlignment="Left" Margin="600,379,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="44" Width="167"/>
-            <Button  Content="Back" Name="BackB" HorizontalAlignment="Left" Margin="86,379,0,0" VerticalAlignment="Top" Click="BackB_Click"/>
+            <Button Content="🛒" HorizontalAlignment="Left" Margin="600,379,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="44" Width="167" Background="#FFF6EFEF"/>
+            <Button  Content="🔙" Name="BackB" HorizontalAlignment="Left" Margin="53,379,0,0" VerticalAlignment="Top" Click="BackB_Click" Width="106" Background="#FFF9EFEF" Height="44"/>
 
         </Grid>
 
