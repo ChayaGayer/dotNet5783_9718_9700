@@ -36,8 +36,8 @@
     </Window.Resources>
     <Grid>
         <ScrollViewer x:Name="Catalog" Background="#ffff" Margin="0,-37,0,37"  >
-            <ListView Name="ListViewProductItems" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ChooseItem_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}" ItemTemplate="{StaticResource prod}">
-               
+            <ListView Name="ListViewProductItems" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ChooseItem_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}" ItemTemplate="{StaticResource prod}" Height="375">
+
                 <!--<StackPanel >
                     <TextBlock Text="Items"/>
                     <StackPanel Margin="20 0" >
@@ -45,23 +45,27 @@
                             <ItemsControl.ItemTemplate>
                                
                             </ItemsControl.ItemTemplate>-->
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        <!--</ItemsControl>-->
-                    <!--</StackPanel>-->
-                    <!--<Button Content="Cart" HorizontalAlignment="Left" Margin="500,100,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="63" Width="167"/>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <!--</ItemsControl>-->
+                <!--</StackPanel>-->
+                <!--<Button Content="Cart" HorizontalAlignment="Left" Margin="500,100,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="63" Width="167"/>
 
                 </StackPanel>-->
-                
-            </ListView>
-            
-        </ScrollViewer>
-        
 
-        <Button Content="Cart" HorizontalAlignment="Left" Margin="555,344,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="63" Width="167"/>
+            </ListView>
+
+        </ScrollViewer>
+
+
+        <Grid>
+            <Button Content="🛒" HorizontalAlignment="Left" Margin="600,379,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="44" Width="167"/>
+            <Button  Content="Back" Name="BackB" HorizontalAlignment="Left" Margin="86,379,0,0" VerticalAlignment="Top" Click="BackB_Click"/>
+
+        </Grid>
 
 
     </Grid>

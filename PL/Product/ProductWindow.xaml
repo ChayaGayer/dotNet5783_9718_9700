@@ -7,7 +7,19 @@
         mc:Ignorable="d"
        DataContext="{Binding productPl,RelativeSource={RelativeSource Self}}"
         Title="ProductWindow" Height="640" Width="800">
+    <Window.Resources
+>
+        <Style x:Key="myButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Extra Bold" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+        </Grid.Background>
         <Grid x:Name="grid1Product"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,71,0,0" Height="439" Width="568">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -21,14 +33,14 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="ID:" FontFamily="Rockwell Extra Bold"  HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Width="38"/>
             <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"  PreviewKeyDown="iDTextBox_PreviewKeyDown" />
 
 
-            <Label Grid.Column="0" Content="Product Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Product Name:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox x:Name="productNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding ProductName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
-            <Label Grid.Column="0" Content="Category:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Category:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <ComboBox x:Name="categoryComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN"  Margin="3" Grid.Row="2" VerticalAlignment="Center" Width="120">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -36,14 +48,15 @@
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
-            <Label Grid.Column="0" Content="In Stock:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="In Stock:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
             <TextBox x:Name="inStockTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding InStock, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="inStockTextBox_PreviewKeyDown"/>
-            <Label Grid.Column="0" Content="Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Price:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="priceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="priceTextBox_PreviewKeyDown"/>
 
         </Grid>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="692,469,0,0" VerticalAlignment="Top" Click="Add_Click" Visibility="Visible" Name="AddProduct" />
-        <Button Content="Update" HorizontalAlignment="Left" Margin="620,474,0,0" VerticalAlignment="Top" Click="UpdateProduct_Click" Visibility="Visible" Name="UpdateProduct"/>
+
+        <Button Content="Add"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="679,469,0,0" VerticalAlignment="Top" Click="Add_Click" Visibility="Visible" Name="AddProduct" Width="93" Height="41" />
+        <Button Content="Update" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="535,469,0,0" VerticalAlignment="Top" Click="UpdateProduct_Click" Visibility="Visible" Name="UpdateProduct" Width="118" Height="41"/>
         <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
 
     </Grid>

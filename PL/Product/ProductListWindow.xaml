@@ -8,16 +8,21 @@
          DataContext="{Binding prodList,RelativeSource={RelativeSource Self}}"
         Title="ProductListWindow" Height="640" Width="800">
     <Grid>
-        <DataGrid x:Name="productForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="268,113,132,121" MouseDoubleClick="Update_Click " SelectionChanged="ProductListView_SelectionChanged">
-        <DataGrid.Columns>
-            <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
-            <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Header="Product Name" Width="SizeToHeader"/>
-        </DataGrid.Columns>
-    </DataGrid>
-        <Button Content="Add New Product" HorizontalAlignment="Left" Margin="635,586,0,0" VerticalAlignment="Top" Click="AddNewProduct"/>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <DataGrid x:Name="productForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="268,113,132,121" MouseDoubleClick="Update_Click " SelectionChanged="ProductListView_SelectionChanged" Background="#FFFDFCFC">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="60"/>
+                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="60"/>
+                <DataGridTextColumn x:Name="productNameColumn" Binding="{Binding ProductName}" Header="Product Name" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Add New Product" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="633,528,0,0" VerticalAlignment="Top" Click="AddNewProduct" Height="52" Width="129" Background="#FFFFFCFC"/>
         <ComboBox Name="Category" SelectionChanged="Category_SelectionChanged" HorizontalAlignment="Left" Margin="80,166,0,0" VerticalAlignment="Top" Width="120"/>
-        
+        <Label x:Name="CategoryCheckBox" Content="Category" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="80,132,0,0" VerticalAlignment="Top" Height="29" Width="120"/>
+        <Image HorizontalAlignment="Left" Height="123" Margin="10,492,0,0" VerticalAlignment="Top" Width="170" Source="/Orders/לוגו סברובסקי.png"/>
+
     </Grid>
 </Window>
