@@ -265,6 +265,8 @@ catch (BO.BlIncorrectDatesException ex)
             return;
         }
 
+      
+
 
 
         //  private void SelectCategory(object sender, SelectionChangedEventArgs e)

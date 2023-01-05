@@ -63,6 +63,9 @@ namespace PL.Product
             }
         }
 
-
+        private void BackB_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().ShowDialog();
+        }
     }
 }

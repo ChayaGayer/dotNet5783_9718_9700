@@ -9,7 +9,7 @@
     <Window.Resources>
         <Style x:Key="myButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="32"/>
-            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontFamily" Value="Rockwell Extra Bold"/>
             <Setter Property="FontWeight" Value="Black"/>
         </Style>
     </Window.Resources>

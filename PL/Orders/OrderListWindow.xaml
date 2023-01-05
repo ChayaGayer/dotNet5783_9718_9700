@@ -7,8 +7,12 @@
         mc:Ignorable="d"
        
         Title="OrderListWindow" Height="450" Width="800">
-    
-        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="163,131,87,109" MouseDoubleClick="orderForListDataGrid_MouseDoubleClick_1">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+        </Grid.Background>
+
+        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="133,172,87,46" MouseDoubleClick="orderForListDataGrid_MouseDoubleClick_1" Background="#FFFCFBFB">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
@@ -17,5 +21,5 @@
                 <DataGridTextColumn x:Name="totelPriceColumn" Binding="{Binding TotelPrice}" Header="Totel Price" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-   
+    </Grid>
 </Window>

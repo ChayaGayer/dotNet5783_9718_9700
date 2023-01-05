@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="0,0,10,55">
+
+    <Grid Margin="0,0,10,-6">
         <Grid.Background>
             <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
         </Grid.Background>
@@ -20,10 +21,10 @@
                 <ImageBrush Stretch="None"/>
             </Button.Background>
         </Button>
-        <Button Content="Track" HorizontalAlignment="Left" Background="White" Margin="343,267,0,0" VerticalAlignment="Top" Height="51" Width="143" FontFamily="Rockwell Extra Bold" Click="Track_Click" BorderBrush="#FFFFFDFD"/>
-        <TextBox x:Name="OrderId" HorizontalAlignment="Left" Margin="343,359,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="143" Visibility="Hidden"   PreviewKeyDown="OrderId_PreviewKeyDown"/>
-        <Label Content="Enter Order Id" HorizontalAlignment="Left" Margin="291,377,0,0" VerticalAlignment="Top" Visibility="Hidden" Name="enterId" />
-        <Button x:Name="Check" Content="Press for Check" HorizontalAlignment="Left" Margin="509,368,0,0" VerticalAlignment="Top" Visibility="Hidden" Click="Check_Click"/>
+        <Button Content="Track" HorizontalAlignment="Left" Background="White" Margin="343,267,0,0" VerticalAlignment="Top" Height="51" Width="143" FontFamily="Rockwell Extra Bold" Click="Track_Click"/>
+        <TextBox x:Name="OrderId" HorizontalAlignment="Left" Margin="343,346,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"  Visibility="Hidden"  Height="33" Width="120" FontFamily="Rockwell Extra Bold" PreviewKeyDown="OrderId_PreviewKeyDown"/>
+        <Label Content="Enter Order Id" HorizontalAlignment="Left" Margin="178,346,0,0" VerticalAlignment="Top" Visibility="Hidden"  Height="33" Width="138" FontFamily="Rockwell Extra Bold" Name="enterId" />
+        <Button x:Name="Check" Content="Press for Check" HorizontalAlignment="Left" Margin="509,346,0,0" VerticalAlignment="Top" Visibility="Hidden" Click="Check_Click" Height="33" Width="120" Background="White" FontFamily="Rockwell Extra Bold"/>
         <Button Content="Button" HorizontalAlignment="Left" Height="29" Margin="48,393,0,0" VerticalAlignment="Top" Width="72">
         </Button>
 

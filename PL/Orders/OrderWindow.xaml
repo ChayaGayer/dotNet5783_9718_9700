@@ -8,6 +8,10 @@
         DataContext="{Binding OrderPl,RelativeSource={RelativeSource Self}}"
         Title="OrderWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+        </Grid.Background>
+
         <Grid x:Name="gridOrder2" HorizontalAlignment="Left" VerticalAlignment="Top"   Margin="44,53,0,0" Width="262" Height="302">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -24,26 +28,26 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Customer Address:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Customer Address:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="customerAddressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding CustomerAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Customer Email:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Customer Name:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Delivery Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Delivery Date:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
             <DatePicker x:Name="deliveryDateDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" SelectedDate="{Binding DeliveryDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="ID:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="iDTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Order Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Order Date:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <Label x:Name="orderDateLabel" Grid.Column="1" Content="{Binding OrderDate}" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="Ship Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Ship Date:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <DatePicker x:Name="shipDateDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" SelectedDate="{Binding ShipDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
-            <Label Grid.Column="0" Content="Status:" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Status:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
             <TextBox x:Name="statusTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="7" Text="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Total Price:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
             <TextBox x:Name="totalPriceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="8" Text="{Binding TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="276,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.241,-0.158" MouseDoubleClick="Update_MouseDoubleClick" Width="124" Height="22">
+        <Button Content="Update" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="302,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.241,-0.158" MouseDoubleClick="Update_MouseDoubleClick" Width="66" Height="28">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -53,7 +57,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="276,254,0,0" VerticalAlignment="Top" MouseDoubleClick="Button_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" Width="105">
+        <Button Content="Update" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="302,237,0,0" VerticalAlignment="Top" MouseDoubleClick="Button_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" Width="79" Height="23">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -64,7 +68,7 @@
             </Button.RenderTransform>
         </Button>
 
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" SelectionMode="Single" Margin="373,74,26,217">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" SelectionMode="Single" Margin="373,74,26,22">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
