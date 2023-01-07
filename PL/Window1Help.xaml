@@ -8,30 +8,28 @@
         Title="Window1Help" Height="143" Width="798">
 
     <!--<Grid Margin="0,10,0,0" HorizontalAlignment="Center" Width="732">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="121"/>
-            <ColumnDefinition Width="135"/>
-            <ColumnDefinition Width="186"/>
+        --><!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="164"/>
+            <ColumnDefinition Width="278"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="72"/>
             <ColumnDefinition Width="98"/>
             <ColumnDefinition Width="50"/>
 
         </Grid.ColumnDefinitions>
-        <Ellipse Width="116" Margin="15,0,0,18" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+        --><!--<Ellipse Height="80" Width="80" Margin="20,10,0,18" HorizontalAlignment="Left">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding}">
-
-                </ImageBrush>
+                <ImageBrush ImageSource="{Binding  Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  />
             </Ellipse.Fill>
-        </Ellipse>
+        </Ellipse>--><!--
         <TextBlock Grid.Column="1" Text="{Binding Path=ItemId}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="130" Margin="0,43,0,18"/>
         <TextBlock Grid.Column="1" Text="Item Id" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="112" Margin="0,10,0,78"/>
-        <TextBlock Grid.Column="2" Text="{Binding Path=ItemName}" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,35" Foreground="#909090" Width="170"/>
+        <TextBlock Grid.Column="2" Text="{Binding Path=ItemName}" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,18" Foreground="#909090" Width="258"/>
         <TextBlock Grid.Column="5" Text="{Binding Path=Price}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="98" />
         <TextBlock Grid.Column="4" Text="{Binding Path=Amount}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Left"  Width="57" Margin="30,0,0,0" Grid.ColumnSpan="2" />
         <StackPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="20">
-            <Button Style="{StaticResource btnCounter}" Click="AddOne_Click">
+            <Button Style="{StaticResource btnCounter}" Click="AddOne_Click">--><!--
 
             </Button>
             <Button Style="{StaticResource btnCounter}" Margin="0 5 0 0">
