@@ -20,10 +20,17 @@ namespace PL.Orders
     public partial class OrderTrack : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
+        /// <summary>
+        /// a window condtructor according the xaml
+        /// </summary>
         public OrderTrack()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// a window condtructor according the xaml with id
+        /// </summary>
+        /// <param name="id"></param>
         public OrderTrack(int id)
         {
             InitializeComponent();

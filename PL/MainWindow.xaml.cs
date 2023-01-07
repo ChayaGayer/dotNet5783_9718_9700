@@ -24,14 +24,25 @@ namespace PL
     public partial class MainWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
-
+        /// <summary>
+        /// a window constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-        }
+        }//
+        /// <summary>
+        /// open window for maneger
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProductList(object sender, RoutedEventArgs e) => new Window1().Show();
 
-      
+      /// <summary>
+      /// for tracking an order -open text box to fill the id
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
 
         private void Track_Click(object sender, RoutedEventArgs e)
         {
@@ -40,7 +51,11 @@ namespace PL
             Check.Visibility = Visibility.Visible;
            // new OrderTrack().ShowDialog();
         }
-
+        /// <summary>
+        /// open the Catalog for the custumer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void NewOrder_Click(object sender, RoutedEventArgs e)//private
         {
             
@@ -57,14 +72,29 @@ namespace PL
 
             new ProductItemWindow(MyCart).ShowDialog();
         }
-
+        /// <summary>
+        /// a button that check the id and if exust open the correct order tracking 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Check_Click(object sender, RoutedEventArgs e)
         {
             int id = int.Parse(OrderId.Text);
-            
-            new OrderTrack(id).Show();
-        }
-
+            try
+            {
+                new OrderTrack(id).Show();
+            }
+            catch (BlMissingEntityException ex)
+            {
+                {
+                    MessageBox.Show(ex.Message, "The id not exist", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+            }
+        }/// <summary>
+         /// PreviewKeyDown allow kees and digits for the id 
+         /// </summary>
+         /// <param name="sender"></param>
+         /// <param name="e"></param>
         private void OrderId_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;

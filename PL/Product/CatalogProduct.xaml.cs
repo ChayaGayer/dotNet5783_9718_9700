@@ -37,11 +37,18 @@ namespace PL.Product
         public static readonly DependencyProperty CatalogProductPLProperty =
             DependencyProperty.Register("CatalogProductPL", typeof(BO.ProductItem), typeof(Window), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// A constructor for the window according the xaml
+        /// </summary>
         public CatalogProduct()
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// A constructor for the window according the xaml with cart and id
+        /// </summary>
+        /// <param name="MyCart"></param>
+        /// <param name="id"></param>
         public CatalogProduct(BO.Cart MyCart , int id)
         {
             cart= MyCart;   
@@ -61,7 +68,11 @@ namespace PL.Product
 
             
         }
-
+        /// <summary>
+        /// add the item for the cart by id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
             int textId = int.Parse(iDTextBlock.Text);

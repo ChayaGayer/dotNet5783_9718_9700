@@ -138,11 +138,16 @@ internal class Product : BlApi.IProduct
     {
         try
         {
-            if (product.ID < 100000 || product.ID > 999999 || product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)//check if the details in property
+            if (product.ID < 100000 || product.ID > 999999 ) //check if the details in property
 
-
-                throw new BO.BlNullPropertyException("Missing detail in property");
-
+               
+                throw new BO.BlNullPropertyException("Wrong ID");
+            if (product.ProductName.Length == 0)
+                throw new BO.BlEmptyStringException("Missing Name");
+            if (product.Price < 0)
+                throw new BO.BlNagtiveNumberException("Negative Number");
+                if(product.InStock < 0)
+                throw new BO.BlNagtiveNumberException("Negative Number");
             dal?.Product.Add(new DO.Product()//adding to the dal
             {
                 ID = product.ID,
@@ -191,10 +196,16 @@ internal class Product : BlApi.IProduct
     public void UpdateProductData(BO.Product product)
     {
         try {
-            if (product.ID < 100000 || product.ID > 999999 || product.ProductName.Length == 0 || product.Price < 0 || product.InStock < 0)//check if the details in property
+             if (product.ID < 100000 || product.ID > 999999 ) //check if the details in property
 
-                throw new BO.BlNullPropertyException("Missing detail in property");
-
+               
+                throw new BO.BlNullPropertyException("Wrong ID");
+            if (product.ProductName.Length == 0)
+                throw new BO.BlEmptyStringException("Missing Name");
+            if (product.Price < 0)
+                throw new BO.BlNagtiveNumberException("Negative Number");
+                if(product.InStock < 0)
+                throw new BO.BlNagtiveNumberException("Negative Number");
             dal.Product.Update(new DO.Product()//update
             {
                 ID = product.ID,

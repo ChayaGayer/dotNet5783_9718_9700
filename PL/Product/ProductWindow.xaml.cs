@@ -29,24 +29,26 @@ namespace PL.Product
         /// <summary>
         /// constructor for the add
         /// </summary>
-        public ProductWindow()
+        public ProductWindow()//Window Constructor,not get parameters
         {
              InitializeComponent();
              categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
-             UpdateProduct.Visibility = Visibility.Collapsed;
-             AddProduct.Visibility = Visibility.Visible;
+             UpdateProduct.Visibility = Visibility.Collapsed;//close the update button
+             AddProduct.Visibility = Visibility.Visible;//visible the add one
             AddProduct.Content = "Add";
             try
             {
-                productPl = new BO.Product();
+                productPl = new BO.Product();//new product
             }
             catch(BO.BlMissingEntityException ex)
-            { productPl = null;
+            { productPl = null;//if couldnt throw exception
                 MessageBox.Show(ex.Message," Operation Fail",MessageBoxButton.OK,MessageBoxImage.Exclamation);
                 this.Close();
             }
         }
-
+        /// <summary>
+        /// Dependency Property for product
+        /// </summary>
 
         public BO.Product? productPl
         {
@@ -66,7 +68,7 @@ namespace PL.Product
         public ProductWindow(int id)
         {
             InitializeComponent();
-            //product=
+            
             categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
             UpdateProduct.Visibility = Visibility.Visible;
             AddProduct.Visibility = Visibility.Collapsed;
@@ -88,7 +90,7 @@ namespace PL.Product
         {
 
         }
-       
+
         /// <summary>
         /// adding a product to the list
         /// </summary>
@@ -96,35 +98,29 @@ namespace PL.Product
         /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-           // MessageBoxResult messageBoxResult;
+            
 
             try
             {
-                // BO.Product product = new BO.Product()
-                bl?.Product.AddProduct(productPl!);
+               
+                bl?.Product.AddProduct(productPl!);//adding the product that now in the dp
                 MessageBox.Show($"Product successfully added!", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
-            catch(BlAlreadyExistEntityException ex) {MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation); }
-                
+            catch (BlAlreadyExistEntityException ex) { MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation); }
 
-               /* ID = int.Parse(IDtextBox.Text),
-                Price = int.Parse(Price.Text),
-                ProductName = Name.Text,
-                InStock = int.Parse(Amount.Text),
-                Category = (BO.Category)selection.SelectedItem
-                };
-                bl.Product.AddProduct(product);
-               */ //messageBoxResult = MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-             
-   
-          // catch (BO.BlNullPropertyException ex)
-            //{
-                //MessageBox.Show(ex.Message);
+
+
+            catch (BO.BlNullPropertyException ex)
+            {
+
+                MessageBox.Show(ex.Message);
 
 
             }
-
+            catch(BlEmptyStringException ex) { MessageBox.Show(ex.Message); } 
+            catch(BlNagtiveNumberException ex) { MessageBox.Show(ex.Message); }
+        }
         private void UpdateProduct_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -140,7 +136,7 @@ namespace PL.Product
                 }
 
         }
-        /* catch (BO.BlAlreadyExistEntityException ex)
+        catch (BO.BlAlreadyExistEntityException ex)
 {
     MessageBox.Show(ex.Message,"ERROR", MessageBoxButton.OK,MessageBoxImage.Error);
 
@@ -158,11 +154,7 @@ catch (BO.BlInCorrectException ex)
 
 
 }
-catch (BO.BlMissingEntityException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-}
 catch (BO.BlNagtiveNumberException ex)
 {
     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -178,89 +170,98 @@ catch (BO.BlIncorrectDatesException ex)
     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
 }
-*/
-    }
 
+    }
+        /// <summary>
+        /// PreviewKeyDown allow kees and digits for the id  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void iDTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
-
             if (text == null) return;
-
             if (e == null) return;
-
+            //allow get out of the text box
+            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
+                return;
+            //allow list of system keys (add other key here if you want to allow)
+            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
+            e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
+            || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down ||
+            e.Key == Key.Right || e.Key == Key.NumPad0 || e.Key == Key.NumPad1 || e.Key == Key.NumPad2 || e.Key == Key.NumPad3 || e.Key == Key.NumPad4 || e.Key == Key.NumPad5 || e.Key == Key.NumPad6 || e.Key == Key.NumPad7 || e.Key == Key.NumPad8 || e.Key == Key.NumPad9)
+                return;
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
             //allow control system keys
-
             if (Char.IsControl(c)) return;
-
             //allow digits (without Shift or Alt)
-
             if (Char.IsDigit(c))
-
                 if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-
-                    return;
-
-
-            e.Handled = true;
+                    return; //let this key be written inside the textbox
+                            //forbid letters and signs (#,$, %, ...)
+            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other
 
             return;
         }
-
+        /// <summary>
+        /// PreviewKeyDown allow kees and digits for the price
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void priceTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
-
             if (text == null) return;
-
             if (e == null) return;
-
+            //allow get out of the text box
+            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
+                return;
+            //allow list of system keys (add other key here if you want to allow)
+            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
+            e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
+            || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down ||
+            e.Key == Key.Right || e.Key == Key.NumPad0 || e.Key == Key.NumPad1 || e.Key == Key.NumPad2 || e.Key == Key.NumPad3 || e.Key == Key.NumPad4 || e.Key == Key.NumPad5 || e.Key == Key.NumPad6 || e.Key == Key.NumPad7 || e.Key == Key.NumPad8 || e.Key == Key.NumPad9)
+                return;
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
             //allow control system keys
-
             if (Char.IsControl(c)) return;
-
             //allow digits (without Shift or Alt)
-
             if (Char.IsDigit(c))
-
                 if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-
-                    return;
-
-
-            e.Handled = true;
+                    return; //let this key be written inside the textbox
+                            //forbid letters and signs (#,$, %, ...)
+            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other
 
             return;
         }
-
+        /// <summary>
+        /// PreviewKeyDown allow kees and digits for in stock
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void inStockTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
-
             if (text == null) return;
-
             if (e == null) return;
-
+            //allow get out of the text box
+            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
+                return;
+            //allow list of system keys (add other key here if you want to allow)
+            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
+            e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
+            || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down ||
+            e.Key == Key.Right || e.Key == Key.NumPad0 || e.Key == Key.NumPad1 || e.Key == Key.NumPad2 || e.Key == Key.NumPad3 || e.Key == Key.NumPad4 || e.Key == Key.NumPad5 || e.Key == Key.NumPad6 || e.Key == Key.NumPad7 || e.Key == Key.NumPad8 || e.Key == Key.NumPad9)
+                return;
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
             //allow control system keys
-
             if (Char.IsControl(c)) return;
-
             //allow digits (without Shift or Alt)
-
             if (Char.IsDigit(c))
-
                 if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-
-                    return;
-
-
-            e.Handled = true;
+                    return; //let this key be written inside the textbox
+                            //forbid letters and signs (#,$, %, ...)
+            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other
 
             return;
         }
@@ -269,75 +270,9 @@ catch (BO.BlIncorrectDatesException ex)
 
 
 
-        //  private void SelectCategory(object sender, SelectionChangedEventArgs e)
-        // {
-        //  selection.ItemsSource = Enum.GetValues(typeof(BO.Category));
+       
 
-        // }
-
-        /// <summary>
-        /// update the product 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /* private void UpdateProduct_Click_1(object sender, RoutedEventArgs e)
-         {
-             MessageBoxResult messageBoxResult;
-             try
-             {
-                 BO.Product product = new BO.Product();
-                 product.ID = int.Parse(IDtextBox.Text);
-                 product.ProductName = Name.Text;
-                 product.InStock = int.Parse(Amount.Text);
-                 product.Price = int.Parse(Price.Text);
-                 product.Category = (BO.Category)selection.SelectedItem;
-                 bl?.Product.UpdateProductData(product);
-                 messageBoxResult = MessageBox.Show("Product update succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-             }
-             catch (BO.BlNullPropertyException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-             }
-             catch (BO.BlAlreadyExistEntityException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-             }
-             catch (BO.BlEmptyStringException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-             }
-             catch (BO.BlInCorrectException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-             }
-             catch (BO.BlMissingEntityException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-             }
-             catch (BO.BlNagtiveNumberException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-             }
-             catch (BO.BlWorngCategoryException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-             }
-             catch (BO.BlIncorrectDatesException ex)
-             {
-                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-             *///}
+        
     }
 
       

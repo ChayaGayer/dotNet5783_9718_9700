@@ -21,6 +21,9 @@ namespace PL.Product
     public partial class Window1 : Window
     {
         static readonly BlApi.IBl bl = BlApi.Factory.Get();
+        /// <summary>
+        /// a window constructor
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -28,14 +31,22 @@ namespace PL.Product
 
      
 
-      
+      /// <summary>
+      /// open the productList
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
 
         private void product_click(object sender, RoutedEventArgs e)
         {
 
             new ProductListWindow(bl).Show();
         }
-
+        /// <summary>
+        /// open the ordersList
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void orders_Click(object sender, RoutedEventArgs e)
         {
             new OrderListWindow(bl).Show();
