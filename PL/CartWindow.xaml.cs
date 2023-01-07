@@ -82,6 +82,8 @@ namespace PL
             }
             orderItemListView.ItemsSource = CartPl.Items;
             orderItemListView.Items.Refresh();
+            TotalPriceTB.Text = CartPl.TotalPrice.ToString();
+
 
         }
 
@@ -108,11 +110,12 @@ namespace PL
             //orderItemListView.Items.Refresh();
             orderItemListView.ItemsSource = CartPl.Items;
             orderItemListView.Items.Refresh();
+            TotalPriceTB.Text = CartPl.TotalPrice.ToString();
 
 
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             BO.OrderItem orderItem = (BO.OrderItem)((Button)sender).DataContext;
             try
@@ -134,6 +137,7 @@ namespace PL
             //orderItemListView.Items.Refresh();
             orderItemListView.ItemsSource = CartPl.Items;
             orderItemListView.Items.Refresh();
+            TotalPriceTB.Text = CartPl.TotalPrice.ToString();
 
 
         }

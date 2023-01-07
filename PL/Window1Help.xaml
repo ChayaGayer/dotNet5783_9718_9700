@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Window1Help" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Window1Help" Height="143" Width="798">
+
+    <!--<Grid Margin="0,10,0,0" HorizontalAlignment="Center" Width="732">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="121"/>
+            <ColumnDefinition Width="135"/>
+            <ColumnDefinition Width="186"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="72"/>
+            <ColumnDefinition Width="98"/>
+            <ColumnDefinition Width="50"/>
+
+        </Grid.ColumnDefinitions>
+        <Ellipse Width="116" Margin="15,0,0,18" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding}">
+
+                </ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+        <TextBlock Grid.Column="1" Text="{Binding Path=ItemId}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="130" Margin="0,43,0,18"/>
+        <TextBlock Grid.Column="1" Text="Item Id" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="112" Margin="0,10,0,78"/>
+        <TextBlock Grid.Column="2" Text="{Binding Path=ItemName}" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,35" Foreground="#909090" Width="170"/>
+        <TextBlock Grid.Column="5" Text="{Binding Path=Price}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="98" />
+        <TextBlock Grid.Column="4" Text="{Binding Path=Amount}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Left"  Width="57" Margin="30,0,0,0" Grid.ColumnSpan="2" />
+        <StackPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="20">
+            <Button Style="{StaticResource btnCounter}" Click="AddOne_Click">
+
+            </Button>
+            <Button Style="{StaticResource btnCounter}" Margin="0 5 0 0">
+
+            </Button>
+        </StackPanel>
+        <TextBlock Grid.Column="5" Text="{Binding Path=Price}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="0" />
+        <Button Grid.Column="6" Style="{StaticResource btnRemove}" Margin="55,-13,-55,0" >
+            <Image  Width="18" Style="{StaticResource icon}"/>
+        </Button>
+    </Grid>-->
 </Window>
+
+
+

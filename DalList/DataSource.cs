@@ -2,6 +2,7 @@
 
 using DO;
 using System.Data;
+using System.Xml.Linq;
 
 namespace Dal;
 
@@ -25,14 +26,50 @@ internal static class DataSource
     internal static List<Product?> ProducstList { get; } = new List<Product?>();//the list for the product
     internal static List<Order?> OrdersList { get; } = new List<Order?>();//the list for the order
     internal static List<OrderItem?> OrderItemsList { get; } = new List<OrderItem?>(); //the list for the order items
-
+    internal static List<User?> UsersList { get; } = new List<User?>();
     private static void s_Initialize()
     {
 
         CreateAndInitProducts();
         CreateAndInitOrders();
         CreateAndInitOrderItems();
+        CreateAndInitUsers();
 
+    }
+    private static void CreateAndInitUsers()
+    {
+        string[] UsersNames = { "Efrat Amar", "Shira Levinzon", "Chaya Gayer","Shira Gayer", "Yeudit Avitan","Inbal Peri"};
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                UsersList.Add(
+                    new User
+                    {
+                        Name = UsersNames[i],
+                        Email = (UsersNames[i] + "@gmail.com").Replace(' ', '_'),
+                        LogIn = UserLogIn.Maneger,
+                        Password=123
+                        
+                    }
+
+                    ) ;
+            }
+            for(int j = 3; j < 6; j++)
+            {
+                UsersList.Add(
+                   new User
+                   {
+
+                       Name = UsersNames[j],
+                       Email = (UsersNames[j] + "@gmail.com").Replace(' ', '_'),
+                       LogIn = UserLogIn.Coustomer,
+                       Password=456
+                   }
+                   );
+
+            }
+        }
+       
     }
     private static void CreateAndInitProducts()//The function that initializes the list of products
     {

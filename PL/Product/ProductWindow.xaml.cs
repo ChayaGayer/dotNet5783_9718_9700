@@ -133,53 +133,48 @@ namespace PL.Product
                 MessageBox.Show($"Product successfully updated!", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
-            catch(BlMissingEntityException ex)
+            catch (BlMissingEntityException ex)
             {
                 {
                     MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
 
+            }
+            catch (BO.BlAlreadyExistEntityException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+            }
+            catch (BO.BlEmptyStringException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+            }
+            catch (BO.BlInCorrectException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+            catch (BO.BlNagtiveNumberException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            catch (BO.BlWorngCategoryException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            catch (BO.BlIncorrectDatesException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
         }
-        /* catch (BO.BlAlreadyExistEntityException ex)
-{
-    MessageBox.Show(ex.Message,"ERROR", MessageBoxButton.OK,MessageBoxImage.Error);
-
-
-}
-catch (BO.BlEmptyStringException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-}
-catch (BO.BlInCorrectException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
-}
-catch (BO.BlMissingEntityException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-}
-catch (BO.BlNagtiveNumberException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-}
-catch (BO.BlWorngCategoryException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-}
-catch (BO.BlIncorrectDatesException ex)
-{
-    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-}
-*/
-    }
 
         private void iDTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {

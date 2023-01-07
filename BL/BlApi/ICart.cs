@@ -1,4 +1,4 @@
-﻿using BO;namespace BlApi;
+﻿namespace BlApi;
 /// <summary>
 /// the cart interface
 /// </summary>

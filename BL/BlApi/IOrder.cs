@@ -9,9 +9,9 @@ public interface IOrder
    
     IEnumerable<OrderForList?> GetListedOrders();
     //IEnumerable<BO.OrderItem?> GetList(IEnumerable<DO.OrderItem?> listOrderItem);
-    BO.Order  RequestOrderDeta(int orderID);
-    BO.Order UpdateSendOrder(int orderID);
-    BO.Order UpdateSupplyOrder(int orderID);
-    BO.OrderTracking OrderTracking(int orderID);
-    BO.Order UpdateOrder(int orderID);
+    Order  RequestOrderDeta(int orderID);
+    Order UpdateSendOrder(int orderID);
+    Order UpdateSupplyOrder(int orderID);
+   OrderTracking OrderTracking(int orderID);
+    Order UpdateOrder(int orderID);
 }

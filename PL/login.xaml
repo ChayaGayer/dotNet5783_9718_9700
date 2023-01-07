@@ -5,21 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+         DataContext="{Binding MyUser,RelativeSource={RelativeSource Self}}"
         Title="login" Height="400" Width="450" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="129,75,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Height="49" Width="231" FontSize="40" FontWeight="Bold" />
-        <TextBox HorizontalAlignment="Left" Margin="79,181,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5" Height="36" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center">
+        <TextBlock x:Name="SignInTB" HorizontalAlignment="Left" Margin="77,76,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Height="59" Width="283" FontSize="40" FontWeight="Bold" TextAlignment="Center" />
+        <TextBox x:Name="NameTB" HorizontalAlignment="Left" Margin="79,181,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="261" RenderTransformOrigin="0.5,0.5" Height="36" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center">
 
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-0.408"/>
+                    <RotateTransform Angle="-0.051"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <PasswordBox HorizontalAlignment="Left" Margin="87,245,0,0" VerticalAlignment="Top" Width="251" Height="35"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="77,242,0,0" VerticalAlignment="Top" Width="261" Height="38"/>
+        <TextBox x:Name="PasswardTB" HorizontalAlignment="Left" Margin="77,242,0,0" TextWrapping="Wrap" Text="Passward" VerticalAlignment="Top" Width="261" RenderTransformOrigin="0.5,0.5" Height="36" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center"/>
+        <Button x:Name="btnSignIn" Content="Sign in" HorizontalAlignment="Left" Margin="120,303,0,0" VerticalAlignment="Top" Height="37" Width="171" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC"/>
 
     </Grid>
 </Window>

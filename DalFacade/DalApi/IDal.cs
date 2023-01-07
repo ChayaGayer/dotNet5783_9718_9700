@@ -8,4 +8,6 @@ public interface IDal
     IProduct Product { get; }
 
     IOrderItem OrderItem { get; }
+    IUser User { get; }
+
 }

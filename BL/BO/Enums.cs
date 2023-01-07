@@ -23,3 +23,4 @@ public enum OrderStatus
     Watch,
     None//צריך לבדוק האם זה לא דופק את שלב שתיים
 }
+public enum UserLogIn { Coustomer,Maneger };
