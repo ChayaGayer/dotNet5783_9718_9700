@@ -21,6 +21,10 @@ namespace PL.Orders
     public partial class OrderListWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
+        /// <summary>
+        ///  a window condtructor according the xaml
+        /// </summary>
+        /// <param name="bl"></param>
         public OrderListWindow(BlApi.IBl bl)
         {
             InitializeComponent();
@@ -28,7 +32,11 @@ namespace PL.Orders
         }
         
 
-
+        /// <summary>
+        /// open the selected order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void orderForListDataGrid_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             BO.OrderForList? OrderL = orderForListDataGrid.SelectedItem as BO.OrderForList;

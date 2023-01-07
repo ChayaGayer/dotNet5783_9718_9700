@@ -33,7 +33,7 @@ namespace PL.Product
         public ProductListWindow(BlApi.IBl bl)
         {
             InitializeComponent();
-            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();
+            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();//bring the list from the bl
             BO.Category category = new BO.Category();   
             Category.ItemsSource=Enum.GetValues(typeof(BO.Category));
            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();
@@ -41,7 +41,9 @@ namespace PL.Product
 
        }
 
-
+        /// <summary>
+        /// Dependency Property 
+        /// </summary>
         public List<BO.ProductForList?>  prodList
         {
             get { return (List<BO.ProductForList?>) GetValue(prodListProperty); }
@@ -53,7 +55,11 @@ namespace PL.Product
         public static readonly DependencyProperty prodListProperty =
             DependencyProperty.Register("prodList", typeof(List<BO.ProductForList?>), typeof(Window), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// Displays the list by selected catalog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -85,13 +91,17 @@ namespace PL.Product
             new ProductWindow().ShowDialog();//open the product window
            // ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list
         }
-
+        /// <summary>
+        /// Update a product
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             BO.ProductForList? prodList = productForListDataGrid.SelectedItems as BO.ProductForList;
-            int id = ((ProductForList)productForListDataGrid.SelectedItem).ID;//get the id-אפשר למחוק
+            int id = ((ProductForList)productForListDataGrid.SelectedItem).ID;//get the id-
              new ProductWindow(id).ShowDialog();//open the product window with the update button
-            //ProductListView.ItemsSource = bl.Product.GetListedProducts();//show the update list-איך רואין ריענון
+            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();//show the update list-איך רואין ריענון
         }
     }
 }

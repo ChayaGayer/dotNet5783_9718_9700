@@ -22,6 +22,7 @@ namespace PL.Product
     public partial class ProductItemWindow : Window
     {
         BlApi.IBl bl = BlApi.Factory.Get();
+        
         public ObservableCollection<BO.ProductItem?> ListProductItems
         {
             get { return (ObservableCollection<BO.ProductItem?>)GetValue(ListProductItemsProperty); }
@@ -34,38 +35,49 @@ namespace PL.Product
 
 
         BO.Cart cart1;
-        
 
+        /// <summary>
+        /// a window condtructor according the xaml,no parameters
+        /// </summary>
         public ProductItemWindow()
         {
             InitializeComponent();
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();//bring the catalog from the bl
         }
+        /// <summary>
+        /// a window condtructor according the xaml,with cart
+        /// </summary>
+        /// <param name="cart"></param>
         public ProductItemWindow(BO.Cart cart)
         {
             InitializeComponent();
             ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
             cart1 = cart;
         }
-
+        /// <summary>
+        /// open the cart window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cart_Click(object sender, RoutedEventArgs e)
         {
             new CartWindow(cart1).ShowDialog();
         }
-
+        /// <summary>
+        /// double click to see the productItem
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductItem? productItem= ListViewProductItems.SelectedItem as BO.ProductItem;
+            BO.ProductItem? productItem= ListViewProductItems.SelectedItem as BO.ProductItem;//the select product
            if(productItem!=null)
             {
                 CatalogProduct catalogProduct = new CatalogProduct(cart1, productItem.ID);
-                catalogProduct.ShowDialog();
+                catalogProduct.ShowDialog();//open this product window
             }
         }
 
-        private void BackB_Click(object sender, RoutedEventArgs e)
-        {
-            new MainWindow().ShowDialog();
-        }
+       
     }
 }

@@ -31,7 +31,9 @@ namespace PL.Orders
         public static readonly DependencyProperty OrderPlProperty =
             DependencyProperty.Register("OrderPl", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
 
-       
+        /// <summary>
+        ///  a window condtructor according the xaml
+        /// </summary>
         public OrderWindow()
         {
             //orderItemListView.ItemsSource = bl.Order.GetListedOrders();
@@ -52,7 +54,11 @@ namespace PL.Orders
                 MessageBox.Show(ex.Message," Invalied id",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
-
+        /// <summary>
+        /// update the dates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
@@ -70,7 +76,11 @@ namespace PL.Orders
             }
            
         }
-
+        /// <summary>
+        /// update the dates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
