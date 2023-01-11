@@ -17,6 +17,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{BF8E0E74-3274-4888-91C5-7E4D4B63F6C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{3580F7D4-8E07-4F69-AF8E-04DC5CD99072}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8AE9BBCC-1240-4CA0-96CA-6B285FE6BD8B} = {8AE9BBCC-1240-4CA0-96CA-6B285FE6BD8B}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{5C34EDA4-E96E-4455-B470-B23ED45A982D}"
 EndProject
@@ -48,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pics", "Pics", "{BC7079D2-D
 		pic\IMG_FAILURE.png = pic\IMG_FAILURE.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaIXml", "DaIXml\DaIXml.csproj", "{8AE9BBCC-1240-4CA0-96CA-6B285FE6BD8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaIXml", "DaIXml\DaIXml.csproj", "{8AE9BBCC-1240-4CA0-96CA-6B285FE6BD8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,7 +96,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5C34EDA4-E96E-4455-B470-B23ED45A982D} = {7082352E-E513-4DE0-ABA8-D7DBE276456C}
 		{690B183D-5076-4249-990C-B8639327A991} = {7082352E-E513-4DE0-ABA8-D7DBE276456C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
