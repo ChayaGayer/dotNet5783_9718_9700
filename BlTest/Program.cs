@@ -30,7 +30,7 @@ namespace BITest
 5:update product,
 6:show catalog
 7:delails of product from catalog
-8:for back");
+8:for backdddddd");
 
             if (!ProductActions.TryParse(Console.ReadLine(), out choice)) throw new Exception("This option not exist!");
             while (choice != ProductActions.Exit)
