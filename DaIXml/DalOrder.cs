@@ -60,4 +60,5 @@ internal class DalOrder : IOrder
         listOrd.Add(order);//add the new one
         XMLTools.SaveListToXMLSerializer(listOrd, s_orders);
     }
+
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <Name>Efrat Amar</Name>
+    <Email>Efrat_Amar@gmail.com</Email>
+    <LogIn>Maneger</LogIn>
+    <Password>123</Password>
+  </User>
+  <User>
+    <Name>Shira Levinzon</Name>
+    <Email>Shira_Levinzon@gmail.com</Email>
+    <LogIn>Maneger</LogIn>
+    <Password>123</Password>
+  </User>
+  <User>
+    <Name>Chaya Gayer</Name>
+    <Email>Chaya_Gayer@gmail.com</Email>
+    <LogIn>Maneger</LogIn>
+    <Password>123</Password>
+  </User>
+  <User>
+    <Name>Shira Gayer</Name>
+    <Email>Shira_Gayer@gmail.com</Email>
+    <LogIn>Coustomer</LogIn>
+    <Password>456</Password>
+  </User>
+  <User>
+    <Name>Yeudit Avitan</Name>
+    <Email>Yeudit_Avitan@gmail.com</Email>
+    <LogIn>Coustomer</LogIn>
+    <Password>456</Password>
+  </User>
+  <User>
+    <Name>Inbal Peri</Name>
+    <Email>Inbal_Peri@gmail.com</Email>
+    <LogIn>Coustomer</LogIn>
+    <Password>456</Password>
+  </User>
+</ArrayOfUser>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <ID>100000</ID>
+    <ProductName>Gold stud earrings</ProductName>
+    <Price>1229</Price>
+    <Category>Earrings</Category>
+    <InStock>0</InStock>
+  </Product>
+  <Product>
+    <ID>100001</ID>
+    <ProductName>Silver stud earrings</ProductName>
+    <Price>1380</Price>
+    <Category>Earrings</Category>
+    <InStock>3</InStock>
+  </Product>
+  <Product>
+    <ID>100002</ID>
+    <ProductName>RoseGold stud earrings</ProductName>
+    <Price>983</Price>
+    <Category>Earrings</Category>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>100003</ID>
+    <ProductName>Gold Tennis bracelets</ProductName>
+    <Price>1436</Price>
+    <Category>Braclet</Category>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>100004</ID>
+    <ProductName>Silver Tennis bracelets</ProductName>
+    <Price>1069</Price>
+    <Category>Braclet</Category>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>100005</ID>
+    <ProductName>RoseGold Tennis bracelets</ProductName>
+    <Price>1348</Price>
+    <Category>Braclet</Category>
+    <InStock>8</InStock>
+  </Product>
+  <Product>
+    <ID>100006</ID>
+    <ProductName>Gold Halo rings</ProductName>
+    <Price>1312</Price>
+    <Category>Ring</Category>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>100007</ID>
+    <ProductName>Silver Halo rings</ProductName>
+    <Price>859</Price>
+    <Category>Ring</Category>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>100008</ID>
+    <ProductName>RoseGold Halo rings</ProductName>
+    <Price>1102</Price>
+    <Category>Ring</Category>
+    <InStock>9</InStock>
+  </Product>
+  <Product>
+    <ID>100009</ID>
+    <ProductName>Gold Neckless</ProductName>
+    <Price>823</Price>
+    <Category>Neckless</Category>
+    <InStock>9</InStock>
+  </Product>
+  <Product>
+    <ID>100010</ID>
+    <ProductName>Silver Neckless</ProductName>
+    <Price>1241</Price>
+    <Category>Neckless</Category>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>100011</ID>
+    <ProductName>RoseGold Neckless</ProductName>
+    <Price>1380</Price>
+    <Category>Neckless</Category>
+    <InStock>9</InStock>
+  </Product>
+  <Product>
+    <ID>100012</ID>
+    <ProductName>Gold Watch </ProductName>
+    <Price>1229</Price>
+    <Category>Watch</Category>
+    <InStock>5</InStock>
+  </Product>
+  <Product>
+    <ID>100013</ID>
+    <ProductName>Silver Watch </ProductName>
+    <Price>335</Price>
+    <Category>Watch</Category>
+    <InStock>8</InStock>
+  </Product>
+  <Product>
+    <ID>100014</ID>
+    <ProductName>RoseGold Watch </ProductName>
+    <Price>1033</Price>
+    <Category>Watch</Category>
+    <InStock>7</InStock>
+  </Product>
+  <Product>
+    <ID>100015</ID>
+    <ProductName>RoseGold Bands rings</ProductName>
+    <Price>1149</Price>
+    <Category>Ring</Category>
+    <InStock>0</InStock>
+  </Product>
+</ArrayOfProduct>

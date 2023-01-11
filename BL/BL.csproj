@@ -14,11 +14,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <ProjectReference Include="..\DaIXml\DaIXml.csproj" />
 	  <ProjectReference Include="..\DalFacade\DalFacade.csproj">
 		  <PrivateAssets>all</PrivateAssets>
 	  </ProjectReference>
     <ProjectReference Include="..\DalList\DalList.csproj" />
-	<ProjectReference Include="..\DalXml\DalXml.csproj" />
   </ItemGroup>
 
 </Project>
