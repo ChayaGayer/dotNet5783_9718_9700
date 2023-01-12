@@ -15,13 +15,6 @@
     <InStock>3</InStock>
   </Product>
   <Product>
-    <ID>100002</ID>
-    <ProductName>RoseGold stud earrings</ProductName>
-    <Price>983</Price>
-    <Category>Earrings</Category>
-    <InStock>5</InStock>
-  </Product>
-  <Product>
     <ID>100003</ID>
     <ProductName>Gold Tennis bracelets</ProductName>
     <Price>1436</Price>
@@ -29,39 +22,11 @@
     <InStock>5</InStock>
   </Product>
   <Product>
-    <ID>100004</ID>
-    <ProductName>Silver Tennis bracelets</ProductName>
-    <Price>1069</Price>
-    <Category>Braclet</Category>
-    <InStock>1</InStock>
-  </Product>
-  <Product>
-    <ID>100005</ID>
-    <ProductName>RoseGold Tennis bracelets</ProductName>
-    <Price>1348</Price>
-    <Category>Braclet</Category>
-    <InStock>8</InStock>
-  </Product>
-  <Product>
     <ID>100006</ID>
     <ProductName>Gold Halo rings</ProductName>
     <Price>1312</Price>
     <Category>Ring</Category>
     <InStock>1</InStock>
-  </Product>
-  <Product>
-    <ID>100007</ID>
-    <ProductName>Silver Halo rings</ProductName>
-    <Price>859</Price>
-    <Category>Ring</Category>
-    <InStock>1</InStock>
-  </Product>
-  <Product>
-    <ID>100008</ID>
-    <ProductName>RoseGold Halo rings</ProductName>
-    <Price>1102</Price>
-    <Category>Ring</Category>
-    <InStock>9</InStock>
   </Product>
   <Product>
     <ID>100009</ID>
@@ -111,5 +76,19 @@
     <Price>1149</Price>
     <Category>Ring</Category>
     <InStock>0</InStock>
+  </Product>
+  <Product>
+    <ID>100002</ID>
+    <ProductName>RoseGold stud earrings</ProductName>
+    <Price>983</Price>
+    <Category>Earrings</Category>
+    <InStock>4</InStock>
+  </Product>
+  <Product>
+    <ID>100005</ID>
+    <ProductName>RoseGold Tennis bracelets</ProductName>
+    <Price>1348</Price>
+    <Category>Braclet</Category>
+    <InStock>8</InStock>
   </Product>
 </ArrayOfProduct>

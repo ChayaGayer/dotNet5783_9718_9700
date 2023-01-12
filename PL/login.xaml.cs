@@ -37,5 +37,13 @@ namespace PL
             InitializeComponent();
            
         }
+
+        //private void btnLogIn_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    try
+        //    {
+        //        MyUser=(bl.User.)
+        //    }
+        //}
     }
 }

@@ -109,15 +109,6 @@
     <DeliveryDate xsi:nil="true" />
   </Order>
   <Order>
-    <ID>100012</ID>
-    <CustomerName>Inbal Peri</CustomerName>
-    <CustomerEmail>Inbal_Peri@gmail.com</CustomerEmail>
-    <CustomerAddress>Hod Hasharon</CustomerAddress>
-    <OrderDate>2022-04-08T12:21:08</OrderDate>
-    <ShipDate>2022-04-15T21:23:13</ShipDate>
-    <DeliveryDate xsi:nil="true" />
-  </Order>
-  <Order>
     <ID>100013</ID>
     <CustomerName>Sarit Shimon</CustomerName>
     <CustomerEmail>Sarit_Shimon@gmail.com</CustomerEmail>
@@ -143,5 +134,14 @@
     <OrderDate>2022-07-15T01:38:37</OrderDate>
     <ShipDate>2022-07-17T11:54:15</ShipDate>
     <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>100012</ID>
+    <CustomerName>Inbal Peri</CustomerName>
+    <CustomerEmail>Inbal_Peri@gmail.com</CustomerEmail>
+    <CustomerAddress>Hod Hasharon</CustomerAddress>
+    <OrderDate>2022-04-08T12:21:08</OrderDate>
+    <ShipDate>2022-04-15T21:23:13</ShipDate>
+    <DeliveryDate>2023-01-12T18:05:28.0639132+02:00</DeliveryDate>
   </Order>
 </ArrayOfOrder>
