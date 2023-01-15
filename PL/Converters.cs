@@ -15,13 +15,7 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            //string imageRelativeName = (string)value;
-            //string currentDir = Environment.CurrentDirectory;
-            //string ImagePath = @"\Pics\" + imageRelativeName + ".png";
-            //string imageFullName = currentDir +
-            //(File.Exists(currentDir + ImagePath) ? ImagePath : @"\Pics\IMG_FAILURE.png");
-
-            //return new BitmapImage(new Uri(imageFullName));
+         ;
 
             try
             {
