@@ -15,8 +15,7 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-         ;
-
+         
             try
             {
                 string imageRelativeName = (string)value;

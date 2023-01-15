@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DalApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,106 +9,178 @@ namespace BlImplementation;
 
 internal class User : BlApi.IUser
 {
+    DalApi.IDal dal = DalApi.Factory.Get();
     /// <summary>
     /// return all the users in the system
     /// </summary>
     /// <returns></returns>
     /// <exception cref="BO.BlNullPropertyException"></exception>
-    public IEnumerable<BO.User?> GetAllUsers()
+    public void AddUser(BO.User u, int LogIn)
     {
-        return dal.User.GetAll().Select(user => new BO.User()
+        if (u.Name == null || u.Name == "")
         {
-            Name = user?.Name ?? throw new BO.BlNullPropertyException("missing user name"),
-            Password = user?.Password ?? throw new BO.BlNullPropertyException("missing password"),
-            LogIn = (BO.UserLogIn)(user?.LogIn)
-        });
-    }
-
-    /// <summary>
-    /// Updete a user details
-    /// </summary>
-    /// <param name="user"></param>
-    /// <exception cref="BO.BlEmptyStringException"></exception>
-    /// <exception cref="BO.BlMissingEntityException"></exception>
-    public void UpdateUser(BO.User user)
-    {
-        if (user.Name == " ")
-            throw new BO.BlEmptyStringException("user name");
+            throw new BO.BlNullPropertyException("Name");
+        }
+        if (u.Password == null)
+        {
+            throw new BO.BlNullPropertyException("Password");
+        }
+      
+       
+        if (u.Email == null || u.Email == "")
+        {
+            throw new BO.BlNullPropertyException("Email");
+        }
+        if (!u.Email.Contains("@"))
+        {
+            throw new BO.BlNullPropertyException("Email");
+        }
         try
         {
-            dal.User.Update(new DO.User() { Name = user.Name, Password = user.Password, LogIn = (DO.UserLogIn)(user.LogIn) });
-        }
-        catch (DO.DalMissingIdException ex)
-        {
-            throw new BO.BlMissingEntityException("user doesnt exist", ex);
-        }
+            dal.User.Add(new DO.User()
+            {
+                Name = u.Name ?? "",
+                Password = u.Password,
+                LogIn = (DO.UserLogIn)LogIn,
+                Email = u.Email,
+               
 
-    }
-    /// <summary>
-    /// return the users by enum
-    /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
-    public IEnumerable<BO.User?> GetListedListByFilter(Func<BO.User?, bool>? filter = null)
-    {
-        return from BO.User u in GetAllUsers()
-               where filter(u)
-               select u;
-    }
-    /// <summary>
-    /// delete a user
-    /// </summary>
-    /// <param name="id"></param>
-    /// <exception cref="BO.BlMissingEntityException"></exception>
-    public void DeleteUser(int id)
-    {
-        try
-        {
-            dal.User.Delete(id);//try to delete user with this id-password
-        }
-        catch (DO.DalMissingIdException ex)
-        {
-            throw new BO.BlMissingEntityException("user doesnt exist", ex);
-        }
 
-    }
-    DalApi.IDal dal = DalApi.Factory.Get();
-    private delegate BO.User? sc<in T>(T obj);
-    public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="user"></param>
-    /// <exception cref="BO.BlMissingEntityException"></exception>
-    public void Compare(BO.User user)
-    {
-        IEnumerable<DO.User> use = from DO.User u in dal.User.GetAll()
-                                   where (u.Name == user.Name) && (u.Password == user.Password)/*&&((BO.LogIn)(u.Log)==user.Log)*//*&&(u.Email==user.Email)*/
-                                   select u;
-        if (use.Count() == 0)//if empty-there was nothing equals to the given user
-            throw new BO.BlMissingEntityException("user doesnt exist");//user doesnt exist
-        user.LogIn = (BO.UserLogIn)(use.First(u => (u.Name == user.Name) && (u.Password == user.Password)).LogIn);
-        //exists
-    }
-    /// <summary>
-    /// add a new user to the system
-    /// </summary>
-    /// <param name="user"></param>
-    /// <exception cref="BO.BlEmptyStringException"></exception>
-    /// <exception cref="BO.BlAlreadyExistEntityException"></exception>
-    public void AddUser(BO.User user)
-    {
-        if (user.Name == " ")
-            throw new BO.BlEmptyStringException("user name");
-        try
-        {
-            dal.User.Add(new DO.User() { Name = user.Name, Password = user.Password, LogIn = (DO.UserLogIn)(user.LogIn) });
+            });
         }
         catch (DO.DalAlreadyExistIdException ex)
         {
-            throw new BO.BlAlreadyExistEntityException(" this user already exists", ex);
+            throw new BO.BlAlreadyExistEntityException("User",ex);
         }
+
+    }
+    public BO.User GetByUserPasswprd(string name, int password)
+    {
+        try
+        {
+            if (name == null || name == "")
+            {
+                throw new BO.BlNullPropertyException("Email");
+            }
+            if (password == null )
+            {
+                throw new BO.BlNullPropertyException("Password");
+            }
+
+            DO.User u = dal.User.GetById(password);
+            return new BO.User()
+            {
+                Name = u.Name ?? "",
+                Password = u.Password,
+                LogIn = (BO.UserLogIn)u.LogIn,
+                Email = u.Email,
+            };
+        }
+        catch (DO.DalMissingIdException ex)
+        {
+            throw new BO.BlMissingEntityException(@"User doesn't exist,
+                                        Sign up first", ex);
+        }
+
     }
 
 }
+
+    //public IEnumerable<BO.User?> GetAllUsers()
+    //{
+    //    return dal.User.GetAll().Select(user => new BO.User()
+    //    {
+    //        Name = user?.Name ?? throw new BO.BlNullPropertyException("missing user name"),
+    //        Password = user?.Password ?? throw new BO.BlNullPropertyException("missing password"),
+    //        LogIn = (BO.UserLogIn)(user?.LogIn)
+    //    });
+    //}
+
+    ///// <summary>
+    ///// Updete a user details
+    ///// </summary>
+    ///// <param name="user"></param>
+    ///// <exception cref="BO.BlEmptyStringException"></exception>
+    ///// <exception cref="BO.BlMissingEntityException"></exception>
+    //public void UpdateUser(BO.User user)
+    //{
+    //    if (user.Name == " ")
+    //        throw new BO.BlEmptyStringException("user name");
+    //    try
+    //    {
+    //        dal.User.Update(new DO.User() { Name = user.Name, Password = user.Password, LogIn = (DO.UserLogIn)(user.LogIn) });
+    //    }
+    //    catch (DO.DalMissingIdException ex)
+    //    {
+    //        throw new BO.BlMissingEntityException("user doesnt exist", ex);
+    //    }
+
+    //}
+    ///// <summary>
+    ///// return the users by enum
+    ///// </summary>
+    ///// <param name="filter"></param>
+    ///// <returns></returns>
+    //public IEnumerable<BO.User?> GetListedListByFilter(Func<BO.User?, bool>? filter = null)
+    //{
+    //    return from BO.User u in GetAllUsers()
+    //           where filter(u)
+    //           select u;
+    //}
+    ///// <summary>
+    ///// delete a user
+    ///// </summary>
+    ///// <param name="id"></param>
+    ///// <exception cref="BO.BlMissingEntityException"></exception>
+    //public void DeleteUser(int id)
+    //{
+    //    try
+    //    {
+    //        dal.User.Delete(id);//try to delete user with this id-password
+    //    }
+    //    catch (DO.DalMissingIdException ex)
+    //    {
+    //        throw new BO.BlMissingEntityException("user doesnt exist", ex);
+    //    }
+
+    //}
+    //DalApi.IDal dal = DalApi.Factory.Get();
+    //private delegate BO.User? sc<in T>(T obj);
+    //public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="user"></param>
+    ///// <exception cref="BO.BlMissingEntityException"></exception>
+    //public void Compare(BO.User user)
+    //{
+    //    IEnumerable<DO.User> use = from DO.User u in dal.User.GetAll()
+    //                               where (u.Name == user.Name) && (u.Password == user.Password)/*&&((BO.LogIn)(u.Log)==user.Log)*//*&&(u.Email==user.Email)*/
+    //                               select u;
+    //    if (use.Count() == 0)//if empty-there was nothing equals to the given user
+    //        throw new BO.BlMissingEntityException("user doesnt exist");//user doesnt exist
+    //    user.LogIn = (BO.UserLogIn)(use.First(u => (u.Name == user.Name) && (u.Password == user.Password)).LogIn);
+    //    //exists
+    //}
+    ///// <summary>
+    ///// add a new user to the system
+    ///// </summary>
+    ///// <param name="user"></param>
+    ///// <exception cref="BO.BlEmptyStringException"></exception>
+    ///// <exception cref="BO.BlAlreadyExistEntityException"></exception>
+    //public void AddUser(BO.User user)
+    //{
+    //    if (user.Name == " ")
+    //        throw new BO.BlEmptyStringException("user name");
+    //    try
+    //    {
+    //        dal.User.Add(new DO.User() { Name = user.Name, Password = user.Password, LogIn = (DO.UserLogIn)(user.LogIn) });
+    //    }
+    //    catch (DO.DalAlreadyExistIdException ex)
+    //    {
+    //        throw new BO.BlAlreadyExistEntityException(" this user already exists", ex);
+    //    }
+    //}
+
+
 
