@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using BO;
+using System.Windows.Media;
 
 namespace PL
 {
@@ -15,7 +17,7 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-         ;
+         
 
             try
             {
@@ -35,12 +37,29 @@ namespace PL
 
             }
         }
+       
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
                 throw new NotImplementedException();
             }
         }
+    class ConvertColor : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            OrderStatus status = (OrderStatus)value;
+            if (status == OrderStatus.Ordered) { return Brushes.Red; }
+            if (status == OrderStatus.Shipped) { return Brushes.Orange; }
+            else
+            { return Brushes.Green; }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
+}
 
 

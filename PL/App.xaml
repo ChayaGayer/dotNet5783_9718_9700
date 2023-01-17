@@ -92,6 +92,8 @@
             </Setter>
         </Style>
 
+        <local:ConvertColor x:Key ="StatusToColor" />
+
 
     </Application.Resources>
     

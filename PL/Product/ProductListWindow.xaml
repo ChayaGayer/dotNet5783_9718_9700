@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
          DataContext="{Binding prodList,RelativeSource={RelativeSource Self}}"
-        Title="ProductListWindow" Height="640" Width="800">
+        Title="ProductListWindow" Height="640" Width="800" Activated="Window_Activated">
     <Grid>
         <Grid.Background>
             <ImageBrush/>
