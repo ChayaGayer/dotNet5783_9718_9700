@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
     <Name>Efrat Amar</Name>
@@ -33,6 +33,12 @@
   <User>
     <Name>Inbal Peri</Name>
     <Email>Inbal_Peri@gmail.com</Email>
+    <LogIn>Coustomer</LogIn>
+    <Password>456</Password>
+  </User>
+  <User>
+    <Name>Shira Hoffman</Name>
+    <Email>Shira Hoffman</Email>
     <LogIn>Coustomer</LogIn>
     <Password>456</Password>
   </User>

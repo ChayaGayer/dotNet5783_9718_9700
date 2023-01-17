@@ -5,6 +5,7 @@
              StartupUri="login.xaml">
     <Application.Resources>
         <local:ConvertImagePathToBitmap x:Key="ImagePathToBitmap"/>
+        <local:ConvertTextToBoolean x:Key="TextToBoolean"/>
         <Style x:Key="btnCart" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
@@ -23,7 +24,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="btnCartMini" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">

@@ -15,7 +15,7 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-         
+
             try
             {
                 string imageRelativeName = (string)value;
@@ -36,10 +36,31 @@ namespace PL
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
+        {
+            throw new NotImplementedException();
         }
     }
+
+    class ConvertTextToBoolean : IMultiValueConverter //As long as one of the product details is empty, it will not be possible to update or add a new product
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            while (value[0].ToString() == "" || value[1].ToString() == "" || value[2].ToString() == "" || value[3].ToString() == "")
+            {
+                return false;
+            }
+            return true;
+
+        }
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+    
+   
 
 

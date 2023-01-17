@@ -5,24 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-         DataContext="{Binding MyUser,RelativeSource={RelativeSource Self}}"
+         
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-   
+
     <Grid Margin="0,0,10,-6">
         <Grid.Background>
             <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
         </Grid.Background>
-        <Button x:Name="MangerBtn" Content="Maneger" Click="ProductList" HorizontalAlignment="Left" Margin="599,264,0,0" VerticalAlignment="Top" FontFamily="Rockwell Extra Bold" Height="54" Width="114">
+        <Button x:Name="MangerBtn" Content="Maneger" Click="ProductList" HorizontalAlignment="Left" Margin="634,346,0,0" VerticalAlignment="Top" FontFamily="Rockwell Extra Bold" Height="51" Width="146">
             <Button.Background>
                 <ImageBrush TileMode="None"/>
             </Button.Background>
         </Button>
-        <Button x:Name="NewOrder" Content="New Order" HorizontalAlignment="Left"  Margin="140,267,0,0" VerticalAlignment="Top" Height="51" Width="124" FontFamily="Rockwell Extra Bold" Click="NewOrder_Click">
+        <Button x:Name="NewOrder" Content="New Order" HorizontalAlignment="Left"  Margin="140,267,0,0" VerticalAlignment="Top" Height="51" Width="143" FontFamily="Rockwell Extra Bold" Click="NewOrder_Click">
             <Button.Background>
                 <ImageBrush Stretch="None"/>
             </Button.Background>
         </Button>
-        <Button x:Name="TrackBtn"  Content="Track" HorizontalAlignment="Left" Background="White" Margin="343,267,0,0" VerticalAlignment="Top" Height="51" Width="143" FontFamily="Rockwell Extra Bold" Click="Track_Click"/>
+        <Button x:Name="TrackBtn"  Content="Track" HorizontalAlignment="Left" Background="White" Margin="478,267,0,0" VerticalAlignment="Top" Height="51" Width="151" FontFamily="Rockwell Extra Bold" Click="Track_Click"/>
         <TextBox x:Name="OrderId" HorizontalAlignment="Left" Margin="343,346,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"  Visibility="Hidden"  Height="33" Width="120" FontFamily="Rockwell Extra Bold" PreviewKeyDown="OrderId_PreviewKeyDown"/>
         <Label Content="Enter Order Id" HorizontalAlignment="Left" Margin="178,346,0,0" VerticalAlignment="Top" Visibility="Hidden"  Height="33" Width="138" FontFamily="Rockwell Extra Bold" Name="enterId" />
         <Button x:Name="Check" Content="Press for Check" HorizontalAlignment="Left" Margin="509,346,0,0" VerticalAlignment="Top" Visibility="Hidden" Click="Check_Click" Height="33" Width="120" Background="White" FontFamily="Rockwell Extra Bold"/>

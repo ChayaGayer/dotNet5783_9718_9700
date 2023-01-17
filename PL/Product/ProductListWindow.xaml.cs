@@ -100,8 +100,11 @@ namespace PL.Product
         {
             BO.ProductForList? prodList = productForListDataGrid.SelectedItems as BO.ProductForList;
             int id = ((ProductForList)productForListDataGrid.SelectedItem).ID;//get the id-
-             new ProductWindow(id).ShowDialog();//open the product window with the update button
-            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();//show the update list-איך רואין ריענון
+            ProductWindow p= new ProductWindow(id);//open the product window with the update button
+            
+            productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();//show the update listן
+            p.categoryComboBox.SelectedItem = p.productPl.Category;
+            p.ShowDialog();
         }
     }
 }

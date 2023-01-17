@@ -1,4 +1,5 @@
 ﻿
+using BO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,8 +15,9 @@ public interface IProduct
 {
 
     IEnumerable<BO.ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? filter = null);
-   // IEnumerable<BO.ProductForList?> GetListedProductsByNoneCategory();
+    
     IEnumerable<BO.ProductItem?> GetListedProductsForC();
+    IEnumerable<ProductItem?> MostPopular();
     
     BO.Product RequestProductDetaForM(int productID);
     BO.ProductItem RequestProductDetaForC(int productID, BO.Cart cart);

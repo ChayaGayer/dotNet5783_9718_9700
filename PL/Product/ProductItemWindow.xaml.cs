@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -78,6 +79,40 @@ namespace PL.Product
             }
         }
 
-       
+        private void BracletME_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Braclet);
+        }
+
+        private void RefrashME_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts();
+        }
+
+        private void EarringsMe_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Earrings);
+        }
+
+        private void RingMe_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Ring);
+        }
+
+        private void NecklessMe_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Neckless);
+        }
+
+        private void WatchME_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Watch);
+        }
+
+        private void BestSelerME_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+            ListViewProductItems.ItemsSource = bl.Product.MostPopular();
+        }
     }
 }

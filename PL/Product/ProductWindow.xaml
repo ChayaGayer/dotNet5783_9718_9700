@@ -41,7 +41,7 @@
             <TextBox x:Name="productNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding ProductName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
             <Label Grid.Column="0" Content="Category:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <ComboBox x:Name="categoryComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN"  Margin="3" Grid.Row="2" VerticalAlignment="Center" Width="120">
+            <ComboBox x:Name="categoryComboBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN"  Margin="0,0,0,4" Grid.Row="2" VerticalAlignment="Bottom" Width="120" Text="{Binding Category}">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
@@ -55,7 +55,16 @@
 
         </Grid>
 
-        <Button Content="Add"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="679,469,0,0" VerticalAlignment="Top" Click="Add_Click" Visibility="Visible" Name="AddProduct" Width="93" Height="41" />
+        <Button Content="Add"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="679,469,0,0" VerticalAlignment="Top" Click="Add_Click" Visibility="Visible" Name="AddProduct" Width="93" Height="41">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource TextToBoolean}">
+                    <Binding Path="Text" ElementName="IDTextBox"/>
+                    <Binding Path="Text" ElementName="InStockTextBox"/>
+                    <Binding Path="Text" ElementName="NameTextBox"/>
+                    <Binding Path="Text" ElementName="PriceTextBox"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
         <Button Content="Update" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="535,469,0,0" VerticalAlignment="Top" Click="UpdateProduct_Click" Visibility="Visible" Name="UpdateProduct" Width="118" Height="41"/>
         <Image x:Name="prodImage" Source="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="244" Margin="25,337,0,0" VerticalAlignment="Top" Width="191"/>
 
