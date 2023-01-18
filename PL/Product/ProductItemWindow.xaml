@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
         DataContext="{Binding ListProductItems,RelativeSource={RelativeSource Self}}"
-        Title="ProductItemWindow" Height="450" Width="800">
+        Title="ProductItemWindow" Height="550" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="prod">
             <StackPanel>
@@ -35,8 +35,13 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ScrollViewer x:Name="Catalog" Background="#ffff" Margin="0,-37,0,37"  >
-            <ListView Name="ListViewProductItems" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ChooseItem_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}" ItemTemplate="{StaticResource prod}" Height="375">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="202*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer x:Name="Catalog" Background="#ffff" Margin="0,49,0,37" Grid.RowSpan="2"  >
+            <ListView Name="ListViewProductItems" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="ChooseItem_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding}" ItemTemplate="{StaticResource prod}" Height="338" Width="790">
 
                 <!--<StackPanel >
                     <TextBlock Text="Items"/>
@@ -60,16 +65,28 @@
 
         </ScrollViewer>
 
+        <Button Content="🛒" HorizontalAlignment="Left" Margin="621,367,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="67" Width="153" Background="#FFF6EFEF" FontSize="24" FontFamily="Tempus Sans ITC" Grid.Row="1" Grid.RowSpan="2" />
+        <Grid Grid.Row="0" Margin="0,0,0,384" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width='*'/>
+                <ColumnDefinition Width='*'/>
+                <ColumnDefinition Width='*'/>
+                <ColumnDefinition Width='*'/>
+                <ColumnDefinition Width='*'/>
+                <ColumnDefinition Width='*'/>
+                <ColumnDefinition Width='*'/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="WatchME" Content="Watch" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="70"  FontFamily="Tempus Sans ITC" MouseEnter="WatchME_MouseEnter"/>
+            <Label x:Name="NecklessMe" Grid.Column="1" Content="Neckless" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" FontFamily="Tempus Sans ITC" MouseEnter="NecklessMe_MouseEnter" />
+            <Label x:Name="RingMe" Grid.Column="2" Content="Ring" HorizontalAlignment="Left" Margin="41,10,0,0" VerticalAlignment="Top"  FontFamily="Tempus Sans ITC" MouseEnter="RingMe_MouseEnter" Height="39" Width="39"/>
+            <Label x:Name="EarringsMe" Grid.Column="3" Content="Earrings" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"  FontFamily="Tempus Sans ITC" MouseEnter="EarringsMe_MouseEnter" Height="39" Width="72"/>
+            <Label x:Name="BracletME" Grid.Column="4" Content="Braclet" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" FontFamily="Tempus Sans ITC" MouseEnter="BracletME_MouseEnter" Width="57"/>
+            <Label x:Name="RefrashME" Grid.Column="5" Content="Refrash" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" FontFamily="Tempus Sans ITC" MouseEnter="RefrashME_MouseEnter"/>
+            <Label x:Name="BestSelerME" Grid.Column="6" Content="BestSaler" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Tempus Sans ITC" MouseEnter="BestSelerME_MouseEnter"/>
 
-        <Grid>
-            <Button Content="🛒" HorizontalAlignment="Left" Margin="600,379,0,0" VerticalAlignment="Top" Click="Cart_Click" Height="44" Width="167" Background="#FFF6EFEF" FontSize="24" FontFamily="Tempus Sans ITC"/>
-           
 
         </Grid>
-
-
     </Grid>
-
 
 
 </Window>

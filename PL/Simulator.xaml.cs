@@ -25,35 +25,42 @@ namespace PL
     /// 
     public partial class Simulator : Window
     {
+
+
+
+
+        public List<BO.OrderForList?> MyOrderList
+        {
+            get { return (List<BO.OrderForList?>)GetValue(MyOrderListProperty); }
+            set { SetValue(MyOrderListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyOrderList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyOrderListProperty=
+            DependencyProperty.Register("MyOrderList", typeof(List<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
+
+
         BackgroundWorker worker;
-        bool f;
-        DateTime timeSim = DateTime.Now;
+        bool f=false;
+        DateTime timeSim= DateTime.Now;
         BlApi.IBl bl = BlApi.Factory.Get();
         public Simulator()
         {
             InitializeComponent();
+            MyOrderList = bl.Order.GetListedOrders().ToList();
             worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            ordList = new List<BO.OrderForList?>(bl.Order.GetListedOrders());
+            //MyOrderList = new List<BO.OrderForList?>(bl.Order.GetListedOrders());
+           // orderForListDataGrid.ItemsSource = bl.Order.GetListedOrders();
         }
 
 
 
-        public List<BO.OrderForList?> ordList
-        {
-            get { return (List<BO.OrderForList?>)GetValue(MyPropertyProperty); }
-            set { SetValue(MyPropertyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("MyProperty", typeof(List<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
-
-
+       
         private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             if (f == true)
@@ -62,33 +69,12 @@ namespace PL
             }
             else if (e.Cancelled == true)
             {
-                MessageBox.Show("finished");
+                MessageBox.Show(" Simulator Stoped");
             }
             this.Cursor = Cursors.Arrow;
         }
 
-        //if (e.Cancelled == true)
-        //{
-
-        //    //// MessageBox.Show("");
-        //}
-        //else
-        //{
-        //    // MessageBox.Show("Mazal Tov!!");
-        //}
-        //this.Cursor = Cursors.Arrow;
-        ////if (e.Cancelled)
-        ////{
-
-        //    label1.Text = ;
-
-        //}
-        //else
-        //{
-
-        //    label1.Text = "Operation Complete";
-
-        //}
+        
 
 
         //buttonCancel.Enabled = false;
@@ -112,13 +98,15 @@ namespace PL
                     bl.Order.UpdateSupplyOrder(orderSimulator.ID);//, timeSim);
 
             }
-            if (ordList.All(x => x?.Status == BO.OrderStatus.Delivered))
+            if (MyOrderList.All(x => x?.Status == BO.OrderStatus.Delivered))
             {
                 if (worker.WorkerSupportsCancellation == true)
                     worker.CancelAsync(); // Cancel.
                 f = true;//if all the orders delivered
             }
-            ordList = bl.Order.GetListedOrders().ToList();
+            MyOrderList = new List<BO.OrderForList?>(bl.Order.GetListedOrders());
+            //MyOrderList = bl.Order.GetListedOrders().ToList();
+            //  MyOrderList.ItemsSource = bl.Order.GetListedOrders();
 
 
 
@@ -128,7 +116,7 @@ namespace PL
 
         private void Worker_DoWork(object? sender, DoWorkEventArgs e)
         {
-
+          //  DateTime timeSim = DateTime.Now;
             while (true)
             {
                 if (worker.CancellationPending == true)
@@ -138,10 +126,14 @@ namespace PL
                 }
                 else
                 {
-                    Thread.Sleep(2000);
+
+                    //if (worker.WorkerReportsProgress == true)
+                    //    worker.ReportProgress(11);
+                    //timeSim = timeSim.AddHours(4);
+                    //Thread.Sleep(2000);
 
                     timeSim = timeSim.AddHours(4);
-
+                    Thread.Sleep(2000);
                     if (worker.WorkerReportsProgress == true)
                         worker.ReportProgress(11);
 
@@ -158,6 +150,7 @@ namespace PL
                 worker.RunWorkerAsync();
             }
 
+          
         }
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)

@@ -1,9 +1,4 @@
-﻿using BO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,6 +10,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PL.Product;
 using PL.Orders;
+using BlApi;
+using BO;
+using System.Collections.Generic;
+using System;
 
 namespace PL
 {
@@ -23,14 +22,29 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+       
         BlApi.IBl bl = BlApi.Factory.Get();
         /// <summary>
         /// a window constructor
         /// </summary>
         public MainWindow()
-        {
+        {   
             InitializeComponent();
-        }//
+            NewOrder.Visibility = Visibility.Hidden;
+            TrackBtn.Visibility = Visibility.Hidden;
+        }
+        BO.Cart CurrentCart;
+        public MainWindow(BO.Cart Mycart)
+        {
+            CurrentCart = Mycart;
+            InitializeComponent();
+            MangerBtn.Visibility = Visibility.Hidden;
+            CurrentCart.CustomerAdress = " ";
+            CurrentCart.Items = new List<BO.OrderItem?>();
+            CurrentCart.TotalPrice = 0;
+
+        }
+        //
         /// <summary>
         /// open window for maneger
         /// </summary>
@@ -38,18 +52,18 @@ namespace PL
         /// <param name="e"></param>
         private void ProductList(object sender, RoutedEventArgs e) => new Window1().Show();
 
-      /// <summary>
-      /// for tracking an order -open text box to fill the id
-      /// </summary>
-      /// <param name="sender"></param>
-      /// <param name="e"></param>
+        /// <summary>
+        /// for tracking an order -open text box to fill the id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             OrderId.Visibility = Visibility.Visible;
             enterId.Visibility = Visibility.Visible;
             Check.Visibility = Visibility.Visible;
-           // new OrderTrack().ShowDialog();
+            // new OrderTrack().ShowDialog();
         }
         /// <summary>
         /// open the Catalog for the custumer
@@ -58,19 +72,8 @@ namespace PL
         /// <param name="e"></param>
         public void NewOrder_Click(object sender, RoutedEventArgs e)//private
         {
-            
-            //BO.Cart MyCart = new BO.Cart();
-            BO.Cart MyCart = new BO.Cart
-            {
-                CustomerName = " ",
-                CustomerAdress = " ",
-                CustomerEmail = " ",
-                Items = new List<BO.OrderItem?>(),
-                TotalPrice = 0
-            };
 
-
-            new ProductItemWindow(MyCart).ShowDialog();
+            new ProductItemWindow(CurrentCart).ShowDialog();
         }
         /// <summary>
         /// a button that check the id and if exust open the correct order tracking 
@@ -107,7 +110,7 @@ namespace PL
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
             e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down ||
-            e.Key == Key.Right||e.Key==Key.NumPad0||e.Key==Key.NumPad1|| e.Key == Key.NumPad2|| e.Key == Key.NumPad3|| e.Key == Key.NumPad4|| e.Key == Key.NumPad5|| e.Key == Key.NumPad6|| e.Key == Key.NumPad7|| e.Key == Key.NumPad8|| e.Key == Key.NumPad9)
+            e.Key == Key.Right || e.Key == Key.NumPad0 || e.Key == Key.NumPad1 || e.Key == Key.NumPad2 || e.Key == Key.NumPad3 || e.Key == Key.NumPad4 || e.Key == Key.NumPad5 || e.Key == Key.NumPad6 || e.Key == Key.NumPad7 || e.Key == Key.NumPad8 || e.Key == Key.NumPad9)
                 return;
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
             //allow control system keys
@@ -121,9 +124,14 @@ namespace PL
 
             return;
         }
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            new Simulator().Show();
+
+        }
     }
 
 
-
-    }
+}
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        DataContext="{Binding ordList,RelativeSource={RelativeSource Self}}"
+        DataContext="{Binding MyOrderList,RelativeSource={RelativeSource Self}}"
         Title="Simulator" Height="450" Width="800">
     <Grid>
         <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="88,28,87,46"  Background="#FFFCFBFB" >
@@ -29,8 +29,15 @@
                 <!--<DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>-->
 
                 <DataGridTemplateColumn Header="Status" Width="Auto">                    <DataGridTemplateColumn.CellTemplate>                        <DataTemplate>                            <TextBlock Text="{Binding Path=Status}" Background="{Binding Path=Status, Converter={StaticResource StatusToColor}}"/>                            <!--<TextBlock Text="{Binding Path=Status}" Background="{Binding Path=Status, Converter={StaticResource StatusToColor}}"/>-->                        </DataTemplate>                    </DataGridTemplateColumn.CellTemplate>                </DataGridTemplateColumn>
-                
-                <!--return Brushes.Pink;-->
+                <DataGridTemplateColumn x:Name="statusColumn" Header="Tracking" Width="163">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ProgressBar x:Name="progressBar" Value="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, Converter={StaticResource TimeToProgressBar}}" Foreground="#FFC96C6C"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
 
             </DataGrid.Columns>
         </DataGrid>

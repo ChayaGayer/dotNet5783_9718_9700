@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-         DataContext="{Binding MyUser,RelativeSource={RelativeSource Self}}"
+        DataContext="{Binding MyUser,RelativeSource={RelativeSource Self}}"
         Title="login" Height="400" Width="450" WindowStartupLocation="CenterScreen">
+
     <Grid>
-        <TextBlock x:Name="LogInTB" HorizontalAlignment="Left" Margin="77,76,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Height="59" Width="283" FontSize="40" FontWeight="Bold" TextAlignment="Center" />
-        <TextBox x:Name="NameTB" HorizontalAlignment="Left" Margin="79,181,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="261" RenderTransformOrigin="0.5,0.5" Height="36" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center">
+        <TextBlock x:Name="LogInTB" HorizontalAlignment="Center" Margin="0,28,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Height="55" Width="298" FontSize="40" FontWeight="Bold" TextAlignment="Center" />
+        <TextBox x:Name="NameTB" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="295" RenderTransformOrigin="0.5,0.5" Height="41" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center">
 
             <TextBox.RenderTransform>
                 <TransformGroup>
@@ -20,9 +21,14 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <PasswordBox HorizontalAlignment="Left" Margin="77,242,0,0" VerticalAlignment="Top" Width="261" Height="38"/>
-        <TextBox x:Name="PasswardTB" HorizontalAlignment="Left" Margin="77,242,0,0" TextWrapping="Wrap" Text="Passward" VerticalAlignment="Top" Width="261" RenderTransformOrigin="0.5,0.5" Height="36" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center"/>
-        <Button x:Name="btnLogIn" Content="Log in" HorizontalAlignment="Left" Margin="120,303,0,0" VerticalAlignment="Top" Height="37" Width="171" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC"/>
+        <TextBox x:Name="PasswardTB" HorizontalAlignment="Center" Margin="0,145,0,0" TextWrapping="Wrap" Text="{Binding Password ,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="298" RenderTransformOrigin="0.5,0.5" Height="47" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center"/>
+        <Button x:Name="btnLogIn" Content="Log in" HorizontalAlignment="Left" Margin="39,303,0,0" VerticalAlignment="Top" Height="37" Width="143" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC" MouseDoubleClick="btnLogIn_MouseDoubleClick"/>
+        <Button x:Name="btnSignIn" Content="Sign up" HorizontalAlignment="Left" Margin="267,303,0,0" VerticalAlignment="Top" Height="37" Width="154" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC" MouseDoubleClick="btnSignIn_MouseDoubleClick"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Height="31" Width="54" FontFamily="Tempus Sans ITC"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Height="47" Width="65" FontFamily="Tempus Sans ITC"/>
+        <Label Content="If you don't have an account,Sign up 🖍" HorizontalAlignment="Left" Margin="76,209,0,0" VerticalAlignment="Top" Height="31" Width="268" FontFamily="Tempus Sans ITC" Foreground="#FFA02C2C"/>
 
     </Grid>
+
+
 </Window>

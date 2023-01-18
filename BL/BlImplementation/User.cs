@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DalApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,84 @@ namespace BlImplementation;
 
 internal class User : BlApi.IUser
 {
+
     /// <summary>
     /// return all the users in the system
     /// </summary>
     /// <returns></returns>
     /// <exception cref="BO.BlNullPropertyException"></exception>
+    //    public void AddUser(BO.User u, int LogIn)
+    // DalApi.IDal dal = DalApi.Factory.Get();
+    //    {
+    //        if (u.Name == null || u.Name == "")
+    //        {
+    //            throw new BO.BlNullPropertyException("Name");
+    //        }
+    //        if (u.Password == null)
+    //        {
+    //            throw new BO.BlNullPropertyException("Password");
+    //        }
+
+
+    //        if (u.Email == null || u.Email == "")
+    //        {
+    //            throw new BO.BlNullPropertyException("Email");
+    //        }
+    //        if (!u.Email.Contains("@"))
+    //        {
+    //            throw new BO.BlNullPropertyException("Email");
+    //        }
+    //        try
+    //        {
+    //            dal.User.Add(new DO.User()
+    //            {
+    //                Name = u.Name ?? "",
+    //                Password = u.Password,
+    //                LogIn = (DO.UserLogIn)LogIn,
+    //                Email = u.Email,
+
+
+
+    //            });
+    //        }
+    //        catch (DO.DalAlreadyExistIdException ex)
+    //        {
+    //            throw new BO.BlAlreadyExistEntityException("User",ex);
+    //        }
+
+    //    }
+    //    public BO.User GetByUserPasswprd(string name, int password)
+    //    {
+    //        try
+    //        {
+    //            if (name == null || name == "")
+    //            {
+    //                throw new BO.BlNullPropertyException("Email");
+    //            }
+    //            if (password == null )
+    //            {
+    //                throw new BO.BlNullPropertyException("Password");
+    //            }
+
+    //            DO.User u = dal.User.GetById(password);
+    //            return new BO.User()
+    //            {
+    //                Name = u.Name ?? "",
+    //                Password = u.Password,
+    //                LogIn = (BO.UserLogIn)u.LogIn,
+    //                Email = u.Email,
+    //            };
+    //        }
+    //        catch (DO.DalMissingIdException ex)
+    //        {
+    //            throw new BO.BlMissingEntityException(@"User doesn't exist,
+    //                                        Sign up first", ex);
+    //        }
+
+    //    }
+
+    //}
+    DalApi.IDal dal = DalApi.Factory.Get();
     public IEnumerable<BO.User?> GetAllUsers()
     {
         return dal.User.GetAll().Select(user => new BO.User()
@@ -71,7 +145,7 @@ internal class User : BlApi.IUser
         }
 
     }
-    DalApi.IDal dal = DalApi.Factory.Get();
+   
     private delegate BO.User? sc<in T>(T obj);
     public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
     /// <summary>
@@ -79,7 +153,7 @@ internal class User : BlApi.IUser
     /// </summary>
     /// <param name="user"></param>
     /// <exception cref="BO.BlMissingEntityException"></exception>
-    public void Compare(BO.User user)
+    public void Checking(BO.User user)
     {
         IEnumerable<DO.User> use = from DO.User u in dal.User.GetAll()
                                    where (u.Name == user.Name) && (u.Password == user.Password)/*&&((BO.LogIn)(u.Log)==user.Log)*//*&&(u.Email==user.Email)*/
@@ -108,6 +182,6 @@ internal class User : BlApi.IUser
             throw new BO.BlAlreadyExistEntityException(" this user already exists", ex);
         }
     }
-
 }
+
 

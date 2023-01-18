@@ -2,9 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PL"
-             StartupUri="MainWindow.xaml">
+             StartupUri="login.xaml">
     <Application.Resources>
         <local:ConvertImagePathToBitmap x:Key="ImagePathToBitmap"/>
+        <local:ConvertTextToBoolean x:Key="TextToBoolean"/>
         <Style x:Key="btnCart" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
@@ -23,7 +24,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="btnCartMini" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
@@ -93,7 +93,7 @@
         </Style>
 
         <local:ConvertColor x:Key ="StatusToColor" />
-
+        <local:ConvertColor x:Key ="TimeToProgressBar" />
 
     </Application.Resources>
     

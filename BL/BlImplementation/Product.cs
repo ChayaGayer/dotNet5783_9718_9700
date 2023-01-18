@@ -1,4 +1,7 @@
-﻿namespace BlImplementation;
+﻿using BO;
+using System.Collections.Generic;
+
+namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
@@ -55,6 +58,45 @@ internal class Product : BlApi.IProduct
                };
 
 
+    }
+    private bool checkIfstock(int inStock)
+    {
+        if (inStock <= 0)
+            return false;
+        return true;
+    }
+    private int AmountCart(BO.Cart cart, int id)
+    {
+        if (cart == null)
+            return 0;
+        var productItem = cart.Items?.FirstOrDefault(x => x?.ItemId == id);
+        return productItem!=null ? productItem.Amount:0;
+    }
+    public IEnumerable <BO.ProductItem?> MostPopular()
+    {
+        var productL = from item in dal.OrderItem.GetAll()
+                       group item by item?.ItemId into gPopular
+                       select new { id = gPopular.Key, Items = gPopular };
+        productL=productL.OrderByDescending(x=>x.Items.Count()).Take(10);
+        try
+        {
+            return from item in productL
+                   let p = dal.Product.GetById(item?.id ?? throw new BlMissingEntityException("Prouduct doesnt exist"))
+                   select new BO.ProductItem
+                   {
+                       ID = p.ID,
+                       ProductName = p.ProductName,
+                       Category = (BO.Category)p.Category,
+                       //AmountInCart =AmountCart(cart,p.ID),
+                       IsStock = checkIfstock(p.InStock),
+                       ImageRelativeName = @"\Pics\" + p.ID + ".png",
+                       Price = p.Price
+                   };
+        }
+        catch(DO.DalMissingIdException ex)
+        {
+            throw new BO.BlMissingEntityException(ex.Message);
+        }
     }
     /// <summary>
     /// get the product id and return this product for maneger
@@ -164,7 +206,7 @@ internal class Product : BlApi.IProduct
             throw new BO.BlAlreadyExistEntityException("ID allready Exist", e);
         }
     }
-
+  
         /// <summary>
         /// getting product id and delete this product
         /// </summary>

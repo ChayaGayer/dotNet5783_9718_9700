@@ -11,35 +11,36 @@ namespace Dal;
 
 internal class DalUser : IUser
 {
-    const string s_users = "users";
+    readonly string s_users = "users";
     static DO.User? createUserfromXElement(XElement u)
     {
-        DO.UserLogIn userLogIn;
-        Enum.TryParse((string?)u.Element("UserLogIn"), out userLogIn);
-        return new DO.User()
+        //DO.UserLogIn userLogIn;
+        //Enum.TryParse((string?)u.Element("UserLogIn"), out userLogIn);
+        DO.User user = new DO.User()
         {
-            Name=(string?)u.Element("Name"),
-            Email=(string?)u.Element("Email"),
-            LogIn=userLogIn,
-            Password=(int)u.ToIntNullable("Password")           
+            Name = (string?)u.Element("Name") ?? "",
+            Email = (string?)u.Element("Email") ?? "",
+            LogIn = u.ToEnumNullable<DO.UserLogIn>("LogIn") ?? DO.UserLogIn.Coustomer,
+            Password = u.ToIntNullable("Password") ?? 0
         };
+        return user;
     }
 
     public int Add(User user)
     {
         XElement? usersRootElem = XMLTools.LoadListFromXMLElement(s_users);
         XElement? us = (from u in usersRootElem.Elements()
-                          where (string?)u.Element("Name") == user.Name //where (int?)st.Element("ID") == doStudent.ID
-                          select u).FirstOrDefault();
+                        where (string?)u.Element("Name") == user.Name //where (int?)st.Element("ID") == doStudent.ID
+                        select u).FirstOrDefault();
         if (us != null)
-            throw new Exception("the user already exist"); // fix to: throw new DalMissingIdException(id);
+            throw new DO.DalAlreadyExistIdException(user.Password, "the user already exist"); // fix to: throw new DalMissingIdException(id);
 
         XElement userElem = new XElement("User",
                                    new XElement("Name", user.Name),
                                    new XElement("Email", user.Name),
                                    new XElement("LogIn", user.LogIn),
                                    new XElement("Password", user.Password)
-                                  
+
                                    );
 
         usersRootElem.Add(userElem);
@@ -53,8 +54,8 @@ internal class DalUser : IUser
     {
         XElement? usersRootElem = XMLTools.LoadListFromXMLElement(s_users);
         XElement? us = (from st in usersRootElem.Elements()
-                          where (int?)st.Element("ID") == id
-                          select st).FirstOrDefault() ?? throw new Exception("missing id"); // fix to: throw new DalMissingIdException(id);
+                        where (int?)st.Element("ID") == id
+                        select st).FirstOrDefault() ?? throw new Exception("missing id"); // fix to: throw new DalMissingIdException(id);
 
         us.Remove(); //<==>   Remove stud from studentsRootElem
 
@@ -86,7 +87,7 @@ internal class DalUser : IUser
         return (from u in usersRootElem?.Elements()
                 where u.ToIntNullable("Password") == id
                 select (DO.User?)createUserfromXElement(u)).FirstOrDefault()
-               ?? throw new DO.DalMissingIdException(id,"the passowrd isnt correct"); // fix to: throw new DalMissingIdException(id);
+               ?? throw new DO.DalMissingIdException(id, "the passowrd isnt correct"); // fix to: throw new DalMissingIdException(id);
     }
 
     public void Update(User user)
@@ -138,5 +139,5 @@ internal class DalUser : IUser
     //    listUsers[UserIndex] = user;
     //    XMLTools.SaveListToXMLSerializer(listUsers, s_users);
 
-    //}
+    // }
 }

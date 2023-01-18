@@ -113,6 +113,9 @@ internal class Cart : ICart
                 if (amount == 0)
                 {
                     cart.Items = cart.Items.Where(x => x?.ItemId != oi.ID);//delete
+                    cart.TotalPrice = cart.TotalPrice - oi.TotalPrice;
+
+
                     return cart;    //        return cart;
 
                    
@@ -146,41 +149,7 @@ internal class Cart : ICart
 
         }
     
-    //DO.Product product = new DO.Product();
-    //product = dal!.Product.GetById(productId);//get the product
-
-    //var orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
-    //if (orderItem != null)//there is such product
-    //{
-    //    if (product.InStock < amount)//if the amount in stock smaller then the new amount->update
-    //    {
-    //        orderItem.Amount += amount;
-    //        orderItem.TotalPrice = product.Price;
-    //        cart.TotalPrice += product.Price;
-    //        return cart;
-    //    }
-
-    //    if (product.InStock > amount) //if the amount in stock bigger then the new amount->update
-    //    {
-    //        orderItem.Amount = amount;
-    //        orderItem.TotalPrice -= (amount - product.InStock) * product.Price;
-    //        cart.TotalPrice -= (amount - product.InStock) * product.Price;
-    //        return cart;
-    //    }
-    //    if (amount == 0)
-    //    {
-
-    //        cart.Items = cart.Items.Where(x => x?.ItemId != product.ID);//delete
-    //        return cart;
-
-    //    }
-    //    return cart;
-    //}
-    //else
-    //{
-    //    throw new BO.BlMissingEntityException("The amount of the product is lower then the amount in stock");
-    //}
-
+   
 }
     /// <summary>
     /// confirmation of  order getting a cart and check propriety
