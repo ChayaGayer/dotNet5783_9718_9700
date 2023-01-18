@@ -176,8 +176,14 @@ namespace PL
             orderItemListView.Visibility = Visibility.Hidden;
             btnFinishOrder.Visibility = Visibility.Hidden;
             btnConfirmOrder.Visibility = Visibility.Visible;
+            TotalPriceTB.Text = CartPl.TotalPrice.ToString();
 
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -114,5 +114,10 @@ namespace PL.Product
 
             ListViewProductItems.ItemsSource = bl.Product.MostPopular();
         }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();   
+        }
     }
 }

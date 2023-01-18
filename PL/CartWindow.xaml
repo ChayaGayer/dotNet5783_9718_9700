@@ -9,8 +9,8 @@
         Title="CartWindow" Height="730" Width="797" Background="Beige" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <DataTemplate x:Key="MyOrderItemTemplate" DataType="local: OrderItem">
-            
-                <Grid Margin="0 15 0 0" HorizontalAlignment="Center"  x:Name="Grid1">
+
+            <Grid Margin="0 15 0 0" HorizontalAlignment="Center"  x:Name="Grid1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
                     <ColumnDefinition Width="164"/>
@@ -22,10 +22,10 @@
 
                 </Grid.ColumnDefinitions>
                 <Ellipse Height="80" Width="80" Margin="20,10,0,18" HorizontalAlignment="Left">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding  Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  />
-            </Ellipse.Fill>
-        </Ellipse>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding  Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  />
+                    </Ellipse.Fill>
+                </Ellipse>
                 <TextBlock Grid.Column="1" Text="{Binding Path=ItemId}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="130" Margin="0,43,0,18"/>
                 <TextBlock Grid.Column="1" Text="Item Id" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Center" Width="112" Margin="0,10,0,78"/>
                 <TextBlock Grid.Column="2" Text="{Binding Path=ItemName}" FontWeight="SemiBold" FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,18" Foreground="#909090" Width="258"/>
@@ -33,7 +33,7 @@
                 <TextBlock Grid.Column="4" Text="{Binding Path=Amount}" FontWeight="SemiBold" FontSize="16" HorizontalAlignment="Left"  Width="57" Margin="30,0,0,0" Grid.ColumnSpan="2" />
                 <StackPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="20">
                     <Button Style="{StaticResource btnCounter}" Click="AddOne_Click" Content="➕"/>
-                    
+
 
                     <Button Style="{StaticResource btnCounter}" Margin="0 5 0 0" Click="Minus_Click" Content="➖">
 
@@ -67,13 +67,13 @@
             <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Grid.Column="0" Content="Customer Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
             <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontFamily="Tempus Sans ITC"/>
-            <TextBlock x:Name="totalPriceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding TotalPrice}" VerticalAlignment="Center"/>
+
         </Grid>
         <Button Content="Confirm" Name="btnConfirmOrder" HorizontalAlignment="Left" Margin="136,270,0,0" VerticalAlignment="Top" MouseDoubleClick="btnConfirmOrder_MouseDoubleClick" Height="22" Width="78" Background="#FFF6F3F3" FontFamily="Tempus Sans ITC"/>
         <Button x:Name="btnFinishOrder" Content="Finish Order" HorizontalAlignment="Left" Margin="41,609,0,0" VerticalAlignment="Top" MouseDoubleClick="btnFinishOrder_MouseDoubleClick" Width="193" Background="#FFF6F0F0" FontFamily="Tempus Sans ITC" Height="64"/>
         <TextBlock x:Name="TotalPriceTB" HorizontalAlignment="Left" Margin="524,609,0,0" TextWrapping="Wrap" Text="{Binding Path=TotalPrice}" VerticalAlignment="Top" Height="64" Width="212" FontSize="18"/>
         <Label Content="Total Price 💷" HorizontalAlignment="Center" Margin="0,609,0,0" VerticalAlignment="Top" Height="64" Width="157" FontSize="18" FontFamily="Tempus Sans ITC"/>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="41,678,0,0" VerticalAlignment="Top" Width="84" BorderBrush="#FFF6F0F0" Background="#FFEAE6E6" Click="Button_Click"/>
 
     </Grid>
 

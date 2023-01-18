@@ -91,4 +91,18 @@
     <Category>Braclet</Category>
     <InStock>8</InStock>
   </Product>
+  <Product>
+    <ID>100020</ID>
+    <ProductName>watch</ProductName>
+    <Price>250</Price>
+    <Category>Earrings</Category>
+    <InStock>1</InStock>
+  </Product>
+  <Product>
+    <ID>100021</ID>
+    <ProductName>earings</ProductName>
+    <Price>600</Price>
+    <Category>Earrings</Category>
+    <InStock>1</InStock>
+  </Product>
 </ArrayOfProduct>

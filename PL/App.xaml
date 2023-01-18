@@ -92,6 +92,8 @@
             </Setter>
         </Style>
 
+        <local:ConvertColor x:Key ="StatusToColor" />
+        <local:ConvertColor x:Key ="TimeToProgressBar" />
 
     </Application.Resources>
     

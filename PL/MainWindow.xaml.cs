@@ -38,6 +38,7 @@ namespace PL
         {
             CurrentCart = Mycart;
             InitializeComponent();
+            simulatorB.Visibility = Visibility.Hidden;
             MangerBtn.Visibility = Visibility.Hidden;
             CurrentCart.CustomerAdress = " ";
             CurrentCart.Items = new List<BO.OrderItem?>();
@@ -123,6 +124,12 @@ namespace PL
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other
 
             return;
+        }
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            new Simulator().Show();
+
         }
 
         private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
