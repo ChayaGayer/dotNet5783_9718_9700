@@ -44,6 +44,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="49,300,0,0" VerticalAlignment="Top" Height="23" Width="92" BorderBrush="#FFFBF0F0" Background="#FFF3F2F2" FontSize="22" Click="Button_Click"/>
 
     </Grid>
 </Window>

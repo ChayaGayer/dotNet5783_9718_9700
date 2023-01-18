@@ -39,5 +39,6 @@
         </Grid>
         <Image x:Name="prodImage" Source="{Binding ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"  HorizontalAlignment="Left" Height="171" Margin="30,237,0,0" VerticalAlignment="Top" Width="257"/>
         <Button Content="Add To Cart"  HorizontalAlignment="Left" Margin="553,324,0,0" VerticalAlignment="Top" Height="40" Width="117" Click="AddToCart_Click" Background="#FFFCF7F7" FontFamily="Tempus Sans ITC"/>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="708,0,0,0" VerticalAlignment="Top" Height="24" Width="56" FontSize="22" Background="White" BorderBrush="White" MouseDoubleClick="Button_MouseDoubleClick"/>
     </Grid>
 </Window>

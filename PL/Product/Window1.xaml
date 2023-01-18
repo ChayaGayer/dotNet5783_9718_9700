@@ -13,7 +13,7 @@
             <Setter Property="FontWeight" Value="Black"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid Name="MainGrid">
         <Grid.Background>
             <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
@@ -25,5 +25,6 @@
         </Grid.RowDefinitions>
         <Button Style="{StaticResource myButtonStyle}" Content="Products "  Margin="25,242,477,91" Grid.Row="1" Click="product_click"></Button>
         <Button Style="{StaticResource myButtonStyle}" Content="Orders "  Margin="468,242,52,91" Grid.Row="1" Click="orders_Click"></Button>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="40,32,0,0" VerticalAlignment="Top" Height="30" Grid.RowSpan="2" Width="83" FontSize="22" Background="White" MouseDoubleClick="Button_MouseDoubleClick"/>
     </Grid>
 </Window>

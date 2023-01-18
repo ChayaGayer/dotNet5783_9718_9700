@@ -88,5 +88,10 @@ namespace PL.Product
             }
             this.Close();
         }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

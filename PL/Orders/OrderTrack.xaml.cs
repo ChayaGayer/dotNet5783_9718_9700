@@ -56,11 +56,10 @@ namespace PL.Orders
         public static readonly DependencyProperty OrderPlProperty =
             DependencyProperty.Register("OrderPl", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
 
-
-      
-
-   
-       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
     }
 

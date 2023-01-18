@@ -23,6 +23,7 @@
         <ComboBox Name="Category" SelectionChanged="Category_SelectionChanged" HorizontalAlignment="Left" Margin="80,166,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="CategoryCheckBox" Content="Category" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="80,132,0,0" VerticalAlignment="Top" Height="29" Width="120"/>
         <Image HorizontalAlignment="Left" Height="123" Margin="10,492,0,0" VerticalAlignment="Top" Width="170" Source="/Orders/לוגו סברובסקי.png"/>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" Height="27" Width="80" MouseDoubleClick="Button_MouseDoubleClick" Background="#FFF9F9F9" BorderBrush="White"/>
 
     </Grid>
 </Window>

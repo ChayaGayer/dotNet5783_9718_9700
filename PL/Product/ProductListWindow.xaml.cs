@@ -73,7 +73,7 @@ namespace PL.Product
             }
             else {
                 //productForListDataGrid.ItemsSource = bl.Product.GetListedProducts(x => x?.Category == category);
-                prodList = new List<BO.ProductForList?>(bl.Product.GetListedProducts());
+                prodList = new List<BO.ProductForList?>(bl.Product.GetListedProducts(x => x?.Category == category));
 
             }
         }
@@ -115,6 +115,11 @@ namespace PL.Product
         {
             prodList = new List<BO.ProductForList?>(bl.Product.GetListedProducts());
 
+        }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
         }
     }
 }

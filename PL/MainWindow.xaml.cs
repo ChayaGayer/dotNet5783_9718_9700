@@ -38,6 +38,7 @@ namespace PL
         {
             CurrentCart = Mycart;
             InitializeComponent();
+            simulatorB.Visibility = Visibility.Hidden;
             MangerBtn.Visibility = Visibility.Hidden;
             CurrentCart.CustomerAdress = " ";
             CurrentCart.Items = new List<BO.OrderItem?>();
@@ -129,6 +130,11 @@ namespace PL
         {
             new Simulator().Show();
 
+        }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
         }
     }
 

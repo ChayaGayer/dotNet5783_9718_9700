@@ -27,6 +27,7 @@
         <Label Content="Enter Order Id" HorizontalAlignment="Left" Margin="178,346,0,0" VerticalAlignment="Top" Visibility="Hidden"  Height="33" Width="138" FontFamily="Rockwell Extra Bold" Name="enterId" />
         <Button x:Name="Check" Content="Press for Check" HorizontalAlignment="Left" Margin="509,346,0,0" VerticalAlignment="Top" Visibility="Hidden" Click="Check_Click" Height="33" Width="120" Background="White" FontFamily="Rockwell Extra Bold"/>
         <Button Content="Simulator" Name="simulatorB" HorizontalAlignment="Left" Margin="634,58,0,0" VerticalAlignment="Top" Width="135" Height="51" Background="White" FontFamily="Rockwell Extra Bold" Click="Simulator_Click"/>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="37,372,0,0" VerticalAlignment="Top" Height="25" Width="89" FontSize="22" BorderBrush="White" Background="White" MouseDoubleClick="Button_MouseDoubleClick"/>
 
 
 
