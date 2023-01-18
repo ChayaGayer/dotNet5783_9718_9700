@@ -115,9 +115,9 @@ namespace PL
             if (order.Status == BO.OrderStatus.Delivered)
                 return 100;
             if (order.Status == BO.OrderStatus.Ordered)
-                return ((TimeSpan)(timSim - order.OrderDate)!).Days * 10;
+                return 30;
             else
-                return ((TimeSpan)(timSim - order.OrderDate)!).Days * 10;
+                return 70;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

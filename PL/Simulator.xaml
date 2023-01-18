@@ -29,10 +29,10 @@
                 <!--<DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>-->
 
                 <DataGridTemplateColumn Header="Status" Width="Auto">                    <DataGridTemplateColumn.CellTemplate>                        <DataTemplate>                            <TextBlock Text="{Binding Path=Status}" Background="{Binding Path=Status, Converter={StaticResource StatusToColor}}"/>                            <!--<TextBlock Text="{Binding Path=Status}" Background="{Binding Path=Status, Converter={StaticResource StatusToColor}}"/>-->                        </DataTemplate>                    </DataGridTemplateColumn.CellTemplate>                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="statusColumn" Header="Tracking" Width="163">
+                <DataGridTemplateColumn x:Name="statusColumn" Header="Procces" Width="163">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ProgressBar x:Name="progressBar" Value="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, Converter={StaticResource TimeToProgressBar}}" Foreground="#FFC96C6C"/>
+                            <ProgressBar x:Name="progressBar" Value="{Binding Path=Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, Converter={StaticResource TimeToProgressBar}}" Foreground="#FFC96C6C"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
