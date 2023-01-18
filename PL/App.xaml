@@ -93,7 +93,7 @@
         </Style>
 
         <local:ConvertColor x:Key ="StatusToColor" />
-        <local:ConvertTimeToProgressBar x:Key ="TimeToProgressBar" />
+      <!--<local:ConvertTimeToProgressBar x:Key ="TimeToProgressBar" />-->
 
     </Application.Resources>
     

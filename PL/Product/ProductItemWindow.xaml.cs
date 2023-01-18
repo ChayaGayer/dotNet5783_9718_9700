@@ -81,7 +81,8 @@ namespace PL.Product
 
         private void BracletME_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Braclet);
+             ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Braclet);
+          //  ListProductItems =  new ObservableCollection<ProductItem?>(bl.Product.GetListedProducts(p => (BO.Category)p?.Category == Category.Braclet);
         }
 
         private void RefrashME_MouseEnter(object sender, MouseEventArgs e)

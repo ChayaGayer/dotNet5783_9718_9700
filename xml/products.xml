@@ -105,4 +105,11 @@
     <Category>Earrings</Category>
     <InStock>1</InStock>
   </Product>
+  <Product>
+    <ID>100050</ID>
+    <ProductName>xdd</ProductName>
+    <Price>100</Price>
+    <Category>Braclet</Category>
+    <InStock>2</InStock>
+  </Product>
 </ArrayOfProduct>

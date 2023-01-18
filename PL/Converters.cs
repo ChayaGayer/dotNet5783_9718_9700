@@ -81,50 +81,20 @@ namespace PL
         }
         
     }
-    class ConvertTimeToProgressBar : IValueConverter
-    {
-      private BlApi.IBl bl = BlApi.Factory.Get();
+    //class ConvertTimeToProgressBar : IValueConverter
+    //{
+    //  private BlApi.IBl bl = BlApi.Factory.Get();
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            DateTime timSim;
-            //if (timSim == null)
-                timSim = DateTime.Now;
-            BO.Order order = new();
-            int id = (int)value;
-            try
-            {
-                order = bl.Order.RequestOrderDeta(id);
-            }
-            catch (BO.BlNullPropertyException ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.BlMissingEntityException ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.BlAlreadyExistEntityException  ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            if (order.Status == BO.OrderStatus.Delivered)
-                return 100;
-            if (order.Status == BO.OrderStatus.Ordered)
-                return 30;
-            else
-                return 70;
-        }
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+           
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     
 }

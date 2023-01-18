@@ -34,12 +34,16 @@ namespace PL
             TrackBtn.Visibility = Visibility.Hidden;
         }
         BO.Cart CurrentCart;
+        /// <summary>
+        /// constructor with parameter
+        /// </summary>
+        /// <param name="Mycart"></param>
         public MainWindow(BO.Cart Mycart)
         {
-            CurrentCart = Mycart;
+            CurrentCart = Mycart;//the cart 
             InitializeComponent();
-            simulatorB.Visibility = Visibility.Hidden;
-            MangerBtn.Visibility = Visibility.Hidden;
+            simulatorB.Visibility = Visibility.Hidden;//for customer hide the simulator button
+            MangerBtn.Visibility = Visibility.Hidden;//for customer hide the maneger button
             CurrentCart.CustomerAdress = " ";
             CurrentCart.Items = new List<BO.OrderItem?>();
             CurrentCart.TotalPrice = 0;
@@ -125,13 +129,21 @@ namespace PL
 
             return;
         }
-
+        /// <summary>
+        /// open the simulator window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
             new Simulator().Show();
 
         }
-
+        /// <summary>
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.Close();
