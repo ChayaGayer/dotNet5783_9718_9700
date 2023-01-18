@@ -34,7 +34,7 @@ internal class Cart : ICart
 
         BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
 
-        if (orderItem != null)//if the product already in the cart
+        if (orderItem != null)//if the product alreadyin the cart
         {
             if (product.InStock > orderItem.Amount)//there is enough-update
             {
