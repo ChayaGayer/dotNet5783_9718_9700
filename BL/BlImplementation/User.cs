@@ -15,77 +15,7 @@ internal class User : BlApi.IUser
     /// </summary>
     /// <returns></returns>
     /// <exception cref="BO.BlNullPropertyException"></exception>
-    //    public void AddUser(BO.User u, int LogIn)
-    // DalApi.IDal dal = DalApi.Factory.Get();
-    //    {
-    //        if (u.Name == null || u.Name == "")
-    //        {
-    //            throw new BO.BlNullPropertyException("Name");
-    //        }
-    //        if (u.Password == null)
-    //        {
-    //            throw new BO.BlNullPropertyException("Password");
-    //        }
-
-
-    //        if (u.Email == null || u.Email == "")
-    //        {
-    //            throw new BO.BlNullPropertyException("Email");
-    //        }
-    //        if (!u.Email.Contains("@"))
-    //        {
-    //            throw new BO.BlNullPropertyException("Email");
-    //        }
-    //        try
-    //        {
-    //            dal.User.Add(new DO.User()
-    //            {
-    //                Name = u.Name ?? "",
-    //                Password = u.Password,
-    //                LogIn = (DO.UserLogIn)LogIn,
-    //                Email = u.Email,
-
-
-
-    //            });
-    //        }
-    //        catch (DO.DalAlreadyExistIdException ex)
-    //        {
-    //            throw new BO.BlAlreadyExistEntityException("User",ex);
-    //        }
-
-    //    }
-    //    public BO.User GetByUserPasswprd(string name, int password)
-    //    {
-    //        try
-    //        {
-    //            if (name == null || name == "")
-    //            {
-    //                throw new BO.BlNullPropertyException("Email");
-    //            }
-    //            if (password == null )
-    //            {
-    //                throw new BO.BlNullPropertyException("Password");
-    //            }
-
-    //            DO.User u = dal.User.GetById(password);
-    //            return new BO.User()
-    //            {
-    //                Name = u.Name ?? "",
-    //                Password = u.Password,
-    //                LogIn = (BO.UserLogIn)u.LogIn,
-    //                Email = u.Email,
-    //            };
-    //        }
-    //        catch (DO.DalMissingIdException ex)
-    //        {
-    //            throw new BO.BlMissingEntityException(@"User doesn't exist,
-    //                                        Sign up first", ex);
-    //        }
-
-    //    }
-
-    //}
+    
     DalApi.IDal dal = DalApi.Factory.Get();
     public IEnumerable<BO.User?> GetAllUsers()
     {
@@ -146,10 +76,9 @@ internal class User : BlApi.IUser
 
     }
    
-    private delegate BO.User? sc<in T>(T obj);
-    public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
+
     /// <summary>
-    /// 
+    /// Check if another user have the same password
     /// </summary>
     /// <param name="user"></param>
     /// <exception cref="BO.BlMissingEntityException"></exception>

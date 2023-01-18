@@ -7,7 +7,11 @@ namespace Dal;
 
  internal class DalOrder : IOrder
 {
-    //create
+    /// <summary>
+    /// Add fir list
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     public int Add(Order order)
     {
         order.ID = DataSource.Config.NextOrderNumber;
@@ -16,7 +20,12 @@ namespace Dal;
         
         return order.ID;
    }
-    //Request
+  /// <summary>
+  /// request orser by id
+  /// </summary>
+  /// <param name="id"></param>
+  /// <returns></returns>
+  /// <exception cref="DO.DalMissingIdException"></exception>
     public Order GetById(int id)
     {
         Order order=new Order();//create a new order
@@ -49,6 +58,11 @@ namespace Dal;
         DataSource.OrdersList.Remove(orderToDel);//delete rhe found order.if found
 
     }
+    /// <summary>
+    /// Get all the orders
+    /// </summary>
+    /// <param name="filtar"></param>
+    /// <returns></returns>
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filtar = null)
     {
         if(filtar != null)

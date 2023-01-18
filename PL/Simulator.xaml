@@ -32,7 +32,7 @@
                 <DataGridTemplateColumn x:Name="statusColumn" Header="Procces" Width="163">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ProgressBar x:Name="progressBar" Value="{Binding Path=Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, Converter={StaticResource TimeToProgressBar}}" Foreground="#FFC96C6C"/>
+                            <ProgressBar x:Name="progressBar" Value="{Binding Path=Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, Converter={StaticResource TimeToProgressBar}}" Foreground="#FFFFA07A"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -12,6 +12,11 @@ namespace Dal;
 internal class DalOrder : IOrder
 {
     readonly string s_orders = "orders";
+    /// <summary>
+    /// Add order 
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     public int Add(Order order)
     {
         List<DO.Order?> listOrd = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -24,6 +29,11 @@ internal class DalOrder : IOrder
 
     }
 
+    /// <summary>
+    /// Delete order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="DO.DalMissingIdException"></exception>
     public void Delete(int id)
     {
         List<DO.Order?> listOrd = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
@@ -33,7 +43,11 @@ internal class DalOrder : IOrder
         listOrd.Remove(orderToDel);//delete rhe found order.if found
         XMLTools.SaveListToXMLSerializer(listOrd, s_orders);
     }
-
+    /// <summary>
+    /// Get all the orders
+    /// </summary>
+    /// <param name="filtar"></param>
+    /// <returns></returns>
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filtar = null)
     {
         List<DO.Order?> listOrd = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);

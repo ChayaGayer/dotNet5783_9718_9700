@@ -18,7 +18,7 @@ public class User
     /// </summary>
     public string Email { get; set; }
     /// <summary>
-    /// maneger or coustomer
+    /// maneger or coustomer enum
     /// </summary>
     public UserLogIn LogIn { get; set; }
     /// <summary>

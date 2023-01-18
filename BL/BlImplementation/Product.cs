@@ -6,17 +6,7 @@ namespace BlImplementation;
 internal class Product : BlApi.IProduct
 {
 
-    /// <summary>
-    /// Product list request
-    ///Request a list of products from the data layer
-    /// Build a list of products of the ProductForList type(logical entity) based on the data
-    ////Return the list that was built
-
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="BO.BlMissingEntityException"></exception>
-    /// <exception cref="BO.BlEmptyStringException"></exception>
-    /// <exception cref="BO.BlWorngCategoryException"></exception>
+    
     DalApi.IDal dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? filter = null)
@@ -43,11 +33,13 @@ internal class Product : BlApi.IProduct
     /// <exception cref="BO.BlMissingEntityException"></exception>
     /// <exception cref="BO.BlEmptyStringException"></exception>
     /// <exception cref="BO.BlWorngCategoryException"></exception>
-    public IEnumerable<BO.ProductItem?> GetListedProductsForC()
+    public IEnumerable<BO.ProductItem?> GetListedProductsForC(Func<BO.ProductItem?, bool>? filter = null)
     {
-        return from DO.Product? doProduct in dal.Product.GetAll()
-               select new BO.ProductItem
-               {
+        IEnumerable<BO.ProductItem?> list;
+
+        list= from DO.Product? doProduct in dal.Product.GetAll()
+              select new BO.ProductItem
+              {
                    ID = doProduct?.ID ?? throw new BO.BlMissingEntityException("Missing ID"),
                    ProductName = doProduct?.ProductName ?? throw new BO.BlEmptyStringException("missing name"),
                    Category = (BO.Category?)doProduct?.Category ?? throw new BO.BlWorngCategoryException("missing category"),
@@ -56,7 +48,7 @@ internal class Product : BlApi.IProduct
                    ImageRelativeName = @"\Pics\" + doProduct?.ID + ".png"
 
                };
-
+        return filter is null ? list : list.Where(filter);
 
     }
     private bool checkIfstock(int inStock)

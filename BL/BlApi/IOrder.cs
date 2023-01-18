@@ -9,9 +9,7 @@ public interface IOrder
 {
    
     IEnumerable<OrderForList?> GetListedOrders();
-    //IEnumerable<BO.OrderItem?> GetList(IEnumerable<DO.OrderItem?> listOrderItem);
-   //IEnumerable<StatisticsOrders> GetStatisticsOrders();
-    
+   
      Order  RequestOrderDeta(int orderID);
     Order UpdateSendOrder(int orderID);
     Order UpdateSupplyOrder(int orderID);

@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Content="ID:" FontFamily="Rockwell Extra Bold"  HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Width="38"/>
-            <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"  PreviewKeyDown="iDTextBox_PreviewKeyDown" />
+            <TextBox x:Name="iDTextBox" IsReadOnly="True"  Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"  PreviewKeyDown="iDTextBox_PreviewKeyDown" />
 
 
             <Label Grid.Column="0" Content="Product Name:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>

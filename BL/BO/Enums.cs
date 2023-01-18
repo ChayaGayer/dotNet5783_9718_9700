@@ -21,6 +21,6 @@ public enum OrderStatus
     Ring,
     Neckless,
     Watch,
-    None//צריך לבדוק האם זה לא דופק את שלב שתיים
+    None
 }
 public enum UserLogIn { Coustomer,Maneger };

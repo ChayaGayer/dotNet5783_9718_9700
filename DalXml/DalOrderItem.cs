@@ -12,6 +12,11 @@ namespace Dal;
 internal class DalOrderItem : IOrderItem
 {
     readonly string s_orderItems = "orderItems";
+    /// <summary>
+    /// Add 
+    /// </summary>
+    /// <param name="orderItem"></param>
+    /// <returns></returns>
     public int Add(OrderItem orderItem)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -21,7 +26,11 @@ internal class DalOrderItem : IOrderItem
         XMLTools.SaveListToXMLSerializer(listOrdItem, s_orderItems);
         return orderItem.ID;
     }
-
+    /// <summary>
+    /// Delete
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="DO.DalMissingIdException"></exception>
     public void Delete(int id)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -30,7 +39,11 @@ internal class DalOrderItem : IOrderItem
         listOrdItem.Remove(orderItemToDell);
         XMLTools.SaveListToXMLSerializer(listOrdItem, s_orderItems);
     }
-
+    /// <summary>
+    /// Get all the order items-func whis filter
+    /// </summary>
+    /// <param name="filtar"></param>
+    /// <returns></returns>
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filtar = null)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -38,7 +51,12 @@ internal class DalOrderItem : IOrderItem
             return listOrdItem.Where(x => filtar(x));
         return listOrdItem.Select(x => x);
     }
-
+    /// <summary>
+    /// Get orderitem by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="DO.DalMissingIdException"></exception>
     public OrderItem GetById(int id)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -48,14 +66,24 @@ internal class DalOrderItem : IOrderItem
         return newOrderItem;
 
     }
-
+    /// <summary>
+    /// Get orders item in order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public IEnumerable<OrderItem?> GetOrderItems(int id)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
         var allTheOrder = listOrdItem.Where(x => x.Value.OrderId == id);
         return allTheOrder;
     }
-
+    /// <summary>
+    /// get the item by orderid and item id
+    /// </summary>
+    /// <param name="orderId"></param>
+    /// <param name="itemId"></param>
+    /// <returns></returns>
+    /// <exception cref="DO.DalMissingIdException"></exception>
     public OrderItem GetTheItem(int orderId, int itemId)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
@@ -63,7 +91,11 @@ internal class DalOrderItem : IOrderItem
         return (OrderItem)theOrderItem;
 
     }
-
+    /// <summary>
+    /// update
+    /// </summary>
+    /// <param name="orderItem"></param>
+    /// <exception cref="DO.DalMissingIdException"></exception>
     public void Update(OrderItem orderItem)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);

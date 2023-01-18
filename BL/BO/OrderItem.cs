@@ -8,13 +8,33 @@ namespace BO;
 
 public class OrderItem
 {
-    public int ID { get; set; }//the id of the order item 
-    public int OrderId { get; set; }//the order id
-    public int ItemId { get; set; }//the item id
+    /// <summary>
+    /// the id of the order item 
+    /// </summary>
+    public int ID { get; set; }
+    /// <summary>
+    /// the order id
+    /// </summary>
+    public int OrderId { get; set; }
+    /// <summary>
+    /// the item id
+    /// </summary>
+    public int ItemId { get; set; }
+    /// <summary>
+    /// the item name
+    /// </summary>
     public string ItemName { get; set; }
+    /// <summary>
+    /// the price of the item
+    /// </summary>
     public double Price { get; set; }
-    public int Amount { get; set; }//the amount of the items
-
+    /// <summary>
+    /// the amount of the items
+    /// </summary>
+    public int Amount { get; set; }
+    /// <summary>
+    /// Total price
+    /// </summary>
     public double TotalPrice { get; set; }
     public override string ToString()
     {

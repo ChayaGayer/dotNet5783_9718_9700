@@ -22,11 +22,11 @@
             </TextBox.RenderTransform>
         </TextBox>
         <TextBox x:Name="PasswardTB" HorizontalAlignment="Center" Margin="0,145,0,0" TextWrapping="Wrap" Text="{Binding Password ,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="298" RenderTransformOrigin="0.5,0.5" Height="47" FontSize="26" BorderBrush="BurlyWood" Foreground="DarkGray" TextAlignment="Center"/>
-        <Button x:Name="btnLogIn" Content="Log in" HorizontalAlignment="Left" Margin="39,303,0,0" VerticalAlignment="Top" Height="37" Width="143" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC" MouseDoubleClick="btnLogIn_MouseDoubleClick"/>
-        <Button x:Name="btnSignIn" Content="Sign up" HorizontalAlignment="Left" Margin="267,303,0,0" VerticalAlignment="Top" Height="37" Width="154" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC" MouseDoubleClick="btnSignIn_MouseDoubleClick"/>
+        <Button x:Name="btnLogIn" Content="Log in" HorizontalAlignment="Left" Margin="76,303,0,0" VerticalAlignment="Top" Height="37" Width="317" Background="#FFFCF8F8" FontSize="18" FontFamily="Tempus Sans ITC" MouseDoubleClick="btnLogIn_MouseDoubleClick"/>
+
         <Label Content="Name" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Height="31" Width="54" FontFamily="Tempus Sans ITC"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Height="47" Width="65" FontFamily="Tempus Sans ITC"/>
-        <Label Content="If you don't have an account,Sign up 🖍" HorizontalAlignment="Left" Margin="76,209,0,0" VerticalAlignment="Top" Height="31" Width="268" FontFamily="Tempus Sans ITC" Foreground="#FFA02C2C"/>
+        <Label Content="           Welcom 🛍   " HorizontalAlignment="Left" Margin="76,209,0,0" VerticalAlignment="Top" Height="31" Width="268" FontFamily="Tempus Sans ITC" Foreground="#FFA02C2C"/>
 
     </Grid>
 

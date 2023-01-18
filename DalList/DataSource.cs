@@ -40,6 +40,9 @@ internal static class DataSource
         //    XMLTools.SaveListToXMLSerializer(UsersList, "users");
         //}
     }
+    /// <summary>
+    /// For the users List
+    /// </summary>
     private static void CreateAndInitUsers()
     {
         string[] UsersNames = { "Efrat Amar", "Shira Levinzon", "Chaya Gayer","Shira Gayer", "Yeudit Avitan","Inbal Peri"};
@@ -75,7 +78,10 @@ internal static class DataSource
         }
        
     }
-    private static void CreateAndInitProducts()//The function that initializes the list of products
+    /// <summary>
+    /// The function that initializes the list of products
+    /// </summary>
+    private static void CreateAndInitProducts()
     {
         string[] ProductsArray = { " stud earrings", " Tennis bracelets", " Halo rings",  " Neckless", " Watch "," Bands rings" };
         string[] ProductsColorArray = { "Gold", "Silver", "RoseGold" };
@@ -169,9 +175,11 @@ internal static class DataSource
 
     }
 
-    private static void CreateAndInitOrderItems()//The function that initializes the list of the order items
-          {
-
+    /// <summary>
+    /// The function that initializes the list of the order items
+    /// </summary>
+    private static void CreateAndInitOrderItems()
+   {
         int x1 = s_rand.Next(15);
         int y = 100000;
 

@@ -6,6 +6,9 @@
     <Application.Resources>
         <local:ConvertImagePathToBitmap x:Key="ImagePathToBitmap"/>
         <local:ConvertTextToBoolean x:Key="TextToBoolean"/>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
         <Style x:Key="btnCart" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">

@@ -12,10 +12,14 @@ namespace Dal;
 internal class DalUser : IUser
 {
     readonly string s_users = "users";
+    /// <summary>
+    /// user in exelemnt method
+    /// </summary>
+    /// <param name="u"></param>
+    /// <returns></returns>
     static DO.User? createUserfromXElement(XElement u)
     {
-        //DO.UserLogIn userLogIn;
-        //Enum.TryParse((string?)u.Element("UserLogIn"), out userLogIn);
+        
         DO.User user = new DO.User()
         {
             Name = (string?)u.Element("Name") ?? "",
@@ -25,15 +29,20 @@ internal class DalUser : IUser
         };
         return user;
     }
-
+    /// <summary>
+    /// add user
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    /// <exception cref="DO.DalAlreadyExistIdException"></exception>
     public int Add(User user)
     {
         XElement? usersRootElem = XMLTools.LoadListFromXMLElement(s_users);
         XElement? us = (from u in usersRootElem.Elements()
-                        where (string?)u.Element("Name") == user.Name //where (int?)st.Element("ID") == doStudent.ID
+                        where (string?)u.Element("Name") == user.Name
                         select u).FirstOrDefault();
         if (us != null)
-            throw new DO.DalAlreadyExistIdException(user.Password, "the user already exist"); // fix to: throw new DalMissingIdException(id);
+            throw new DO.DalAlreadyExistIdException(user.Password, "the user already exist"); 
 
         XElement userElem = new XElement("User",
                                    new XElement("Name", user.Name),
@@ -49,19 +58,27 @@ internal class DalUser : IUser
 
         return user.Password; ;
     }
-
+    /// <summary>
+    /// delete a user
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="Exception"></exception>
     public void Delete(int id)
     {
         XElement? usersRootElem = XMLTools.LoadListFromXMLElement(s_users);
         XElement? us = (from st in usersRootElem.Elements()
                         where (int?)st.Element("ID") == id
-                        select st).FirstOrDefault() ?? throw new Exception("missing id"); // fix to: throw new DalMissingIdException(id);
+                        select st).FirstOrDefault() ?? throw new DO.DalMissingIdException(id,"missing id"); // fix to: throw new DalMissingIdException(id);
 
-        us.Remove(); //<==>   Remove stud from studentsRootElem
+        us.Remove(); 
 
         XMLTools.SaveListToXMLElement(usersRootElem, s_users);
     }
-
+    /// <summary>
+    /// Get all the users
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public IEnumerable<User?> GetAll(Func<User?, bool>? filter = null)
     {
         XElement? usersRootElem = XMLTools.LoadListFromXMLElement(s_users);
@@ -79,65 +96,28 @@ internal class DalUser : IUser
         }
 
     }
-
+    /// <summary>
+    /// Get user by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="DO.DalMissingIdException"></exception>
     public User GetById(int id)
     {
         XElement? usersRootElem = XMLTools.LoadListFromXMLElement(s_users);
-        //return DataSource.UsersList.FirstOrDefault(user => user?.Password == id) ?? throw new DalAlreadyExistIdException(id, "user");
         return (from u in usersRootElem?.Elements()
                 where u.ToIntNullable("Password") == id
                 select (DO.User?)createUserfromXElement(u)).FirstOrDefault()
-               ?? throw new DO.DalMissingIdException(id, "the passowrd isnt correct"); // fix to: throw new DalMissingIdException(id);
+               ?? throw new DO.DalMissingIdException(id, "the passowrd isnt correct"); 
     }
-
+    /// <summary>
+    /// Update
+    /// </summary>
+    /// <param name="user"></param>
     public void Update(User user)
     {
         Delete(user.Password);
         Add(user);
     }
-    //readonly string s_users = "users";
-    //public int Add(User user)
-    //{
-    //    List<DO.User?> listUsers = XMLTools.LoadListFromXMLSerializer<DO.User>(s_users);
-    //    bool flag = listUsers.Any(use => use?.Password == user.Password);
-    //    if (flag)//if this password already exist-cant add this user
-    //        throw new DO.DalAlreadyExistIdException(user.Password, "user");
-    //    //the new user doesnt exist
-    //    listUsers.Add(user);
-    //    XMLTools.SaveListToXMLSerializer(listUsers, s_users);
-    //    return user.Password;
-    //}
-
-    //public void Delete(int id)
-    //{
-    //    List<DO.User?> listUsers = XMLTools.LoadListFromXMLSerializer<DO.User>(s_users);
-    //    User? adduser = listUsers.FirstOrDefault(user => user?.Password == id) ?? throw new DalAlreadyExistIdException(id, "user");
-    //    int UserIndex = listUsers.FindIndex(user => user?.Password == id);
-    //    listUsers.RemoveAt(UserIndex);
-    //    XMLTools.SaveListToXMLSerializer(listUsers, s_users);
-    //}
-
-    //public IEnumerable<User?> GetAll(Func<User?, bool>? filtar = null)
-    //{
-    //    List<DO.User?> listUsers = XMLTools.LoadListFromXMLSerializer<DO.User>(s_users);
-    //    if (filtar != null)
-    //        return listUsers.Where(item => filtar(item));
-    //    return listUsers.Select(item => item);
-    //}
-
-    //public User GetById(int id)
-    //{
-    //    List<DO.User?> listUsers = XMLTools.LoadListFromXMLSerializer<DO.User>(s_users);
-    //    return listUsers.FirstOrDefault(user => user?.Password == id) ?? throw new DalAlreadyExistIdException(id, "user");
-    //}
-
-    //public void Update(User user)
-    //{
-    //    List<DO.User?> listUsers = XMLTools.LoadListFromXMLSerializer<DO.User>(s_users);
-    //    User? addUser = listUsers.FirstOrDefault(user => user?.Password == user?.Password) ?? throw new DalAlreadyExistIdException(user.Password, "user");
-    //    int UserIndex = listUsers.FindIndex(user => user?.Password == user?.Password);
-    //    listUsers[UserIndex] = user;
-    //    XMLTools.SaveListToXMLSerializer(listUsers, s_users);
-
-    // }
+ 
 }

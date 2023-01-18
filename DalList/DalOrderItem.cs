@@ -7,14 +7,23 @@ namespace Dal
     internal class DalOrderItem:IOrderItem
     {
         
-        //create
+       /// <summary>
+       /// Add
+       /// </summary>
+       /// <param name="orderItem"></param>
+       /// <returns></returns>
         public int Add(OrderItem orderItem)
         {
             orderItem.ID = DataSource.Config.NextOrderNumber;
             DataSource.OrderItemsList.Add(orderItem);
             return orderItem.ID;
         }
-        ///Request
+        /// <summary>
+        /// Request order item by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="DO.DalMissingIdException"></exception>
         public OrderItem GetById(int id)
         {
             OrderItem newOrderItem = new OrderItem();//create a new  item
@@ -23,7 +32,11 @@ namespace Dal
             return newOrderItem;
 
         }
-        //Update
+        /// <summary>
+        /// update
+        /// </summary>
+        /// <param name="orderItem"></param>
+        /// <exception cref="DO.DalMissingIdException"></exception>
         public void Update(OrderItem orderItem)
         {
             OrderItem orderItemToUpdate = new OrderItem();
@@ -43,6 +56,11 @@ namespace Dal
             DataSource.OrderItemsList.Remove(orderItemToDell);
 
         } 
+        /// <summary>
+        /// Get all the orderitem
+        /// </summary>
+        /// <param name="filtar"></param>
+        /// <returns></returns>
         public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filtar = null)
         {
             if (filtar != null)
@@ -50,11 +68,11 @@ namespace Dal
             return DataSource.OrderItemsList.Select(x => x);
         }
         /// <summary>
-        /// get the id and return akk the items of this order
+        /// get the id and return add the items of this order
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<OrderItem?> GetOrderItems(int id)///לשנות 
+        public IEnumerable<OrderItem?> GetOrderItems(int id)
         {
 
             var allTheOrder = DataSource.OrderItemsList.Where(x => x.Value.OrderId == id);

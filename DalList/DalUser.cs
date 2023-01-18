@@ -25,13 +25,22 @@ public class DalUser : IUser
         DataSource.UsersList.Add(user);
         return user.Password;
     }
-    public void Delete(int id)//for now-dont delete any user...
+    /// <summary>
+    /// Delete
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="DalAlreadyExistIdException"></exception>
+    public void Delete(int id)
     {
         User? adduser = DataSource.UsersList.FirstOrDefault(user => user?.Password == id) ?? throw new DalAlreadyExistIdException(id, "user");
         int UserIndex = DataSource.UsersList.FindIndex(user => user?.Password == id);
         DataSource.UsersList.RemoveAt(UserIndex);
     }
-
+    /// <summary>
+    /// Get all users
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public IEnumerable<User?> GetAll(Func<User?, bool>? filter = null)
     {
         if (filter != null)
@@ -39,12 +48,23 @@ public class DalUser : IUser
         return DataSource.UsersList.Select(item => item);
     }
 
+    /// <summary>
+    /// Get user by id 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="DalAlreadyExistIdException"></exception>
     public User GetById(int id)
     {
         return DataSource.UsersList.FirstOrDefault(user => user?.Password == id) ?? throw new DalAlreadyExistIdException(id, "user");
 
     }
 
+    /// <summary>
+    /// update the user details
+    /// </summary>
+    /// <param name="user"></param>
+    /// <exception cref="DalAlreadyExistIdException"></exception>
     public void Update(User user)
     {
         User? addUser = DataSource.UsersList.FirstOrDefault(user => user?.Password == user?.Password) ?? throw new DalAlreadyExistIdException(user.Password, "user");

@@ -71,7 +71,7 @@ namespace PL.Product
         /// <param name="e"></param>
         private void ChooseItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.ProductItem? productItem= ListViewProductItems.SelectedItem as BO.ProductItem;//the select product
+            BO.ProductItem? productItem=(BO.ProductItem?)ListViewProductItems.SelectedItem ;//the select product
            if(productItem!=null)
             {
                 CatalogProduct catalogProduct = new CatalogProduct(cart1, productItem.ID);
@@ -81,32 +81,33 @@ namespace PL.Product
 
         private void BracletME_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Braclet);
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC(p => p?.Category == Category.Braclet);
+
         }
 
         private void RefrashME_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts();
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC();
         }
 
         private void EarringsMe_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Earrings);
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC(p => p?.Category == Category.Earrings);
         }
 
         private void RingMe_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Ring);
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC(p => p?.Category == Category.Ring);
         }
 
         private void NecklessMe_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Neckless);
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC(p => p?.Category == Category.Neckless);
         }
 
         private void WatchME_MouseEnter(object sender, MouseEventArgs e)
         {
-            ListViewProductItems.ItemsSource = bl.Product.GetListedProducts(p => p?.Category == Category.Watch);
+            ListViewProductItems.ItemsSource = bl.Product.GetListedProductsForC(p => p?.Category == Category.Watch);
         }
 
         private void BestSelerME_MouseEnter(object sender, MouseEventArgs e)
@@ -118,6 +119,29 @@ namespace PL.Product
         private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.Close();   
+        }
+
+        private void Groping_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<IGrouping<BO.Category, BO.ProductForList>> PList = from parcel in bl.Product.GetListedProducts()
+                                                                           group parcel by parcel.Category;
+            List<BO.ProductForList> parcels = new();
+
+            foreach (var group in PList)
+            {
+                foreach (var parcel in group)
+                {
+                    parcels.Add(parcel);
+                }
+            }
+            ListViewProductItems.ItemsSource = parcels;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewProductItems.ItemsSource);
+            if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
     }
 }

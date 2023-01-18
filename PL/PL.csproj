@@ -10,12 +10,17 @@
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+	  <ApplicationIcon>logo.ico</ApplicationIcon>
 
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Orders\לוגו סברובסקי.png" />
     <None Remove="Product\לוגו סברובסקי.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>

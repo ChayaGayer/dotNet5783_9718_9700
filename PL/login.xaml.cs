@@ -79,8 +79,8 @@ namespace PL
             }
             catch (BO.BlMissingEntityException ex)
             {
-                MessageBox.Show("The Passowrd is worng ,please try again", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
-                this.Close();
+                MessageBox.Show("please try again", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
+                
             }
            
             

@@ -49,10 +49,10 @@ namespace PL
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             OrderStatus status = (OrderStatus)value;
-            if (status == OrderStatus.Ordered) { return Brushes.Red; }
-            if (status == OrderStatus.Shipped) { return Brushes.Orange; }
+            if (status == OrderStatus.Ordered) { return Brushes.Plum; }
+            if (status == OrderStatus.Shipped) { return Brushes.Magenta; }
             else
-            { return Brushes.Green; }
+            { return Brushes.MediumVioletRed; }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -83,44 +83,28 @@ namespace PL
     }
     class ConvertTimeToProgressBar : IValueConverter
     {
-      private BlApi.IBl bl = BlApi.Factory.Get();
+
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime timSim;
-            //if (timSim == null)
-                timSim = DateTime.Now;
-            BO.Order order = new();
-            int id = (int)value;
-            try
-            {
-                order = bl.Order.RequestOrderDeta(id);
-            }
-            catch (BO.BlNullPropertyException ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.BlMissingEntityException ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (BO.BlAlreadyExistEntityException  ex)
-            {
-                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            if (order.Status == BO.OrderStatus.Delivered)
-                return 100;
-            if (order.Status == BO.OrderStatus.Ordered)
-                return 30;
-            else
-                return 70;
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+
+            OrderStatus orderStatus = (OrderStatus)value;
+            switch (orderStatus)
+            {
+                case OrderStatus.Ordered:
+                    return 25;
+                case OrderStatus.Shipped:
+                    return 50;
+                case OrderStatus.Delivered:
+                    return 100;
+                default:
+                    return 0;
+
+            }
+        }
+                public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

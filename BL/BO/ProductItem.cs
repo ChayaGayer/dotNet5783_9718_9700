@@ -17,7 +17,7 @@ public class ProductItem
     /// </summary>
      public double Price { get; set; } 
     /// <summary>
-    /// the catefory
+    /// the category
     /// </summary>
     public Category Category { get; set; }
     /// <summary>

@@ -16,7 +16,7 @@ public interface IProduct
 
     IEnumerable<BO.ProductForList?> GetListedProducts(Func<BO.ProductForList?, bool>? filter = null);
     
-    IEnumerable<BO.ProductItem?> GetListedProductsForC();
+    IEnumerable<BO.ProductItem?> GetListedProductsForC(Func<BO.ProductItem?, bool>? filter = null);
     IEnumerable<ProductItem?> MostPopular();
     
     BO.Product RequestProductDetaForM(int productID);

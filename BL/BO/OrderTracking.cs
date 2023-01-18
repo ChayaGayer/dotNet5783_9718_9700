@@ -14,6 +14,8 @@ public class OrderTracking
     /// <summary>
     /// the status of the order
     /// </summary>
+    
+    
     public List<Tuple<DateTime?,string>>? Tracking { get; set; }
 
     public override string ToString()

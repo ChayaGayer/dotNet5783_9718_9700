@@ -3,11 +3,26 @@ namespace DO;
 
 public struct Product
 {
-    public int ID { get; set; }//the id of the product
-    public string? ProductName{ get; set; }//the name of the product
-    public double Price { get; set; }//the price of the product
-    public Category Category { get; set; }//the category of the product 
-    public int InStock { get; set; }//the amount of the product in the store 
+    /// <summary>
+    /// the id of the product
+    /// </summary>
+    public int ID { get; set; }
+    /// <summary>
+    /// the name of the product
+    /// </summary>
+    public string? ProductName{ get; set; }
+    /// <summary>
+    /// the price of the product
+    /// </summary>
+    public double Price { get; set; }
+    /// <summary>
+    /// the category of the product 
+    /// </summary>
+    public Category Category { get; set; }
+    /// <summary>
+    /// the amount of the product in the store
+    /// </summary>
+    public int InStock { get; set; } 
 
     
  public override string ToString()
