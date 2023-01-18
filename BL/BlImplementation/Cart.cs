@@ -196,8 +196,8 @@ internal class Cart : ICart
         //check if the name is empty
         if (cart.CustomerName == "")
             throw new BO.BlEmptyStringException("empty customer name");
-        if (!GetEmail(cart.CustomerEmail))
-            throw new BO.BlEmptyStringException("empty customer email");
+        //if (!GetEmail(cart.CustomerEmail))
+        //    throw new BO.BlEmptyStringException("empty customer email");
 
 
         DO.Order order = new DO.Order();//create a new order
@@ -229,15 +229,70 @@ internal class Cart : ICart
                                                     Category = dal.Product.GetById(item.ItemId).Category,
                                                     InStock = dal.Product.GetById(item.ItemId).InStock - item.Amount
                                                 };
-    
+
 
 
         productUpdate.ToList().ForEach(x => dal.Product.Update(x));
-        
 
+        //Checking the correctness of the values
+        //if (cart.CustomerName == " ")
+        //    throw new   BO.BlEmptyStringException("empty customer name");
+        //if (cart.CustomerAdress== " ")
+        //    throw new BO.BlEmptyStringException("empty customer adress");
+        //if (!new EmailAddressAttribute().IsValid(cart.CustomerEmail))
+        //    throw new BO.BlEmptyStringException("empty customer email");
+        //if (cart.Items?.Count() == 0)
+        //    throw new BO.BlNagtiveNumberException("There are no products in the cart");
+        ////Create a new order
+        //DO.Order newOrder = new DO.Order
+        //{
+        //    CustomerName = cart.CustomerName,
+        //    CustomerAddress = cart.CustomerAdress,
+        //    CustomerEmail = cart.CustomerEmail,
+        //    OrderDate = DateTime.Now,
+        //    ShipDate = null,
+        //    DeliveryDate = null,
+        //};
+        //try
+        //{
+        //    //Adding the order to the list and receiving an ID number
+        //    int orderID = dal.Order.Add(newOrder);
+
+        //    //Adding the products in the cart to the order item list
+        //    cart.Items.ForEach()(item =>
+        //    dal?.OrderItem.Add(new DO.OrderItem
+        //    {
+        //        OrderID = orderID,
+        //        ProductID = item.ProductID,
+        //        Amount = item.Amount,
+        //        Price = item.Price,
+        //    }));
+
+        //    //Temporary list of products after the new stock update
+        //    var products = from BO.OrderItem item in cart.Items!
+        //                   let updateProduct = dal.Product.GetById(item.ItemId)//?ID
+        //                   select new DO.Product
+        //                   {
+        //                       ID = updateProduct.ID,
+        //                       ProductName = updateProduct.ProductName,
+        //                       Category = updateProduct.Category,
+        //                       Price = updateProduct.Price,
+        //                       InStock = updateProduct.InStock - item.Amount,
+
+        //                   };
+
+        //    //Updating the products in the product list
+        //    products.ToList().ForEach(item => dal.Product.Update(item));
+        //    //return orderID;
     }
-    bool GetEmail(string email)//help func to check the email
-    {
-        return new EmailAddressAttribute().IsValid(email);
+        //catch (DO.DalMissingIdException ex)
+        //{
+        //    throw new BO.BlMissingEntityException(ex.Message);
+        //}
     }
-}
+//    bool GetEmail(string email)//help func to check the email
+//    {
+//        return new EmailAddressAttribute().IsValid(email);
+//    }
+//}
+//}

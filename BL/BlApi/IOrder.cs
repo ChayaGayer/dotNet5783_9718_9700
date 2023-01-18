@@ -14,5 +14,5 @@ public interface IOrder
     Order UpdateSendOrder(int orderID);
     Order UpdateSupplyOrder(int orderID);
    OrderTracking OrderTracking(int orderID);
-    Order UpdateOrder(int orderID);
+    //Order UpdateOrder(int orderID);
 }
