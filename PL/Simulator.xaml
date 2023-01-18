@@ -41,8 +41,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Start" Name="buttonStart" IsEnabled="True" HorizontalAlignment="Left" Margin="558,393,0,0" VerticalAlignment="Top" Width="59" Height="31" Click="buttonStart_Click"/>
-        <Button Content="Stop" Name="buttonCancel" IsEnabled="True" HorizontalAlignment="Left" Margin="651,393,0,0" VerticalAlignment="Top" Height="31" Width="53" Click="buttonCancel_Click"/>
+        <Button Content="Start" Name="buttonStart" IsEnabled="True" HorizontalAlignment="Left" Margin="558,390,0,0" VerticalAlignment="Top" Width="59" Height="31" Click="buttonStart_Click" FontFamily="Rockwell Extra Bold"/>
+        <Button Content="Stop" Name="buttonCancel" IsEnabled="True" HorizontalAlignment="Left" Margin="651,390,0,0" VerticalAlignment="Top" Height="31" Width="53" Click="buttonCancel_Click" FontFamily="Rockwell Extra Bold"/>
 
     </Grid>
 </Window>

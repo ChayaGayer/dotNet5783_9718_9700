@@ -81,9 +81,22 @@ namespace PL
         }
         
     }
+    //class ConvertTimeToProgressBar : IValueConverter
+    //{
+    //  private BlApi.IBl bl = BlApi.Factory.Get();
     class ConvertTimeToProgressBar : IValueConverter
     {
 
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+           
+    //    }
+
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
