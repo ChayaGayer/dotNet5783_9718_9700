@@ -73,15 +73,7 @@ namespace PL.Product
             UpdateProduct.Visibility = Visibility.Visible;
             AddProduct.Visibility = Visibility.Collapsed;
             productPl=bl.Product.RequestProductDetaForM(id);
-            /*BO.Product product = bl!.Product.RequestProductDetaForM(id);
-            IDtextBox.Text = product?.ID.ToString();
-            IDtextBox.IsReadOnly = true;
-            IDtextBox.Foreground = Brushes.Red;
-            selection.Text = product?.Category.ToString();
-            Name.Text = product?.ProductName;
-            Price.Text = product?.Price.ToString();
-            Amount.Text = product?.InStock.ToString();
-            */
+           
             UpdateProduct.Content = "Update";
 
 

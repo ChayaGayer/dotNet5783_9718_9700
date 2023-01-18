@@ -51,5 +51,10 @@ namespace PL.Product
         {
             new OrderListWindow(bl).Show();
         }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

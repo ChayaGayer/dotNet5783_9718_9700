@@ -124,6 +124,11 @@ namespace PL
 
             return;
         }
+
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 
 

@@ -26,6 +26,7 @@
         <TextBox x:Name="OrderId" HorizontalAlignment="Left" Margin="343,346,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"  Visibility="Hidden"  Height="33" Width="120" FontFamily="Rockwell Extra Bold" PreviewKeyDown="OrderId_PreviewKeyDown"/>
         <Label Content="Enter Order Id" HorizontalAlignment="Left" Margin="178,346,0,0" VerticalAlignment="Top" Visibility="Hidden"  Height="33" Width="138" FontFamily="Rockwell Extra Bold" Name="enterId" />
         <Button x:Name="Check" Content="Press for Check" HorizontalAlignment="Left" Margin="509,346,0,0" VerticalAlignment="Top" Visibility="Hidden" Click="Check_Click" Height="33" Width="120" Background="White" FontFamily="Rockwell Extra Bold"/>
+        <Button Content="⬅" HorizontalAlignment="Left" Margin="37,372,0,0" VerticalAlignment="Top" Height="25" Width="60" FontSize="22" FontFamily="SimSun" BorderBrush="#FFFBF0F0" Background="White" MouseDoubleClick="Button_MouseDoubleClick"/>
 
 
 
