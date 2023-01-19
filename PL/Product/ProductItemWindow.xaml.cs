@@ -123,18 +123,18 @@ namespace PL.Product
 
         private void Groping_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<IGrouping<BO.Category, BO.ProductForList>> PList = from parcel in bl.Product.GetListedProducts()
-                                                                           group parcel by parcel.Category;
-            List<BO.ProductForList> parcels = new();
+            IEnumerable<IGrouping<BO.Category, BO.ProductItem>> PList = from t in bl.Product.GetListedProductsForC()
+                                                                           group t by t.Category;
+            List<BO.ProductItem> plist = new();
 
             foreach (var group in PList)
             {
                 foreach (var parcel in group)
                 {
-                    parcels.Add(parcel);
+                    plist.Add(parcel);
                 }
             }
-            ListViewProductItems.ItemsSource = parcels;
+            ListViewProductItems.ItemsSource = plist;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewProductItems.ItemsSource);
             if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 

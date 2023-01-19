@@ -36,14 +36,14 @@ namespace PL.Orders
         /// </summary>
         public OrderWindow()
         {
-            //orderItemListView.ItemsSource = bl.Order.GetListedOrders();
+            
             InitializeComponent();
         }
         public OrderWindow(int id)
         {
             
             InitializeComponent();
-            //orderItemListView.ItemsSource = bl.Order.
+            
             try
             {
                 OrderPl = bl.Order.RequestOrderDeta(id);
@@ -53,6 +53,7 @@ namespace PL.Orders
                 OrderPl=null;   
                 MessageBox.Show(ex.Message," Invalied id",MessageBoxButton.OK,MessageBoxImage.Error);
             }
+
         }
         /// <summary>
         /// update the dates
@@ -63,7 +64,7 @@ namespace PL.Orders
         {
             try
             {
-                bl.Order.UpdateSupplyOrder(OrderPl.ID);
+                bl.Order.UpdateSupplyOrder(OrderPl!.ID);
                 OrderPl = bl.Order.RequestOrderDeta(OrderPl.ID);
             }
             catch(BO.BlMissingEntityException ex)
@@ -85,7 +86,7 @@ namespace PL.Orders
         {
             try
             {
-                bl.Order.UpdateSendOrder(OrderPl.ID);
+                bl.Order.UpdateSendOrder(OrderPl!.ID);
                 OrderPl = bl.Order.RequestOrderDeta(OrderPl.ID);
             }
             catch (BO.BlMissingEntityException ex)
@@ -98,5 +99,7 @@ namespace PL.Orders
             }
 
         }
+
+       
     }
 }

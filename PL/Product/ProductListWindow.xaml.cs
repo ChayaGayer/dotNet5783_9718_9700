@@ -33,10 +33,8 @@ namespace PL.Product
         public ProductListWindow(BlApi.IBl bl)
         {
             InitializeComponent();
-            //productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();//bring the list from the bl
             BO.Category category = new BO.Category();   
             Category.ItemsSource=Enum.GetValues(typeof(BO.Category));
-            //productForListDataGrid.ItemsSource = bl.Product.GetListedProducts();
             prodList = new List<BO.ProductForList?>(bl.Product.GetListedProducts());
 
 

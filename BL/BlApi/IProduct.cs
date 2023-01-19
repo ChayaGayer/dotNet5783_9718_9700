@@ -23,7 +23,7 @@ public interface IProduct
     /// get the product list for the customer
     /// </summary>
     /// <returns></returns>
-    IEnumerable<BO.ProductItem?> GetListedProductsForC();
+    IEnumerable<BO.ProductItem?> GetListedProductsForC(Func<BO.ProductItem?, bool>? filter = null);
     /// <summary>
     /// return the most popular products
     /// </summary>

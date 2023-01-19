@@ -181,10 +181,12 @@ internal static class DataSource
     private static void CreateAndInitOrderItems()
    {
         int x1 = s_rand.Next(15);
+
         int y = 100000;
 
         for (int i = 0; i < 20; i++)//for each order
         {
+         
             OrderItemsList.Add(
                 new OrderItem
                 {

@@ -10,7 +10,7 @@
         Title="OrderTrack" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
         <Grid x:Name="grid1"   HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="83,44,0,0" Height="222" Width="470">
             <Grid.ColumnDefinitions>
@@ -31,16 +31,10 @@
 
             <DataGrid x:Name="trackingDataGrid" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Tracking}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="3,0,-166,-139" Grid.Column="1" Grid.Row="2" Background="#FFFFFBFB">
                 <DataGrid.Columns>
-                    <!--<DataGridTemplateColumn x:Name="item1Column" Header="Item 1" IsReadOnly="True" Width="SizeToHeader">-->
-                    <!--<DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <DatePicker SelectedDate="{Binding Item1, Mode=OneWay}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                    <DataGridTextColumn x:Name="item1Column" Binding="{Binding Item1}" Header="Item 1" IsReadOnly="True" Width="100" />
+                   
+                    <DataGridTextColumn x:Name="item1Column" Binding="{Binding Item1}" Header=" " IsReadOnly="True" Width="100" />
 
-                    <DataGridTextColumn x:Name="item2Column" Binding="{Binding Item2}" Header="Item 2" IsReadOnly="True" Width="100"/>
+                    <DataGridTextColumn x:Name="item2Column" Binding="{Binding Item2}" Header=" " IsReadOnly="True" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

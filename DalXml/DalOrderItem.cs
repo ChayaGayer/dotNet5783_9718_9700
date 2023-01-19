@@ -20,7 +20,11 @@ internal class DalOrderItem : IOrderItem
     public int Add(OrderItem orderItem)
     {
         List<DO.OrderItem?> listOrdItem = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItems);
-        orderItem.ID = Config.GetNextOrderItemNumber();
+        if (orderItem.ID == null || orderItem.ID == 0)
+        {
+            orderItem.ID = Config.GetNextOrderItemNumber();
+        }
+       
         listOrdItem.Add(orderItem);
         Config.SaveNextOrderItemNumber(orderItem.ID + 1);
         XMLTools.SaveListToXMLSerializer(listOrdItem, s_orderItems);

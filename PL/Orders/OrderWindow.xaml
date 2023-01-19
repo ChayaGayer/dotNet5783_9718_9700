@@ -9,7 +9,7 @@
         Title="OrderWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
 
         <Grid x:Name="gridOrder2"  HorizontalAlignment="Left" VerticalAlignment="Top"   Margin="44,53,0,0" Width="262" Height="302">
@@ -68,7 +68,7 @@
             </Button.RenderTransform>
         </Button>
 
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" SelectionMode="Single" Margin="373,74,26,22">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" SelectionMode="Single" Margin="373,74,26,22" >
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>

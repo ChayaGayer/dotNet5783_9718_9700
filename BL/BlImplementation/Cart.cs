@@ -1,11 +1,13 @@
 ﻿
 using BlApi;
 using BO;
+using DalApi;
 using DO;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 using System.Transactions;
 namespace BlImplementation;
+
 
 internal class Cart : ICart
 {
@@ -34,7 +36,7 @@ internal class Cart : ICart
 
         BO.OrderItem? orderItem = cart.Items.FirstOrDefault(x => x?.ItemId == productId);
 
-        if (orderItem != null)//if the product alreadyin the cart
+        if (orderItem != null)//if the product already in the cart
         {
             if (product.InStock > orderItem.Amount)//there is enough-update
             {
@@ -59,9 +61,8 @@ internal class Cart : ICart
             {
                 BO.OrderItem? newOrderItem = new BO.OrderItem()//add to the cart
                 {
-                    ID = product.ID,
+                    //ID = product.ID,
                     ItemName = product.ProductName,
-                    //orderid
                     ItemId = product.ID,
                     Price = product.Price,
                     Amount = 1,
@@ -94,63 +95,60 @@ internal class Cart : ICart
 
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int amount)
     {
+        try
         {
-            try
+            if (productId < 0)// if id is inavalid
             {
-                if (productId < 0)// if id is inavalid
-                {
-                    throw new BO.BlInCorrectException("id is inavalid");
-                }
-                if (amount < 0)// if amount is inavalid
-                {
-                    throw new BO.BlNagtiveNumberException("Incorrect amount");
-                }
+                throw new BO.BlInCorrectException("id is inavalid");
+            }
+            if (amount < 0)// if amount is inavalid
+            {
+                throw new BO.BlNagtiveNumberException("Incorrect amount");
+            }
 
-                DO.Product? p = dal?.Product.GetById(productId);// getting the product
-                BO.OrderItem? oi = (from item in cart.Items  // finding orsderItem
-                                    where item.ItemId == productId
-                                    select item).First();
-                if (amount == 0)
-                {
-                    cart.Items = cart.Items.Where(x => x?.ItemId != oi.ID);//delete
-                    cart.TotalPrice = cart.TotalPrice - oi.TotalPrice;
+            DO.Product? p = dal?.Product.GetById(productId);// getting the product
+            BO.OrderItem? oi = (from item in cart.Items  // finding orsderItem
+                                where item.ItemId == productId
+                                select item).First();
+            if (amount == 0)
+            {
+                cart.Items = cart.Items.Where(x => x?.ItemId != oi.ItemId);//delete
+                cart.TotalPrice = cart.TotalPrice - oi.TotalPrice;
+                return cart;    //        return cart;
 
 
-                    return cart;    //        return cart;
+            }
 
-                   
-                }
-               
-                else if (amount > oi.Amount)// increasing the amount
+            else if (amount > oi.Amount)// increasing the amount
+            {
+                if (p?.InStock >= amount)
                 {
-                    if (p?.InStock >= amount)
-                    {
-                        cart.TotalPrice += oi.Price * (amount - oi.Amount);// updating the prices and the amount
-                        oi.TotalPrice += oi.Price * (amount - oi.Amount);
-                        oi.Amount = amount;
-                    }
-                    else// if wanting to increase the amount and there aren't enough products in stock
-                    {
-                        throw new BO.BlNagtiveNumberException("Out of Stock");
-                    }
-                }
-                else if (amount < oi.Amount)// decreasing the amount
-                {
-                    cart.TotalPrice -= oi.Price * (oi.Amount - amount);// updating the prices and the amount
-                    oi.TotalPrice -= oi.Price * (oi.Amount - amount);
+                    cart.TotalPrice += oi.Price * (amount - oi.Amount);// updating the prices and the amount
+                    oi.TotalPrice += oi.Price * (amount - oi.Amount);
                     oi.Amount = amount;
                 }
-                return cart;
+                else// if wanting to increase the amount and there aren't enough products in stock
+                {
+                    throw new BO.BlNagtiveNumberException("Out of Stock");
+                }
             }
-            catch (DO.DalMissingIdException exception)//if product doesn't exist
+            else if (amount < oi.Amount)// decreasing the amount
             {
-                throw new BO.BlMissingEntityException("Product doesn't exist in cart", exception);
+                cart.TotalPrice -= oi.Price * (oi.Amount - amount);// updating the prices and the amount
+                oi.TotalPrice -= oi.Price * (oi.Amount - amount);
+                oi.Amount = amount;
             }
-
+            return cart;
         }
-    
-   
-}
+        catch (DO.DalMissingIdException exception)//if product doesn't exist
+        {
+            throw new BO.BlMissingEntityException("Product doesn't exist in cart", exception);
+        }
+
+    }
+
+
+
     /// <summary>
     /// confirmation of  order getting a cart and check propriety
     /// </summary>
@@ -158,6 +156,7 @@ internal class Cart : ICart
     /// <exception cref="BO.BlMissingEntityException"></exception>
     /// <exception cref="BO.BlNagtiveNumberException"></exception>
     /// <exception cref="BO.BlEmptyStringException"></exception>
+
     public void OrderConfirmation(BO.Cart cart)
     {
         //check if items are exist
@@ -196,8 +195,8 @@ internal class Cart : ICart
         //check if the name is empty
         if (cart.CustomerName == "")
             throw new BO.BlEmptyStringException("empty customer name");
-        //if (!GetEmail(cart.CustomerEmail))
-        //    throw new BO.BlEmptyStringException("empty customer email");
+        if (!GetEmail(cart.CustomerEmail))
+            throw new BO.BlEmptyStringException("empty customer email");
 
 
         DO.Order order = new DO.Order();//create a new order
@@ -234,65 +233,15 @@ internal class Cart : ICart
 
         productUpdate.ToList().ForEach(x => dal.Product.Update(x));
 
-        //Checking the correctness of the values
-        //if (cart.CustomerName == " ")
-        //    throw new   BO.BlEmptyStringException("empty customer name");
-        //if (cart.CustomerAdress== " ")
-        //    throw new BO.BlEmptyStringException("empty customer adress");
-        //if (!new EmailAddressAttribute().IsValid(cart.CustomerEmail))
-        //    throw new BO.BlEmptyStringException("empty customer email");
-        //if (cart.Items?.Count() == 0)
-        //    throw new BO.BlNagtiveNumberException("There are no products in the cart");
-        ////Create a new order
-        //DO.Order newOrder = new DO.Order
-        //{
-        //    CustomerName = cart.CustomerName,
-        //    CustomerAddress = cart.CustomerAdress,
-        //    CustomerEmail = cart.CustomerEmail,
-        //    OrderDate = DateTime.Now,
-        //    ShipDate = null,
-        //    DeliveryDate = null,
-        //};
-        //try
-        //{
-        //    //Adding the order to the list and receiving an ID number
-        //    int orderID = dal.Order.Add(newOrder);
 
-        //    //Adding the products in the cart to the order item list
-        //    cart.Items.ForEach()(item =>
-        //    dal?.OrderItem.Add(new DO.OrderItem
-        //    {
-        //        OrderID = orderID,
-        //        ProductID = item.ProductID,
-        //        Amount = item.Amount,
-        //        Price = item.Price,
-        //    }));
 
-        //    //Temporary list of products after the new stock update
-        //    var products = from BO.OrderItem item in cart.Items!
-        //                   let updateProduct = dal.Product.GetById(item.ItemId)//?ID
-        //                   select new DO.Product
-        //                   {
-        //                       ID = updateProduct.ID,
-        //                       ProductName = updateProduct.ProductName,
-        //                       Category = updateProduct.Category,
-        //                       Price = updateProduct.Price,
-        //                       InStock = updateProduct.InStock - item.Amount,
-
-        //                   };
-
-        //    //Updating the products in the product list
-        //    products.ToList().ForEach(item => dal.Product.Update(item));
-        //    //return orderID;
+        bool GetEmail(string email)//help func to check the email
+        {
+            return new EmailAddressAttribute().IsValid(email);
+        }
     }
-        //catch (DO.DalMissingIdException ex)
-        //{
-        //    throw new BO.BlMissingEntityException(ex.Message);
-        //}
-    }
-//    bool GetEmail(string email)//help func to check the email
-//    {
-//        return new EmailAddressAttribute().IsValid(email);
-//    }
-//}
-//}
+
+   
+}
+
+

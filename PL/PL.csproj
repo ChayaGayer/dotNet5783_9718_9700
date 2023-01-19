@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Orders\לוגו סברובסקי.png" />
-    <None Remove="Product\לוגו סברובסקי.png" />
+    <None Remove="Product\logoSva.png" />
+    
   </ItemGroup>
 
   <ItemGroup>
@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Orders\לוגו סברובסקי.png" />
-    <Resource Include="Product\לוגו סברובסקי.png" />
+    <Resource Include="Product\logoSva.png" />
+    
   </ItemGroup>
 
 </Project>

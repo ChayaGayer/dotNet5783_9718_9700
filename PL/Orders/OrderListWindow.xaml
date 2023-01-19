@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Orders"
         mc:Ignorable="d"
-       
         Title="OrderListWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
 
         <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" IsReadOnly="True" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="133,172,87,46" MouseDoubleClick="orderForListDataGrid_MouseDoubleClick_1" Background="#FFFCFBFB">

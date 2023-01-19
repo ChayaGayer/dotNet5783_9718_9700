@@ -9,7 +9,7 @@
         Title="CatalogProduct" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
         <Grid x:Name="ProductForCatalog"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,34,0,0" Height="203" Width="186">
             <Grid.ColumnDefinitions>

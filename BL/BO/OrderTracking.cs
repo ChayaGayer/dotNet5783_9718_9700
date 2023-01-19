@@ -16,7 +16,10 @@ public class OrderTracking
     /// </summary>
     
     
-    public List<Tuple<DateTime?,string>>? Tracking { get; set; }
+    public List<Tuple<DateTime?,string>>? Tracking { get; set; }/// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
 
     public override string ToString()
     {

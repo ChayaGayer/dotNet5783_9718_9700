@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{690B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{F6FE0EA4-2F85-4F9C-9C66-C383813087EC}"
 	ProjectSection(SolutionItems) = preProject
-		configuration.xml = configuration.xml
+		xml\configuration.xml = xml\configuration.xml
 		xml\dal-config.xml = xml\dal-config.xml
 		xml\orderItems.xml = xml\orderItems.xml
 		xml\orders.xml = xml\orders.xml
@@ -51,6 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pics", "Pics", "{BC7079D2-D
 		pic\100014.png = pic\100014.png
 		pic\100015.png = pic\100015.png
 		pic\IMG_FAILURE.png = pic\IMG_FAILURE.png
+		Pics\logoSva.png = Pics\logoSva.png
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{362C2CBA-1D4F-4EE5-A556-A598C3552F57}"

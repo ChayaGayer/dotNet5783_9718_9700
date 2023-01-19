@@ -16,7 +16,7 @@
 
     <Grid Name="MainGrid">
         <Grid.Background>
-            <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>

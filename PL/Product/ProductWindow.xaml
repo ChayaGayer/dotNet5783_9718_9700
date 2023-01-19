@@ -18,7 +18,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Orders/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
         <Grid x:Name="grid1Product"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,71,0,0" Height="439" Width="568">
             <Grid.ColumnDefinitions>
@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Content="ID:" FontFamily="Rockwell Extra Bold"  HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Width="38"/>
-            <TextBox x:Name="iDTextBox" IsReadOnly="True"  Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"  PreviewKeyDown="iDTextBox_PreviewKeyDown" />
+            <TextBox x:Name="iDTextBox"   Grid.Column="1" HorizontalAlignment="Center" Height="NaN" Margin="0,0,0,7" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Bottom" Width="120"  PreviewKeyDown="iDTextBox_PreviewKeyDown" />
 
 
             <Label Grid.Column="0" Content="Product Name:" FontFamily="Rockwell Extra Bold" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
@@ -54,13 +54,12 @@
             <TextBox x:Name="priceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="4" Text="{Binding Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewKeyDown="priceTextBox_PreviewKeyDown"/>
 
         </Grid>
-
         <Button Content="Add"   Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="679,469,0,0" VerticalAlignment="Top" Click="Add_Click" Visibility="Visible" Name="AddProduct" Width="93" Height="41">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource TextToBoolean}">
                     <Binding Path="Text" ElementName="IDTextBox"/>
-                    <Binding Path="Text" ElementName="InStockTextBox"/>
-                    <Binding Path="Text" ElementName="NameTextBox"/>
+                    <Binding Path="Text" ElementName="inStockTextBox"/>
+                    <Binding Path="Text" ElementName="productNameTextBox"/>
                     <Binding Path="Text" ElementName="PriceTextBox"/>
                 </MultiBinding>
             </Button.IsEnabled>

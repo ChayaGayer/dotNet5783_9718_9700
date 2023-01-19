@@ -15,7 +15,10 @@ internal static class Config
 
     internal static int GetNextOrderNumber()
     {
-        return (int)XMLTools.LoadListFromXMLElement(s_config).Element("NextOrderNumber");
+        int i= XMLTools.ToIntNullable(XMLTools.LoadListFromXMLElement(s_config), "NextOrderNumber") ?? throw new NullReferenceException();
+
+        return XMLTools.ToIntNullable(XMLTools.LoadListFromXMLElement(s_config), "NextOrderNumber") ?? throw new NullReferenceException();
+        //return (int)XMLTools.LoadListFromXMLElement(s_config).Element("NextOrderNumber");
 
     }
     internal static void SaveNextOrderNumber(int num)
@@ -38,3 +41,4 @@ internal static class Config
 
     }
 }
+

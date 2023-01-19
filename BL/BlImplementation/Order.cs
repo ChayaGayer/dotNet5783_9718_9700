@@ -27,22 +27,23 @@ internal class Order : IOrder
     public IEnumerable<BO.OrderForList?> GetListedOrders()
     {
 
+        
         IEnumerable<DO.Order?> orders = dal.Order.GetAll();
         IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem.GetAll();
         return from DO.Order item in orders
-               let items=orderItem.Where(x=>x?.OrderId==item.ID)
+               let items = orderItem.Where(x => x?.OrderId == item.ID)
                select new BO.OrderForList()
                {
                    ID = item.ID,
                    CustomerName = item.CustomerName,
                    Status = Status(item),
                    //Amount= items.Count(),
-                   Amount=dal.OrderItem.GetAll(x=>x.Value.OrderId==item.ID).Sum(x=>x.Value.Amount),
+                   Amount = dal.OrderItem.GetAll(x => x.Value.OrderId == item.ID).Sum(x => x.Value.Amount),
                    TotelPrice = items.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount)
                };
 
 
-    }
+    } 
    
     private IEnumerable<BO.OrderItem?> GetList(IEnumerable<DO.OrderItem?> listOrderItem)
     {
@@ -65,27 +66,52 @@ internal class Order : IOrder
      /// <exception cref="BO.BlInCorrectException"></exception>
     public BO.Order RequestOrderDeta(int orderID)
     {
-        if (orderID < 100000||orderID>999999)//if the id incorrect-throw
+        try
         {
-            throw new BO.BlInCorrectException("Worng ID");
+            if (orderID < 100000 || orderID > 999999)//if the id incorrect-throw
+            {
+                throw new BO.BlInCorrectException("Wrong ID");
+            }
+      
+
+
+            DO.Order order = dal.Order.GetById(orderID);//from the do to the bo build the order
+            return new BO.Order()
+            {
+                ID = order.ID,
+                CustomerName = order.CustomerName,
+                CustomerAddress = order.CustomerAddress,
+                CustomerEmail = order.CustomerEmail,
+                Status = Status(order),
+                DeliveryDate = order.DeliveryDate,
+                OrderDate = order.OrderDate,
+                ShipDate = order.ShipDate,
+                //Items = from DO.OrderItem? orderItem in dal.OrderItem.GetOrderItems(orderID)//GetAll(x => x.Value.OrderId == orderID)
+                //        let name = dal.Product.GetById(orderItem?.ItemId ?? throw new BO.BlNullPropertyException("Product ID")).ProductName ?? ""
+                //        select new BO.OrderItem()
+                //        {
+                //            ID = orderItem?.ID ?? throw new BO.BlNullPropertyException("Order-Item ID"),
+                //            ItemName = name,
+                //           ItemId = orderItem?.ItemId ?? throw new BO.BlNullPropertyException("Product ID"),
+                //            Price = orderItem?.Price ?? 0,
+                //            Amount = orderItem?.Amount ?? 0,
+                //            TotalPrice = orderItem?.Price * orderItem?.Amount ?? 0,
+
+                //        },
+
+                Items = GetList(dal.OrderItem.GetAll().Where(x => x?.OrderId == order.ID)),
+                TotalPrice = GetList(dal.OrderItem.GetAll().Where(x => x?.OrderId == order.ID)).Sum(x => x!.TotalPrice)
+                //TotalPrice = dal.OrderItem.GetAll(x => x?.OrderId == order.ID).Sum(x => x?.Price ?? 0 * x?.Amount ?? 0)
+
+
+            };
         }
-        DO.Order order = dal.Order.GetById(orderID);//from the do to the bo build the order
-        return new BO.Order()
+        catch (DO.DalMissingIdException)
         {
-            ID = order.ID,
-            CustomerName = order.CustomerName,
-            CustomerAddress = order.CustomerAddress,
-            CustomerEmail = order.CustomerEmail,
-            Status = Status(order),
-            DeliveryDate = order.DeliveryDate,
-            OrderDate = order.OrderDate,
-            ShipDate = order.ShipDate,
-            Items = GetList(dal.OrderItem.GetAll().Where(x => x?.OrderId == order.ID)),
-            TotalPrice = GetList(dal.OrderItem.GetAll().Where(x => x?.OrderId == order.ID)).Sum(x => x!.TotalPrice)//לבדוק את הסכום פה
-
-
-        };
+            throw new BO.BlMissingEntityException("Coudnt find the order");
+        }
     }
+
 
 
     /// <summary>

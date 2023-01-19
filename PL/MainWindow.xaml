@@ -10,7 +10,7 @@
 
     <Grid Margin="0,0,10,-6">
         <Grid.Background>
-            <ImageBrush ImageSource="/Product/לוגו סברובסקי.png"/>
+            <ImageBrush ImageSource="/Product/logoSva.png"/>
         </Grid.Background>
         <Button x:Name="MangerBtn" Content="Maneger" Click="ProductList" HorizontalAlignment="Left" Margin="634,346,0,0" VerticalAlignment="Top" FontFamily="Rockwell Extra Bold" Height="51" Width="146">
             <Button.Background>

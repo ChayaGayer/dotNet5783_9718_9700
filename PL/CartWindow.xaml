@@ -48,7 +48,7 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding}" ItemTemplate="{StaticResource MyOrderItemTemplate}" Margin="41,10,0,110">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource MyOrderItemTemplate}" Margin="41,10,0,110">
         </ListView>
         <Grid x:Name="CartGrid"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,56,0,0" Height="143" Width="232">
             <Grid.ColumnDefinitions>

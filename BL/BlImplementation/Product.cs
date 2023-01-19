@@ -172,16 +172,24 @@ internal class Product : BlApi.IProduct
     {
         try
         {
-            if (product.ID < 100000 || product.ID > 999999 ) //check if the details in property
+            if (product.ID < 100000 || product.ID > 999999) //check if the details in property
+            {
 
-               
                 throw new BO.BlNullPropertyException("Wrong ID");
+            }
             if (product.ProductName.Length == 0)
+            {
                 throw new BO.BlEmptyStringException("Missing Name");
+            }
             if (product.Price < 0)
+            {
                 throw new BO.BlNagtiveNumberException("Negative Number");
-                if(product.InStock < 0)
+            }
+            if (product.InStock < 0|| product.InStock ==0)
+            {
                 throw new BO.BlNagtiveNumberException("Negative Number");
+            }
+
             dal?.Product.Add(new DO.Product()//adding to the dal
             {
                 ID = product.ID,

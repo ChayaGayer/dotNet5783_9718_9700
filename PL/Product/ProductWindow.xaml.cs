@@ -73,7 +73,6 @@ namespace PL.Product
             UpdateProduct.Visibility = Visibility.Visible;
             AddProduct.Visibility = Visibility.Collapsed;
             productPl=bl.Product.RequestProductDetaForM(id);
-           
             UpdateProduct.Content = "Update";
 
 
@@ -99,10 +98,10 @@ namespace PL.Product
                 MessageBox.Show($"Product successfully added!", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
-            catch (BlAlreadyExistEntityException ex) { MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation); }
-
-
-
+            catch (BO.BlAlreadyExistEntityException ex)
+            {
+                MessageBox.Show(ex.Message, " Operation Fail", MessageBoxButton.OK, MessageBoxImage.Exclamation); 
+            }
             catch (BO.BlNullPropertyException ex)
             {
 
@@ -110,8 +109,8 @@ namespace PL.Product
 
 
             }
-            catch(BlEmptyStringException ex) { MessageBox.Show(ex.Message); } 
-            catch(BlNagtiveNumberException ex) { MessageBox.Show(ex.Message); }
+            catch(BO.BlEmptyStringException ex) { MessageBox.Show(ex.Message); } 
+            catch(BO.BlNagtiveNumberException ex) { MessageBox.Show(ex.Message); }
         }
         private void UpdateProduct_Click(object sender, RoutedEventArgs e)
         {
